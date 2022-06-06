@@ -1,0 +1,165 @@
+﻿@model PaginationList<ikifikir.editor.Models.PostModel.PostListViewModel>
+@using ikifikir.CORE.Helper.Extends;
+
+@{
+    var prevDisabled = !Model.HasPrevious ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+@{
+    ViewData["Title"] = "icerikler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h4 class="card-title">Gönderiler</h4>
+                        <p class="card-title-desc">Gönerileriniz ile tüm işlemlerinizi gerçekleştirin</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination" style="float:right">
+                                <li class="page-item">
+                                    <a asp-action="icerikler" class="btn btn-link">Başa Dön</a>
+                                </li>
+                                <li class="page-item">
+                                    <a asp-action="icerikler" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn-link @prevDisabled">Önceki</a>
+                                </li>
+                                <li class="page-item">
+                                    <a asp-action="icerikler" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn-link @nextDisabled">Sonraki</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="table-rep-plugin">
+                    <div class="table-responsive mb-0" data-bs-pattern="priority-columns">
+                        <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center;">#</th>
+                                    <th>Başlık</th>
+                                    <th>Yayın</th>
+                                    <th>Güncellenme</th>
+                                    <th>Durum</th>
+                                    <th>İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a class="btn btn-primary" asp-controller="blog" asp-action="icerikler"
+                                           style="top: 7px; margin: auto 0; display: block; position: relative;"><i class="mdi mdi-refresh"></i></a>
+                                    </td>
+                                    <td>
+                                        <form asp-controller="blog" asp-action="icerikler" method="get">
+                                            <div class="btn btn-group-sm" style="width: 100%;">
+                                                <div class="btn-group" style="width: 91%;">
+                                                    <input type="text" class="form-control" name="searchstring">
+                                                </div>
+                                                <div class="btn-group" style="position:relative; left:-38px; width: 7%;">
+                                                    <button type="submit" class="btn btn-primary btn-sm"
+                                                            style="float:right;">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <a asp-controller="blog" asp-action="icerikekle"
+                                           style="position: relative; top: 12px;"
+                                           class="btn btn-primary btn-sm">İçerik Ekle <i class="fas fa-plus fa-sm"></i></a>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="button-items" id="tooltip-container">
+                                        <td style="text-align:center;">@Html.DisplayFor(model => item.Id)</td>
+
+                                        @if (item.title.Length > 40)
+                                        {
+                                            <td>
+                                                <a data-bs-container="#tooltip-container"
+                                                   data-bs-toggle="tooltip"
+                                                   data-bs-placement="top" title="Gönderiyi Düzenle"
+                                                   asp-action="icerikduzenle" asp-controller="blog"
+                                                   asp-route-id="@item.Id">@item.title.Substring(0, 40)<span>...</span></a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <a data-bs-container="#tooltip-container"
+                                                   data-bs-toggle="tooltip"
+                                                   data-bs-placement="top" title="Gönderiyi Düzenle"
+                                                   asp-action="icerikduzenle" asp-controller="blog"
+                                                   asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.title)</a>
+                                            </td>
+                                        }
+
+                                        <td>@Html.DisplayFor(model => item.CreatedTime)</td>
+                                        <td>@Html.DisplayFor(model => item.UpdatedTime)</td>
+                                        @if (item.IsActive != false)
+                                        {
+                                            <td>Aktif</td>
+
+                                        }
+                                        else
+                                        {
+                                            <td>Pasif</td>
+                                        }
+                                    <td>
+                                        <a style="padding:3px;" data-bs-container="#tooltip-container"
+                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                           title="İçerik Sil" asp-action="iceriksil"
+                                           asp-route-id="@item.Id"><i class="mdi mdi-trash-can mdi-24px"></i></a>
+                                       
+                                        @if (item.isNotification == false)
+                                        {
+                                            <a style="padding:3px;" data-bs-container="#tooltip-container"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="Bildirimi Aç" asp-action="icerikbildirimduzenle"
+                                               asp-route-id="@item.Id"><i class="mdi mdi-open-in-app mdi-24px"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a style="padding:3px;" data-bs-container="#tooltip-container"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="Bildirim Kapat" asp-action="icerikbildirimduzenle"
+                                               asp-route-id="@item.Id"><i class="mdi mdi-close-box text-danger mdi-24px"></i></a>
+                                        }
+
+                                        @if (item.IsActive == false)
+                                        {
+                                            <a style="padding:3px;" data-bs-container="#tooltip-container"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="İçeriği Aktifleştir" asp-action="icerikaktiflestir"
+                                               asp-route-id="@item.Id"><i class="mdi mdi-publish mdi-24px"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a style="padding:3px;" data-bs-container="#tooltip-container"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="İçeriği Pasifleştir" asp-action="icerikaktiflestir"
+                                               asp-route-id="@item.Id"><i class="mdi mdi-earth-remove text-danger mdi-24px"></i></a>
+                                        }
+
+                                    </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

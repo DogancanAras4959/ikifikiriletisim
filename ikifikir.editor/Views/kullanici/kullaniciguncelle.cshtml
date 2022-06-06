@@ -1,0 +1,117 @@
+﻿@model ikifikir.editor.Models.UserModel.UserEditViewModel
+@{
+    ViewData["Title"] = "kullaniciguncelle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .link-disabled {
+        pointer-events: none;
+        cursor: default;
+    }
+
+    .table th {
+        font-weight: 600;
+        font-family: Roboto,sans-serif;
+    }
+
+    .input-group {
+        position: relative;
+        display: -ms-flexbox;
+        -ms-flex-wrap: wrap;
+        -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-title-desc {
+        color: #6c757d;
+        margin-bottom: 0px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-8" style="display:block; margin:0 auto;">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="card-title text-center">Yönetici Güncelle</h4>
+                        <p class="card-title-desc text-center">Yöneticinizi güncelleyin ve sayfanızı yönetmeye başlayın</p>
+                    </div>
+                </div>
+
+                @using (Html.BeginForm("kullaniciguncellestir", "kullanici", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(x => x.Id)
+                    
+                    <div class="row g-3 needs-validation mb-3" novalidate>
+
+                        <div class="col-md-6">
+
+                            <label for="example-text-input" class="col-sm-12 col-form-label">Adınız</label>
+                            <input asp-for="FirstName" autocomplete="off" data-toggle="tooltip" data-placement="bottom" class="form-control" type="text" placeholder="Kullanıcı Adını Giriniz" id="example-text-input">
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label for="example-text-input" class="col-sm-12 col-form-label">Soyadınız</label>
+                            <input asp-for="LastName" autocomplete="off" data-toggle="tooltip" data-placement="bottom" class="form-control" type="text" placeholder="Görünecek Adını Giriniz" id="example-text-input">
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row g-3 needs-validation mb-3" novalidate>
+
+                        <div class="col-md-6">
+
+                            <label for="example-text-input" class="col-sm-12 col-form-label">Kullanıcı Adı</label>
+                            <input asp-for="UserName" autocomplete="off" data-toggle="tooltip" data-placement="bottom" class="form-control" type="text" placeholder="Kullanıcı Adını Giriniz" id="example-text-input">
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label for="example-text-input" class="col-sm-12 col-form-label">Email Adresi</label>
+                            <input asp-for="Email" autocomplete="off" data-toggle="tooltip" data-placement="bottom" class="form-control" type="text" placeholder="Görünecek Adını Giriniz" id="example-text-input">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+                    <div class="row g-3 needs-validation mb-3" novalidate>
+
+                        <div class="col-md-6">
+                            <label for="example-text-input" class="col-sm-12 col-form-label">Şifre</label>
+                            <input asp-for="Password" autocomplete="off" data-toggle="tooltip" data-placement="bottom" class="form-control" type="password" placeholder="Şifrenizi Giriniz" id="example-text-input">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label for="example-text-input" class="col-sm-12 col-form-label">Şifre Tekrar</label>
+                            <input asp-for="rePassword" autocomplete="off" data-toggle="tooltip" data-placement="bottom" class="form-control" type="password" placeholder="Şifrenizi Tekrar Giriniz" id="example-text-input">
+                            <span asp-validation-for="rePassword" class="text-danger"></span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="submit" class="btn btn-primary btn-sm" style="min-width: 215px; font-size: 18px; display: block; margin: 0 auto;" value="YÖNETİCİYİ GÜNCELLE" />
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

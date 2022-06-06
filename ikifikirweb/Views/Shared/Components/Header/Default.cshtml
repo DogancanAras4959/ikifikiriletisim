@@ -1,0 +1,178 @@
+﻿<style>
+    .h-attr-side-panel-widget {
+        padding: 0 8% 10px 8%;
+        font-size: 15px;
+    }
+
+    #header #logo img {
+        max-height: 50px;
+    }
+
+    #header.menu-align-right #logo {
+        top: 15px;
+        float: left;
+        margin: 0;
+    }
+</style>
+
+@{
+    int isTransparent = Convert.ToInt32(TempData["isTransparent"]);
+    string transparent = "";
+
+    if (isTransparent == 0)
+    {
+        transparent = "";
+    }
+    else if(isTransparent == 1)
+    {
+        transparent = "header-transparent";
+    }
+}
+
+<header id="header" class="header-show-hide-on-scroll @transparent.Trim() menu-align-right">
+    <div class="header-inner tt-wrap">
+
+        <div id="logo">
+            <!-- logo images for big screens -->
+            <a href="@Url.Action("sayfa","anasayfa")" class="logo-dark"><img src="https://uploads.ikifikir.net/site/logo-dark-ikifikir.png" /></a>
+            <a href="@Url.Action("sayfa","anasayfa")" class="logo-light">
+                <img src="https://uploads.ikifikir.net/site/logo-light-ikifikir.png" />
+            </a>
+
+            <a href="@Url.Action("sayfa","anasayfa")" class="logo-dark-m"><img src="https://uploads.ikifikir.net/site/logo-ikifikir-dark-m.png" /></a>
+            <a href="@Url.Action("sayfa","anasayfa")" class="logo-light-m">
+                <img src="https://uploads.ikifikir.net/site/logo-light-ikifikir.png" />
+            </a>
+        </div>
+
+        <div class="header-attributes">
+            <ul>
+                <li>
+                    <a href="#" class="h-attr-search-trigger"><i class="fas fa-search"></i></a>
+                    <div class="h-attr-search">
+                        <div class="h-attr-search-inner">
+                            <p class="h-attr-search-text">Arama Yap</p>
+                            <form id="h-attr-search-form" class="form-btn-inside" method="get" action="search-results.html">
+                                <input type="text" id="h-attr-search-input" name="search" placeholder="Bir şeyler arayın ...">
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                            <div class="h-attr-search-suggestions">
+                                <h3 class="h-attr-search-sugg-title">- Önerebilir miyiz?</h3>
+                                <!-- Random or most used tags. Note: maximum 20 suggestions/tags! -->
+                                <p><a href="">#aşk</a> <a href="">#eğlence</a> <a href="">#gif</a> <a href="">#yazım</a> <a href="">#dijital</a> <a href="">#duygusal</a> <a href="">#neşeli</a> <a href="">#iyi</a> <a href="">#süper</a></p>
+                            </div>
+                        </div> <!-- /.h-attr-search-inner -->
+                        <div class="h-attr-search-close"><i class="tt-close-btn tt-close-light"></i> <span>Kapat</span></div>
+                    </div> <!-- /.h-attr-search -->
+                </li>
+
+                <li>
+                    <!-- Begin header attributes side panel trigger -->
+                    <a href="" id="h-attr-side-panel-trigger">
+                        <span class="hide-from-md"><i class="fas fa-bars"></i></span>
+                        <span class="hide-to-md"><i class="fas fa-ellipsis-v"></i></span>
+                    </a>
+
+                    <div id="h-attr-side-panel">
+                        <div class="h-attr-side-panel-inner">
+                            <div class="h-attr-side-panel-close"><i class="tt-close-btn tt-close-light"></i></div>
+
+                            <!-- Begin header attributes side panel widget -->
+                            <div class="h-attr-side-panel-widget sp-text-box">
+                                <h4>Şapkadan Ne Çıkaralım?</h4>
+                                <p>Abra Kadabra!</p>
+
+                                <p style="margin:0">
+                                    Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.
+
+                                    Marka yönetimi, grafik tasarım, dijital pazarlama, video prodüksiyonları ve etkinlik yönetimi alanlarında;
+                                    360 derece, özgün, etkili ve fark yaratan işler üretiyoruz.
+                                    Müşterilerimizin gerçek ihtiyaçlarını tespit ederek, onlara danışmanlık da yapıyoruz.
+
+                                    Çok çalışıyoruz. Müşteri kazanmak ve müşteriyi elde tutmanın çok çalışmaktan geçtiğinin farkındayız
+                                </p>
+                            </div>
+
+                            <div class="h-attr-side-panel-widget">
+                                <a target="_blank" href="@Url.Action("calismalar","anasayfa")" class="btn btn-primary btn-block">Çalışmalarımız</a>
+                            </div>
+
+                            <div class="h-attr-side-panel-widget">
+
+                                <h5>Instagram'da İkifikir:</h5>
+
+                                <ul class="thumb-list col-4 gutter-3">
+                                    <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-1.jpg"></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-2.jpg"></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-3.jpg"></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-4.jpg"></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-5.jpg"></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-6.jpg"></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-7.jpg"></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-8.jpg"></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-9.jpg"></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-10.jpg"></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-11.jpg"></a></li>
+                                    <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-12.jpg"></a></li>
+                                </ul>
+                                <!-- End thumbnail list -->
+
+                            </div>
+                            <!-- End header attributes side panel widget -->
+
+                        </div> <!-- /.h-attr-side-panel-inner -->
+                    </div>
+                    <!-- End header attributes side panel -->
+
+                </li>
+                <!-- End header attributes side panel holder -->
+                <!-- Begin mobile menu toggle button (tt-main-menu) -->
+                <li>
+                    <div id="tt-m-menu-toggle-btn">
+                        <span></span>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+        <nav class="tt-main-menu">
+
+            <div class="tt-menu-collapse tt-submenu-dark">
+                <ul class="tt-menu-nav">
+
+                    <li class="tt-submenu-wrap tt-submenu-master active">
+                        <a href="@Url.Action("sayfa","anasayfa")">Ana Sayfa</a>
+                    </li>
+
+                    <li class="tt-submenu-wrap tt-submenu-master">
+                        <a href="@Url.Action("calismalar","anasayfa")">Ne Yaparız?</a>
+
+                    </li>
+
+                    <li class="tt-submenu-wrap tt-submenu-master">
+                        <a href="@Url.Action("ekibimiz","anasayfa")">Biz Kimiz?</a>
+
+                    </li>
+
+                    <li class="tt-submenu-wrap tt-submenu-master">
+                        <a href="@Url.Action("hizmetler","anasayfa")">Hizmetler</a>
+
+                    </li>
+
+                    <li class="tt-submenu-wrap">
+                        <a href="@Url.Action("icerik","blog")">Blog</a>
+                    </li>
+
+                    <li class="tt-submenu-wrap tt-submenu-master">
+                        <a href="@Url.Action("iletisim","anasayfa")">İletişim</a>
+                    </li>
+
+                </ul> <!-- /.tt-menu-nav -->
+            </div> <!-- /.tt-menu-collapse -->
+
+        </nav>
+        <!-- End main menu -->
+
+    </div>
+</header>

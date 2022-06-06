@@ -1,0 +1,105 @@
+﻿@model ikifikirweb.ViewModels.CategoryModel.CategoryViewModel
+@using ikifikirweb.ViewModels.ProjectModel
+@{
+    ViewData["Title"] = "kategori";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<ProjectListViewModel> projects = ViewBag.Projects as List<ProjectListViewModel>;
+}
+
+<style>
+    #page-header.ph-lg .page-header-inner {
+        padding-top: 60px;
+        padding-bottom: 35px;
+    }
+</style>
+
+<section id="page-header" class="ph-lg">
+
+    <div class="page-header-image hide-ph-image parallax-6 bg-image" style="background-image: url('https://uploads.ikifikir.net/site/page-header-bg-1.jpg');">
+
+        <div class="cover cover-opacity-4"></div>
+
+    </div>
+
+    <div class="page-header-inner tt-wrap">
+
+        <div class="page-header-caption ph-cap-lg parallax-5">
+            <div class="ph-title-wrap">
+                <h1 class="page-header-title">@Model.name</h1>
+            </div>
+
+            <div class="zig-zag-separator zig-zag-lg">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+        <!-- End page header caption -->
+
+    </div>
+
+    <div class="ph-anim-element-wrap parallax-4">
+        <div class="ph-anim-element-holder">
+            <div class="ph-anim-element"></div>
+        </div>
+    </div>
+    <!-- End page header animated element -->
+
+</section>
+
+<section id="portfolio-list-section">
+    <div class="portfolio-list-inner isotope-wrap tt-wrap">
+
+        <div class="isotope col-3 gutter-3">
+
+            <div class="isotope-items-wrap pli-colored">
+
+                <div class="grid-sizer"></div>
+
+                @foreach (var item in projects)
+                {
+                    <div class="isotope-item iso-height-1">
+
+                        <!-- Begin portfolio list item -->
+                        <div class="portfolio-list-item">
+
+                            <!-- Begin portfolio list item image -->
+                            <div class="pl-item-image-wrap">
+
+                                <!-- Begin portfolio list item image inner -->
+                                <a href="@Url.Action("calisma","anasayfa", new { Id = item.Id, projectName = item.GenerateSlug() })" class="pl-item-image-inner">
+                                    <div class="pl-item-image bg-image lazy" data-src="https://uploads.ikifikir.net/images/@item.imageThumbnail"></div>
+
+                                    <!-- Portfolio list item icon (displayed only with default hover overlay and "pli-alter-4" class in isotope-items-wrap) -->
+                                    <div class="pl-item-icon"><span class="lnr lnr-link"></span></div>
+                                </a>
+                                <!-- End portfolio list item image inner -->
+
+                            </div>
+                            <!-- End portfolio list item image -->
+                            <!-- Begin portfolio list item info -->
+                            <div class="pl-item-info">
+                                <div class="pl-item-caption">
+                                    <h2 class="pl-item-title"><a href="@Url.Action("calisma","anasayfa", new { Id = item.Id, projectName = item.GenerateSlug() })">@item.projectName</a></h2>
+                                    <div class="pl-item-category"><a href="@Url.Action("kategori", "anasayfa", new { categoryId = item.categoryId })">@item.category.name</a></div>
+                                </div>
+                            </div>
+                            <!-- End portfolio list item info -->
+
+                        </div>
+                        <!-- End portfolio list item -->
+
+                    </div>
+                }
+
+
+            </div>
+
+        </div>
+        <!-- End isotope -->
+
+    </div> <!-- /.portfolio-list-inner (/.isotope-wrap) -->
+</section>

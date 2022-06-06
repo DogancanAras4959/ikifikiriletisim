@@ -1,0 +1,127 @@
+﻿@model IEnumerable<ikifikirweb.ViewModels.TeamModel.TeamListViewModel>
+@{
+    ViewData["Title"] = "ekibimiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="page-header" class="ph-lg ph-center">
+
+    <div class="page-header-image parallax-6 bg-image" style="background-image: url('https://uploads.ikifikir.net/site/page-header-bg-4.jpg');">
+
+        <div class="cover cover-opacity-4"></div>
+
+    </div>
+
+    <div class="page-header-inner tt-wrap">
+
+        <div class="page-header-caption ph-cap-xlg ph-cap-light ph-cap-shadow parallax-5 fade-out-scroll-4">
+            <div class="ph-title-wrap">
+                <h1 class="page-header-title">Biz Kimiz?</h1>
+            </div>
+            <div class="ph-subtitle-wrap">
+                <h2 class="page-header-subtitle">Deneyim ve Dinamizm buluştu</h2>
+            </div>
+
+            <div class="zig-zag-separator zig-zag-lg">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="simple-text-section no-padding-bottom">
+    <div class="simple-text-inner tt-wrap">
+
+        <div class="simple-text-section-content text-center">
+            <p>Müşterilerimizin gerçek ihtiyaçlarını tespit ederek, onlara danışmanlık da yapıyoruz. Çok çalışıyoruz. Müşteri kazanmak ve müşteriyi elde tutmanın çok çalışmaktan geçtiğinin farkındayız</p>
+        </div>
+        <!-- End simple text section content -->
+
+    </div> <!-- /.cta-inner -->
+</section>
+
+<section id="team-section" class="team-classic">
+    <div class="team-inner tt-wrap">
+
+        <ul class="member-list col-4 mb-hover-card mb-hover-shadow">
+
+            @foreach (var item in Model)
+            {
+                <li>
+                    <div class="member-box">
+
+                        <!-- Begin member image -->
+                        <div class="member-image-wrap">
+                            <div class="member-image bg-image lazy" data-src="https://uploads.ikifikir.net/images/@item.image"></div>
+                        </div>
+                        <!-- End member image -->
+                        <!-- Begin member info -->
+                        <div class="member-info">
+                            <div class="level-up">
+                                <h4 class="member-info-title">@item.name</h4>
+                                <div class="member-info-text">@item.role</div>
+                            </div> <!-- /.level-up -->
+
+                            <div class="level-down">
+                                <ul class="member-social">
+                                    <li><a href="@item.facebook" class="btn btn-social-min btn-default btn-link" title="Follow me on Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="@item.twitter" class="btn btn-social-min btn-default btn-link" title="Follow me on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="@item.instagram" class="btn btn-social-min btn-default btn-link" title="Follow me on Instagram" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="mailto:@item.gmail" class="btn btn-social-min btn-default btn-link" title="Contact me" target="_blank"><i class="fas fa-envelope"></i></a></li>
+                                </ul> <!-- /.member-social -->
+                            </div> <!-- /.level-down -->
+                        </div>
+                    </div>
+                </li>
+            }
+
+        </ul>
+    </div>
+</section>
+
+<section class="call-to-action-section cta-style-2 bg-dark text-white bg-pattern" style="background-image: url('https://uploads.ikifikir.net/site/pt-1.png');">
+
+
+    <div class="cover cover-gradient-dark"></div>
+
+    <div class="cta-inner tt-wrap">
+        <!-- add/remove class "tt-wrap" to enable/disable element boxed layout (class "tt-boxed" is required in <body> tag!). Note: additionally you can use prepared helper class "max-width-*" to add custom width to "tt-wrap". Example: "max-width-1500" (class "tt-wrap" is still required!). More info about helper classes in file "helper.css" -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="tt-heading tt-heading-xxlg">
+                    <div class="tt-heading-inner">
+                        <h1 class="tt-heading-title">Ne Yaparız?</h1>
+                        <div class="tt-heading-subtitle">Çalışmalarımızı görmek istermisiniz?</div>
+
+                        <div class="zig-zag-separator">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <!-- End zig-zag separator -->
+
+                    </div> <!-- /.tt-heading-inner -->
+                </div>
+                <!-- End tt-heading -->
+
+            </div> <!-- /.col -->
+
+            <div class="col-md-6">
+
+                <p>Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi. </p>
+
+                <div class="margin-top-30">
+                    <a href="@Url.Action("calismalar","anasayfa")" class="btn btn-white-bordered margin-top-5 margin-right-5">Çalışmalarımız</a>
+                    <a href="@Url.Action("iletisim","anasayfa")" class="btn btn-primary margin-top-5">İletişime Geç</a>
+                </div>
+
+            </div> <!-- /.col -->
+        </div> <!-- /.row -->
+    </div> <!-- /.cta-inner -->
+</section>

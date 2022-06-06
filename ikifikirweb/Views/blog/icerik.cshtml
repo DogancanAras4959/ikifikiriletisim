@@ -1,0 +1,230 @@
+﻿@model PaginationList<ikifikirweb.ViewModels.PostModel.PostListViewModel>
+@using ikifikir.CORE.Helper.Extends;
+@using ikifikirweb.ViewModels.CategoryModel
+
+@{
+    var prevDisabled = !Model.HasPrevious ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+
+    List<CategoryListViewModel> categories = ViewBag.Categories as List<CategoryListViewModel>;
+}
+<style>
+    .blog-author-img {
+        display: block;
+        float: left;
+        object-fit: cover;
+        width: 135px;
+        height: 75px;
+        background-color: rgb(255 255 255);
+        margin-right: 20px;
+        border-radius: 0%;
+        -webkit-transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -ms-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
+
+</style>
+
+@{
+    ViewData["Title"] = "icerik";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="blog-list-section" class="blog-list-classic">
+    <div class="blog-list-inner tt-wrap">
+
+        <div class="row no-margin">
+
+            <!-- Content column -->
+            <div class="col-md-8 no-padding-left no-padding-right">
+
+                <div class="isotope-wrap">
+
+                    <div class="isotope col-1">
+
+                        <div class="isotope-items-wrap no-margin">
+
+                            <div class="grid-sizer"></div>
+
+                            @if (Model.Count() > 0)
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <div class="isotope-item">
+
+                                        <article class="blog-list-item">
+
+                                            <div class="bl-item-image-wrap">
+                                                <a href="@Url.Action("detay","blog", new { Id = item.Id, title = item.GenerateSlug() })"
+                                                   class="bl-item-image bg-image lazy"
+                                                   data-src="https://uploads.ikifikir.net/images/@item.image"></a>
+                                            </div>
+
+                                            <div class="bl-item-info">
+                                                <div class="bl-item-category">
+                                                    <a href="blog-archive.html">Web Design</a> <a href="blog-archive.html">Coding</a>
+                                                </div>
+                                                <a href="@Url.Action("detay","blog", new { Id = item.Id, title = item.GenerateSlug() })"
+                                                   class="bl-item-title"><h2>@item.title</h2></a>
+                                                <div class="bl-item-meta">
+                                                    <span class="published">@item.CreatedTime.ToLongDateString()</span>
+                                                    <span class="posted-by"> - <a>@item.author</a></span>
+                                                </div>
+                                                <div class="bl-item-desc">
+                                                    @item.spot
+                                                </div>
+                                                <a href="@Url.Action("detay","blog", new { Id = item.Id, title = item.GenerateSlug() })"
+                                                   class="bli-read-more btn btn-default btn-sm">Tüm Haberi Oku</a>
+
+                                            </div>
+                                            <!-- End blog list item info -->
+
+                                        </article>
+                                        <!-- End blog list item -->
+
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="isotope-item">
+                                    <article class="blog-list-item">
+                                        <div class="bl-item-desc">
+                                            Blog'umuzda şu anda herhangi bir haber bulunmuyor. Bizi takipte kalmaya devam edin. :)
+                                        </div>
+                                    </article>
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div> <!-- /.isotope-wrap -->
+
+                <div class="tt-pagination-wrap">
+
+                    <ul class="tt-pagination">
+
+                        <li><a asp-action="icerik">Başa Dön</a></li>
+                        <li><a asp-action="icerik" asp-route-pageNumber="@(Model.PageIndex-1)">Önceki</a></li>
+                        <li><a asp-action="icerik" asp-route-pageNumber="@(Model.PageIndex+1)">Sonraki</a></li>
+
+                    </ul>
+
+                </div>
+                <!-- End tt-pagination -->
+
+            </div> <!-- /.col (Content column) -->
+            <!-- Sidebar column -->
+            <div class="col-md-4 no-padding-left no-padding-right">
+
+                <div class="sidebar sidebar-right">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <!-- Begin sidebar widget -->
+                            <div class="sidebar-widget blog-author no-margin-top">
+                                <h3 class="sidebar-heading">Hakkımızda</h3>
+                                <a href="@Url.Action("ekibimiz","anasayfa")" class="blog-author-img bg-image lazy" data-src="https://uploads.ikifikir.net/site/logo-dark-ikifikir.png"></a>
+                                <div class="blog-author-info">
+                                    <h4 class="blog-author-name"><a href="about-me.html">İkifikir</a></h4>
+                                    <div class="blog-author-sub">İletişim</div>
+                                    <p class="blog-author-text">Deneyim ve Dinamizm buluştu</p>
+                                </div>
+                            </div>
+                            <!-- End sidebar widget -->
+
+                        </div> <!-- /.col -->
+
+                        <div class="col-sm-12">
+
+                            <!-- Begin sidebar widget -->
+                            <div class="sidebar-widget sidebar-social">
+                                <h3 class="sidebar-heading">Bizi Takip Edin</h3>
+                                <!-- Begin social buttons -->
+                                <div class="social-buttons">
+                                    <ul>
+                                        <li><a href="https://www.facebook.com/ikifikiriletisim/" class="btn btn-social-min btn-facebook" title="Follow me on Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="https://www.instagram.com/ikifikiriletisim/?hl=tr" class="btn btn-social-min btn-instagram" title="Follow me on Instagram" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                        <li><a href="https://www.youtube.com/channel/UC8kQIpi71NqMqp3tmAKZ2Dw" class="btn btn-social-min btn-youtube" title="Follow me on Youtube" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                    </ul>
+                                </div>
+                                <!-- End social buttons -->
+                            </div>
+                            <!-- End sidebar widget -->
+
+                        </div> <!-- /.col -->
+
+                        <div class="col-sm-12">
+
+                            <!-- Begin sidebar widget -->
+                            <div class="sidebar-widget sidebar-search">
+                                <h3 class="sidebar-heading">Arama Yap</h3>
+                                <form id="blog-search-form" class="form-btn-inside" method="get" action="search-results.html">
+                                    <div class="form-group no-margin">
+                                        <input type="text" class="form-control" id="blog-search" name="search" placeholder="Arama yap...">
+                                        <button type="submit"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- End sidebar widget -->
+
+                        </div> <!-- /.col -->
+
+                        <div class="col-md-12 col-sm-6">
+
+                            <!-- Begin sidebar widget -->
+                            <div class="sidebar-widget sidebar-categories">
+                                <h3 class="sidebar-heading">Kategoriler</h3>
+                                <ul class="list-unstyled">
+
+                                    @foreach (var item in categories)
+                                    {
+                                        <li><a href="@Url.Action("kategori","anasayfa",new { categoryId = item.Id })">@item.name</a></li>
+                                    }
+
+                                </ul>
+                            </div>
+                            <!-- End sidebar widget -->
+
+                        </div> <!-- /.col -->
+                        <!--<div class="col-md-12 col-sm-6">-->
+                        <!-- Begin sidebar widget -->
+                        <!--<div class="sidebar-widget sidebar-photo-stream">
+                            <h3 class="sidebar-heading"><i class="fab fa-instagram"></i> Instagram'da Biz</h3>
+
+                            <ul class="thumb-list col-4 gutter-3">
+                                <li><a href="#" class="thumb-list-item bg-image lazy" data-src="assets/img/thumb-list/img-1.jpg"></a></li>
+                                <li><a href="#" class="thumb-list-item bg-image lazy" data-src="assets/img/thumb-list/img-2.jpg"></a></li>
+                                <li><a href="#" class="thumb-list-item bg-image lazy" data-src="assets/img/thumb-list/img-3.jpg"></a></li>
+                                <li><a href="#" class="thumb-list-item bg-image lazy" data-src="assets/img/thumb-list/img-4.jpg"></a></li>
+                                <li><a href="#" class="thumb-list-item bg-image lazy" data-src="assets/img/thumb-list/img-5.jpg"></a></li>
+                                <li><a href="#" class="thumb-list-item bg-image lazy" data-src="assets/img/thumb-list/img-6.jpg"></a></li>
+                                <li><a href="#" class="thumb-list-item bg-image lazy" data-src="assets/img/thumb-list/img-7.jpg"></a></li>
+                                <li><a href="#" class="thumb-list-item bg-image lazy" data-src="assets/img/thumb-list/img-8.jpg"></a></li>
+                                <li><a href="#" class="thumb-list-item bg-image lazy" data-src="assets/img/thumb-list/img-9.jpg"></a></li>
+                                <li><a href="#" class="thumb-list-item bg-image lazy" data-src="assets/img/thumb-list/img-10.jpg"></a></li>
+                                <li><a href="#" class="thumb-list-item bg-image lazy" data-src="assets/img/thumb-list/img-11.jpg"></a></li>
+                                <li><a href="#" class="thumb-list-item bg-image lazy" data-src="assets/img/thumb-list/img-12.jpg"></a></li>
+                            </ul>-->
+                        <!-- End thumbnail list -->
+                        <!--</div>-->
+                        <!-- End sidebar widget -->
+                        <!--</div>--> <!-- /.col -->
+
+                    </div> <!-- /.row -->
+                </div>
+                <!-- End sidebar -->
+
+            </div> <!-- /.col (Sidebar column) -->
+
+        </div> <!-- /.row -->
+
+    </div> <!-- /.blog-list-inner -->
+</section>
+
+

@@ -1,0 +1,302 @@
+﻿@model ikifikir.editor.Models.ProjectModel.ProjectCreateViewModel
+
+@{
+    ViewData["Title"] = "projeekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
+<style>
+    .link-disabled {
+        pointer-events: none;
+        cursor: default;
+    }
+
+    .table th {
+        font-weight: 600;
+        font-family: Roboto,sans-serif;
+    }
+
+    .input-group {
+        position: relative;
+        display: -ms-flexbox;
+        -ms-flex-wrap: wrap;
+        -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-title-desc {
+        color: #6c757d;
+        margin-bottom: 0px;
+    }
+</style>
+
+<script src="~/ckeditor/ckeditor.js"></script>
+
+<form method="post" asp-action="projeolustur" asp-controller="proje" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-sm-12 col-form-label">Proje Başlık</label>
+
+                        <input asp-for="projectName" autocomplete="off" data-toggle="tooltip"
+                               maxlength="95" id="defaultconfig"
+                               data-placement="bottom" class="form-control" type="text"
+                               placeholder="Proje için slider başlık giriniz">
+
+                        <span asp-validation-for="projectName" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-sm-12 col-form-label">Proje Spot</label>
+
+                        <textarea asp-for="projectSpot" autocomplete="off" rows="4" cols="50" maxlength="320"
+                                  id="defaultconfig" data-toggle="tooltip" data-placement="bottom"
+                                  class="form-control" type="text" placeholder="Proje için spot giriniz"></textarea>
+
+                        <span asp-validation-for="projectSpot" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-sm-12 col-form-label">Proje Açıklama</label>
+
+                        <textarea asp-for="description" rows="3" cols="150" id="editor"></textarea>
+                        <span asp-validation-for="description" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-sm-12 col-form-label">SEO Başlık</label>
+
+                        <input asp-for="seoTitle" autocomplete="off" data-toggle="tooltip"
+                               maxlength="65" id="defaultconfig"
+                               data-placement="bottom" class="form-control" type="text"
+                               placeholder="Proje için ana başlık giriniz (*SEO için önerilir)">
+
+                        <span asp-validation-for="seoTitle" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-sm-12 col-form-label">SEO Açıklama</label>
+
+                        <textarea asp-for="seoDescription" autocomplete="off" rows="2" cols="20" maxlength="320"
+                                  id="defaultconfig" data-toggle="tooltip" data-placement="bottom"
+                                  class="form-control" type="text" placeholder="Seo için açıklama spot giriniz (*SEO için önerilir)"></textarea>
+
+                        <span asp-validation-for="seoDescription" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <label for="example-text-input" class="col-sm-12 col-form-label">Müşteri</label>
+
+                                <input asp-for="client" autocomplete="off" data-toggle="tooltip"
+                                       maxlength="65" id="defaultconfig"
+                                       data-placement="bottom" class="form-control" type="text"
+                                       placeholder="Proje için müşteri giriniz">
+
+                                <span asp-validation-for="client" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="example-text-input" class="col-sm-12 col-form-label">Müşteri Web Site</label>
+
+                                <input asp-for="website" autocomplete="off" data-toggle="tooltip"
+                                       maxlength="65" id="defaultconfig"
+                                       data-placement="bottom" class="form-control" type="text"
+                                       placeholder="Müşterinin websitesini giriniz">
+
+                                <span asp-validation-for="website" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    @*<div class="mb-3">
+                        <label for="example-text-input" class="col-sm-12 col-form-label">Galeri</label>
+                        <input asp-for="galleries" type="file"
+                               multiple data-buttonname="btn-secondary" class="filestyle">
+                    </div>*@
+
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-sm-12 col-form-label">Haber Ayarları</label>
+                        <div class="row">
+
+                            <div class="col-sm-4">
+                                <select asp-for="categoryId" asp-items="@ViewBag.Categories" class="form-control">
+                                    <option selected="selected" value="999">Kategori seçiniz (Zorunlu)</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-8">
+                                <select asp-for="parentProjectId" asp-items="@ViewBag.ProjectParents" class="form-control">
+                                    <option selected="selected" value="999">Bağlamak istediğiniz projeyi seçiniz (Zorunlu Değildir)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            @if (ViewBag.Hata != null)
+            {
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <label style="margin:0;">@ViewBag.Hata</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <img id="img" style="width:100%" src="~/images/bg.jpg" />
+                            <label style="margin-top:10px;" class="col-sm-12 text-center">*(1920x1080 dosya boyutu)</label>
+                            <label for="example-text-input" class="col-sm-12 col-form-label text-center">Öne Çıkan Görsel Belirle</label>
+                            <input type="file" class="filestyle" id="upload" data-input="false" name="file" data-buttonname="btn-secondary">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <input type="checkbox" asp-for="isTitle" />
+                                </div>
+                                <div class="col-sm-11">
+                                    <label class="col-sm-11">Slider Başlığı Göster</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <input type="checkbox" asp-for="isSlider" />
+                                </div>
+                                <div class="col-sm-11">
+                                    <label class="col-sm-11">Slider'a Ekle</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <button type="submit" id="newsBtn" style="width:100%" class="btn btn-primary">Projeyi Oluştur</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="~/libs/jquery/jquery.min.js"></script>
+
+<script>
+    $(function () {
+        $('#upload').change(function () {
+            var input = this;
+            var url = $(this).val();
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                $('#img').attr('src', '~/images/bg.jpg');
+            }
+        });
+
+    });
+</script>
+
+<script>
+    
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+
+        }).then(editor => {
+            window.editor = editor;
+        })
+
+        .catch(error => {
+            console.error(error);
+        });
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#newsBtn").on("click", function () {
+            window.setTimeout(function () {
+                $("#newsBtn").attr("disabled", true);
+            }, 100);
+            document.getElementById("newsBtn").innerHTML = "Proje Oluşturuluyor...";
+        })
+    })
+</script>
+
+<script>
+    $(function () {
+        var config = {
+            toolbar:
+                [
+                    ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
+                    ['NumberedList', 'BulletedList', '-', 'Blockquote'],
+                    ['Styles', 'Format'],
+                    ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll'],
+                ],
+
+            contentsCss: ["body {font-size: 18px;}"],
+
+            /*uiColor: ['#ff0000'],*/
+        };
+
+        $('#cke_NewsContent').ckeditor(config);
+    });
+</script>

@@ -1,0 +1,163 @@
+﻿@using ikifikirweb.ViewModels.CategoryModel
+@model ikifikirweb.ViewModels.PostModel.PostViewModel
+
+@{
+    ViewData["Title"] = "detay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<CategoryListViewModel> categories = ViewBag.Categories as List<CategoryListViewModel>;
+
+}
+
+<style>
+    .blog-author-img {
+        display: block;
+        float: left;
+        object-fit: cover;
+        width: 135px;
+        height: 75px;
+        background-color: rgb(255 255 255);
+        margin-right: 20px;
+        border-radius: 0%;
+        -webkit-transition: all .2s ease-in-out;
+        -moz-transition: all .2s ease-in-out;
+        -ms-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+    }
+
+</style>
+
+<section id="blog-single-section">
+
+    <div class="blog-single-inner tt-wrap">
+
+        <div class="row no-margin">
+
+            <div class="col-md-8 no-padding-left no-padding-right">
+
+                <article class="blog-single-post lightgallery">
+
+                    <div class="bl-item-image-wrap">
+                        <a class="bl-item-image bg-image lazy"
+                           data-src="https://uploads.ikifikir.net/images/@Model.image"></a>
+                    </div>
+                    <br />
+                    <div class="blog-single-post-heading">
+                        <div class="blog-single-post-category"><a href="blog-archive.html">Web Design</a> <a href="blog-archive.html">Coding</a></div>
+                        <h1 class="blog-single-post-title">@Model.title</h1>
+                    </div>
+
+                    <div class="blog-single-post-inner">
+
+                        <div class="blog-single-attributes">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <div class="blog-single-meta-wrap">
+
+                                        <a href="" class="author-avatar pull-left bg-image" style="background-image: url('https://uploads.ikifikir.net/site/logo-dark-ikifikir.png');"></a>
+
+                                        <div class="blog-single-meta">
+                                            <div class="article-author">Yazar: <a>@Model.author</a></div>
+                                            <div class="article-time-cat">
+                                                <span class="article-time">@Model.CreatedTime.ToLongDateString()</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div> <!-- /.col -->
+
+                            </div> <!-- /.row -->
+                        </div>
+
+                        <div class="post-content">
+                            <h5 class="lead">@Model.spot</h5>
+                            <p class="lead">@Html.Raw(Model.content)</p>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div> <!-- /.col (Content column) -->
+
+            <div class="col-md-4 no-padding-left no-padding-right">
+
+                <div class="sidebar sidebar-right">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="sidebar-widget blog-author no-margin-top">
+                                <h3 class="sidebar-heading">Hakkımızda</h3>
+                                <a href="@Url.Action("ekibimiz","anasayfa")" class="blog-author-img bg-image lazy" data-src="https://uploads.ikifikir.net/site/logo-dark-ikifikir.png"></a>
+                                <div class="blog-author-info">
+                                    <h4 class="blog-author-name"><a href="about-me.html">İkifikir</a></h4>
+                                    <div class="blog-author-sub">İletişim</div>
+                                    <p class="blog-author-text">Deneyim ve Dinamizm buluştu</p>
+                                </div>
+                            </div>
+
+                        </div> <!-- /.col -->
+
+                        <div class="col-sm-12">
+
+                            <div class="sidebar-widget sidebar-social">
+                                <h3 class="sidebar-heading">Bizi Takip Edin</h3>
+                                <!-- Begin social buttons -->
+                                <div class="social-buttons">
+                                    <ul>
+                                        <li><a href="https://www.facebook.com/ikifikiriletisim/" class="btn btn-social-min btn-facebook" title="Follow me on Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="https://www.instagram.com/ikifikiriletisim/?hl=tr" class="btn btn-social-min btn-instagram" title="Follow me on Instagram" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                        <li><a href="https://www.youtube.com/channel/UC8kQIpi71NqMqp3tmAKZ2Dw" class="btn btn-social-min btn-youtube" title="Follow me on Youtube" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                    </ul>
+                                </div>
+                                <!-- End social buttons -->
+                            </div>
+
+                        </div> <!-- /.col -->
+
+                        <div class="col-sm-12">
+
+                            <div class="sidebar-widget sidebar-search">
+                                <h3 class="sidebar-heading">Search</h3>
+                                <form id="blog-search-form" class="form-btn-inside" method="get" action="search-results.html">
+                                    <div class="form-group no-margin">
+                                        <input type="text" class="form-control" id="blog-search" name="search" placeholder="Search...">
+                                        <button type="submit"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div> <!-- /.col -->
+
+                        <div class="col-md-12 col-sm-6">
+
+                            <div class="sidebar-widget sidebar-categories">
+                                <h3 class="sidebar-heading">Kategoriler</h3>
+                                <ul class="list-unstyled">
+
+                                    @foreach (var item in categories)
+                                    {
+                                        <li><a href="@Url.Action("kategori","anasayfa",new { categoryId = item.Id })">@item.name</a></li>
+                                    }
+
+                                </ul>
+                            </div>
+
+                        </div> <!-- /.col -->
+
+                    </div> <!-- /.col -->
+
+                </div> <!-- /.row -->
+            </div>
+
+        </div> <!-- /.col (Sidebar column) -->
+
+    </div> <!-- /.row -->
+
+</section>
+

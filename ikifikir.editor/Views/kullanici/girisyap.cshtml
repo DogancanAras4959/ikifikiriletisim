@@ -1,0 +1,146 @@
+﻿@model ikifikir.editor.Models.UserModel.LoginViewModel
+@{
+    Layout = null;
+    var returnUrl = ViewData["returnUrl"] as string;
+}
+
+<style>
+    .bg-image {
+        background: url('images/bg.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+</style>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>İkifikir İletişim | Giriş Yap </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="İkifikir iletişim ile sitenizin içeriklini yönetin" name="description">
+    <meta content="ikifikiriletisim" name="author">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/images/favicon.ico">
+
+    <!-- Bootstrap Css -->
+    <link href="~/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
+    <!-- Icons Css -->
+    <link href="~/css/icons.min.css" rel="stylesheet" type="text/css">
+    <!-- App Css-->
+    <link href="~/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <!-- Begin page -->
+    <div class="accountbg bg-image"></div>
+
+    <div class="account-pages mt-5">
+        @if (ViewBag.LTD != null)
+        {
+            <div class="container" id="lastLoginTime">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-5 col-xl-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <label for="userpassword">Son Giriş Zamanı: @ViewBag.LTD</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        @if (TempData["HataMesaji"] != null)
+        {
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-5 col-xl-4">
+                        <div class="alert alert-danger">
+                            <div class="text-center">
+                                <label>@TempData["HataMesaji"]</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="container" id="loginOnProcess" style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-5 col-xl-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <i class="fa fa-spinner fa-spin" style="font-size:18px"></i>
+                                <label for="userpassword">  Giriş Yapılıyor</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-5 col-xl-4">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="p-3">
+                                <form asp-controller="kullanici" asp-action="girisyap" class="form-horizontal" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="mb-3">
+                                        <label class="form-label" asp-for="Email" for="username"></label>
+                                        @Html.TextBoxFor(x => x.Email, new { @type = "text", @class = "form-control", id = "username", placeholder = "Kullanıcı adınız", autocomplete = "off" })
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label" asp-for="Password" for="userpassword"></label>
+                                        @Html.TextBoxFor(x => x.Password, new { @type = "password", @class = "form-control", id = "userpassword", placeholder = "Şifreniz", autocomplete = "off" })
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col-sm-12 text-end">
+                                            <button id="btn-log" class="btn btn-primary btn-block waves-effect waves-light" style="width:100%" type="submit">Giriş Yap</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/libs/jquery/jquery.min.js"></script>
+    <script src="~/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/libs/metismenu/metisMenu.min.js"></script>
+    <script src="~/libs/simplebar/simplebar.min.js"></script>
+    <script src="~/libs/node-waves/waves.min.js"></script>
+
+    <script src="~/js/app.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn-log").on("click", function () {
+                document.getElementById("loginOnProcess").style.display = "block";
+                document.getElementById("lastLoginTime").style.display = "none";
+                window.setTimeout(function () {
+                    $("#btn-log").attr("disabled", true);
+                }, 100);
+            });
+        })
+    </script>
+
+</body>
+</html>

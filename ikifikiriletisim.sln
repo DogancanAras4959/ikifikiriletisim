@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ikifikir.editor", "ikifikir.editor\ikifikir.editor.csproj", "{D1D7BD36-E24F-464D-900C-FB084D3C2A0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ikifikir.DOMAIN", "ikifikir.DOMAIN", "{17509E7F-ABEE-43D3-B8EE-5002388396C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ikifikir.CORE", "ikifikir.CORE", "{C1748CEC-9AAA-4293-B8AD-4EA9E1D98C56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ikifikir.SERVICES", "ikifikir.SERVICES", "{F65FAC98-A45F-41EF-8C90-57D1B43C8DF6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ikifikir.DAL", "ikifikir.DAL\ikifikir.DAL.csproj", "{47F98664-1C3D-4EDA-8BBA-058A57AFF8AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ikifikir.CORE", "ikifikir.CORE\ikifikir.CORE.csproj", "{18DD102A-4338-45C6-A6DD-7C5EB08A2024}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ikifikir.COMMON", "ikifikir.COMMON\ikifikir.COMMON.csproj", "{56C710E9-B544-41CB-A211-F0369754458C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ikifikir.ENGINES", "ikifikir.ENGINES\ikifikir.ENGINES.csproj", "{33E2C6D7-D91A-4B95-8527-B72F0445D18C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ikifikirweb", "ikifikirweb\ikifikirweb.csproj", "{39B754BD-B359-4FAA-A334-17E452BF8610}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1D7BD36-E24F-464D-900C-FB084D3C2A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1D7BD36-E24F-464D-900C-FB084D3C2A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1D7BD36-E24F-464D-900C-FB084D3C2A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1D7BD36-E24F-464D-900C-FB084D3C2A0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47F98664-1C3D-4EDA-8BBA-058A57AFF8AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47F98664-1C3D-4EDA-8BBA-058A57AFF8AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47F98664-1C3D-4EDA-8BBA-058A57AFF8AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47F98664-1C3D-4EDA-8BBA-058A57AFF8AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18DD102A-4338-45C6-A6DD-7C5EB08A2024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18DD102A-4338-45C6-A6DD-7C5EB08A2024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18DD102A-4338-45C6-A6DD-7C5EB08A2024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18DD102A-4338-45C6-A6DD-7C5EB08A2024}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56C710E9-B544-41CB-A211-F0369754458C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56C710E9-B544-41CB-A211-F0369754458C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56C710E9-B544-41CB-A211-F0369754458C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56C710E9-B544-41CB-A211-F0369754458C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33E2C6D7-D91A-4B95-8527-B72F0445D18C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33E2C6D7-D91A-4B95-8527-B72F0445D18C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33E2C6D7-D91A-4B95-8527-B72F0445D18C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33E2C6D7-D91A-4B95-8527-B72F0445D18C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39B754BD-B359-4FAA-A334-17E452BF8610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39B754BD-B359-4FAA-A334-17E452BF8610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39B754BD-B359-4FAA-A334-17E452BF8610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39B754BD-B359-4FAA-A334-17E452BF8610}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{47F98664-1C3D-4EDA-8BBA-058A57AFF8AF} = {17509E7F-ABEE-43D3-B8EE-5002388396C9}
+		{18DD102A-4338-45C6-A6DD-7C5EB08A2024} = {C1748CEC-9AAA-4293-B8AD-4EA9E1D98C56}
+		{56C710E9-B544-41CB-A211-F0369754458C} = {C1748CEC-9AAA-4293-B8AD-4EA9E1D98C56}
+		{33E2C6D7-D91A-4B95-8527-B72F0445D18C} = {F65FAC98-A45F-41EF-8C90-57D1B43C8DF6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77D301B6-2C6C-4164-BE29-76FDE991B8BB}
+	EndGlobalSection
+EndGlobal

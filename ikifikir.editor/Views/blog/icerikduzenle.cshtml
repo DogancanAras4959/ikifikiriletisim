@@ -1,0 +1,234 @@
+﻿@model ikifikir.editor.Models.PostModel.PostEditViewModel
+
+@{
+    ViewData["Title"] = "icerikekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
+<style>
+    .link-disabled {
+        pointer-events: none;
+        cursor: default;
+    }
+
+    .table th {
+        font-weight: 600;
+        font-family: Roboto,sans-serif;
+    }
+
+    .input-group {
+        position: relative;
+        display: -ms-flexbox;
+        -ms-flex-wrap: wrap;
+        -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-title-desc {
+        color: #6c757d;
+        margin-bottom: 0px;
+    }
+</style>
+
+<script src="~/ckeditor/ckeditor.js"></script>
+
+<form method="post" asp-action="icerikguncellestir" asp-controller="blog" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-sm-12 col-form-label">Gönderi Başlık</label>
+
+                        <input asp-for="title" autocomplete="off" data-toggle="tooltip"
+                               maxlength="95" id="defaultconfig"
+                               data-placement="bottom" class="form-control" type="text"
+                               placeholder="Gönderi için başlık giriniz">
+
+                        <span asp-validation-for="title" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-sm-12 col-form-label">Gönderi Spot</label>
+
+                        <textarea asp-for="spot" autocomplete="off" rows="4" cols="50" maxlength="320"
+                                  id="defaultconfig" data-toggle="tooltip" data-placement="bottom"
+                                  class="form-control" type="text" placeholder="Gönderi için spot giriniz"></textarea>
+
+                        <span asp-validation-for="spot" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-sm-12 col-form-label">Gönderi İçerik</label>
+
+                        <textarea asp-for="content" rows="3" cols="150" id="editor"></textarea>
+                        <span asp-validation-for="content" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-sm-12 col-form-label">SEO Başlık</label>
+
+                        <input asp-for="seoTitle" autocomplete="off" data-toggle="tooltip"
+                               maxlength="65" id="defaultconfig"
+                               data-placement="bottom" class="form-control" type="text"
+                               placeholder="Proje için ana başlık giriniz (*SEO için önerilir)">
+
+                        <span asp-validation-for="seoTitle" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-sm-12 col-form-label">Yazar</label>
+
+                        <input asp-for="author" autocomplete="off" rows="2" cols="20" maxlength="320"
+                               id="defaultconfig" data-toggle="tooltip" data-placement="bottom"
+                               class="form-control" type="text" placeholder="Yazar varsa giriniz" />
+
+                        <span asp-validation-for="author" class="text-danger"></span>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            @if (ViewBag.Hata != null)
+            {
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <label style="margin:0;">@ViewBag.Hata</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <img id="img" style="width:100%" src="https://uploads.ikifikir.net/images/@Model.image" />
+                            <label style="margin-top:10px;" class="col-sm-12 text-center">*(1920x1080 dosya boyutu)</label>
+                            <label for="example-text-input" class="col-sm-12 col-form-label text-center">Öne Çıkan Görsel Belirle</label>
+                            <input type="file" class="filestyle" id="upload" data-input="false" name="file" data-buttonname="btn-secondary">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <input type="checkbox" asp-for="isNotification" />
+                                </div>
+                                <div class="col-sm-11">
+                                    <label class="col-sm-11">Bildirimleri Aç / Kapa</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <button type="submit" id="newsBtn" style="width:100%" class="btn btn-primary">Gönderiyi Oluştur</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="~/libs/jquery/jquery.min.js"></script>
+
+<script>
+    $(function () {
+        $('#upload').change(function () {
+            var input = this;
+            var url = $(this).val();
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                $('#img').attr('src', '~/images/bg.jpg');
+            }
+        });
+
+    });
+</script>
+
+<script>
+
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+
+        }).then(editor => {
+            window.editor = editor;
+        })
+
+        .catch(error => {
+            console.error(error);
+        });
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#newsBtn").on("click", function () {
+            window.setTimeout(function () {
+                $("#newsBtn").attr("disabled", true);
+            }, 100);
+            document.getElementById("newsBtn").innerHTML = "Proje Oluşturuluyor...";
+        })
+    })
+</script>
+
+<script>
+    $(function () {
+        var config = {
+            toolbar:
+                [
+                    ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
+                    ['NumberedList', 'BulletedList', '-', 'Blockquote'],
+                    ['Styles', 'Format'],
+                    ['Undo', 'Redo', '-', 'Find', 'Replace', '-', 'SelectAll'],
+                ],
+
+            contentsCss: ["body {font-size: 18px;}"],
+
+            /*uiColor: ['#ff0000'],*/
+        };
+
+        $('#cke_NewsContent').ckeditor(config);
+    });
+</script>

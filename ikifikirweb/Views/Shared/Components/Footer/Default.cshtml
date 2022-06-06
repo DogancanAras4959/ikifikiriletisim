@@ -1,0 +1,240 @@
+﻿<style>
+    .f-block-logo {
+        margin: 0px 40px 0 0;
+    }
+
+        .f-block-logo img {
+            max-height: 115px;
+        }
+</style>
+
+@{ 
+    int numberTrue = Convert.ToInt32(TempData["footer-light"]);
+}
+
+@if (numberTrue == 1)
+{
+    <section id="footer" class="no-margin-top">
+        <div class="footer-inner">
+            <div class="footer-container tt-wrap">
+                <div class="row">
+                    <div class="col-sm-12 col-md-3">
+
+                        <!-- Begin footer block (logo) -->
+                        <div class="footer-block">
+                            <div class="f-block-logo">
+                                <!-- logo images for big screens -->
+                                <a href="@Url.Action("sayfa","anasayfa")" class="logo-dark"><img src="https://uploads.ikifikir.net/site/logo-dark-ikifikir.png" alt="logo"></a>
+                                <a href="@Url.Action("sayfa","anasayfa")" class="logo-light"><img src="https://uploads.ikifikir.net/site/logo-light-ikifikir.png" alt="logo"></a>
+
+                                <!-- logo images for smaller screens -->
+                                <a href="@Url.Action("sayfa","anasayfa")" class="logo-dark-m"><img src="https://uploads.ikifikir.net/site/logo-ikifikir-dark-m.png" alt="logo"></a>
+                                <a href="@Url.Action("sayfa","anasayfa")" class="logo-light-m"><img src="https://uploads.ikifikir.net/site/logo-ikifikir-m.png" alt="logo"></a>
+                            </div>
+                        </div>
+                        <!-- End footer block -->
+
+                    </div> <!-- /.col -->
+
+                    <div class="col-sm-4 col-md-2">
+
+                        <!-- Begin footer block (links) -->
+                        <div class="footer-block">
+                            <h4 class="f-block-heading">Hızlı Menu</h4>
+                            <ul class="f-block-links">
+                                <li><a href="@Url.Action("ekibimiz","anasayfa")">Ekibimiz</a></li>
+                                <li><a href="@Url.Action("hizmetler","anasayfa")">Hizmetler</a></li>
+                                <li><a href="@Url.Action("calismalar","anasayfa")">Çalışmalar</a></li>
+                                <li><a href="@Url.Action("icerik","blog")">Blog</a></li>
+                                <li><a href="@Url.Action("iletisim","anasayfa")">İletişim</a></li>
+                            </ul>
+                        </div>
+                        <!-- End footer block -->
+
+                    </div> <!-- /.col -->
+
+                    <div class="col-sm-4 col-md-2">
+
+                        <!-- Begin footer block (social) -->
+                        <div class="footer-block">
+                            <h4 class="f-block-heading">Bizi Takip Edin</h4>
+                            <ul class="f-block-links">
+                                <li><a href="https://www.facebook.com/ikifikiriletisim/" target="_blank">Facebook</a></li>
+                                <li><a href="https://www.instagram.com/ikifikiriletisim/?hl=tr" target="_blank">Instagram</a></li>
+                                <li><a href="https://www.youtube.com/channel/UC8kQIpi71NqMqp3tmAKZ2Dw" target="_blank">Youtube</a></li>
+                            </ul>
+                        </div>
+                        <!-- End footer block -->
+
+                    </div> <!-- /.col -->
+
+                    <div class="col-sm-4 col-md-2">
+
+                        <!-- Begin footer block (text) -->
+                        <div class="footer-block">
+                            <h4 class="f-block-heading">İletişim</h4>
+                            <div class="f-block-text">
+                                <p>Merkez Mah. Perihan Sok. Emek İş Hanı No: 68 Kat:4 Şişli / İstanbul</p>
+                                <p>
+                                    +90 0543 143 07 29<br>
+                                    <a href="mailto:info@ikifikir.net">info@ikifikir.net</a>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- End footer block -->
+
+                    </div> <!-- /.col -->
+
+                    <div class="col-sm-12 col-md-3">
+
+                        <!-- Begin footer block (text) -->
+                        <div class="footer-block">
+                            <h4 class="f-block-heading">Hakkımızda</h4>
+                            <div class="f-block-text padding-right-30">
+                                İkiFikir buluşmadır. Hayalgücü ve Füzyon’un, dinamizm ve tecrübenin, tencereyle kapağın buluşması…
+                            </div>
+                        </div>
+                        <!-- End footer block -->
+
+                    </div> <!-- /.col -->
+                </div> <!-- /.row -->
+            </div> <!-- /.footer-container -->
+            <!-- Begin footer bottom -->
+            <div class="footer-bottom">
+                <div class="footer-container tt-wrap">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <!-- Begin footer copyright -->
+                            <div class="footer-bottom-col-left">
+                                &copy; İkifikir / Tüm Hakları Saklıdır
+                            </div>
+                            <!-- End footer copyright -->
+
+                        </div> <!-- /.col -->
+
+                    </div> <!-- /.row -->
+                </div> <!-- /.footer-container -->
+            </div>
+            <!-- End footer bottom -->
+
+        </div> <!-- /.footer-inner -->
+        <!-- Scroll to top button -->
+        <a href="#body" class="scrolltotop sm-scroll" title="Scroll to top"></a>
+
+    </section>
+}
+
+else
+{
+    <section id="footer" class="footer-dark no-margin-top">
+        <div class="footer-inner">
+            <div class="footer-container tt-wrap">
+                <div class="row">
+                    <div class="col-sm-12 col-md-3">
+
+                        <!-- Begin footer block (logo) -->
+                        <div class="footer-block">
+                            <div class="f-block-logo">
+                                <!-- logo images for big screens -->
+                                <a href="@Url.Action("sayfa","anasayfa")" class="logo-dark"><img src="https://uploads.ikifikir.net/site/logo-dark-ikifikir.png" alt="logo"></a>
+                                <a href="@Url.Action("sayfa","anasayfa")" class="logo-light"><img src="https://uploads.ikifikir.net/site/logo-light-ikifikir.png" alt="logo"></a>
+
+                                <!-- logo images for smaller screens -->
+                                <a href="@Url.Action("sayfa","anasayfa")" class="logo-dark-m"><img src="https://uploads.ikifikir.net/site/logo-ikifikir-dark-m.png" alt="logo"></a>
+                                <a href="@Url.Action("sayfa","anasayfa")" class="logo-light-m"><img src="https://uploads.ikifikir.net/site//logo-ikifikir-m.png" alt="logo"></a>
+                            </div>
+                        </div>
+                        <!-- End footer block -->
+
+                    </div> <!-- /.col -->
+
+                    <div class="col-sm-4 col-md-2">
+
+                        <!-- Begin footer block (links) -->
+                        <div class="footer-block">
+                            <h4 class="f-block-heading">Hızlı Menu</h4>
+                            <ul class="f-block-links">
+                                <li><a href="@Url.Action("ekibimiz","anasayfa")">Ekibimiz</a></li>
+                                <li><a href="@Url.Action("hizmetler","anasayfa")">Hizmetler</a></li>
+                                <li><a href="@Url.Action("calismalar","anasayfa")">Çalışmalar</a></li>
+                                <li><a href="@Url.Action("icerik","blog")">Blog</a></li>
+                                <li><a href="@Url.Action("iletisim","anasayfa")">İletişim</a></li>
+                            </ul>
+                        </div>
+                        <!-- End footer block -->
+
+                    </div> <!-- /.col -->
+
+                    <div class="col-sm-4 col-md-2">
+
+                        <!-- Begin footer block (social) -->
+                        <div class="footer-block">
+                            <h4 class="f-block-heading">Bizi Takip Edin</h4>
+                            <ul class="f-block-links">
+                                <li><a href="https://www.facebook.com/ikifikiriletisim/" target="_blank">Facebook</a></li>
+                                <li><a href="https://www.instagram.com/ikifikiriletisim/?hl=tr" target="_blank">Instagram</a></li>
+                                <li><a href="https://www.youtube.com/channel/UC8kQIpi71NqMqp3tmAKZ2Dw" target="_blank">Youtube</a></li>
+                            </ul>
+                        </div>
+                        <!-- End footer block -->
+
+                    </div> <!-- /.col -->
+
+                    <div class="col-sm-4 col-md-2">
+
+                        <!-- Begin footer block (text) -->
+                        <div class="footer-block">
+                            <h4 class="f-block-heading">İletişim</h4>
+                            <div class="f-block-text">
+                                <p>Merkez Mah. Perihan Sok. Emek İş Hanı No: 68 Kat:4 Şişli / İstanbul</p>
+                                <p>
+                                    +90 0543 143 07 29<br>
+                                    <a href="mailto:info@ikifikir.net">info@ikifikir.net</a>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- End footer block -->
+
+                    </div> <!-- /.col -->
+
+                    <div class="col-sm-12 col-md-3">
+
+                        <!-- Begin footer block (text) -->
+                        <div class="footer-block">
+                            <h4 class="f-block-heading">Hakkımızda</h4>
+                            <div class="f-block-text padding-right-30">
+                                İkiFikir buluşmadır. Hayalgücü ve Füzyon’un, dinamizm ve tecrübenin, tencereyle kapağın buluşması…
+                            </div>
+                        </div>
+                        <!-- End footer block -->
+
+                    </div> <!-- /.col -->
+                </div> <!-- /.row -->
+            </div> <!-- /.footer-container -->
+            <!-- Begin footer bottom -->
+            <div class="footer-bottom">
+                <div class="footer-container tt-wrap">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <!-- Begin footer copyright -->
+                            <div class="footer-bottom-col-left">
+                                &copy; İkifikir / Tüm Hakları Saklıdır
+                            </div>
+                            <!-- End footer copyright -->
+
+                        </div> <!-- /.col -->
+
+                    </div> <!-- /.row -->
+                </div> <!-- /.footer-container -->
+            </div>
+            <!-- End footer bottom -->
+
+        </div> <!-- /.footer-inner -->
+        <!-- Scroll to top button -->
+        <a href="#body" class="scrolltotop sm-scroll" title="Scroll to top"></a>
+
+    </section>
+}
+

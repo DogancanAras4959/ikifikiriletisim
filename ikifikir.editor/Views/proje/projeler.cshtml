@@ -1,0 +1,133 @@
+﻿@model PaginationList<ikifikir.editor.Models.ProjectModel.ProjectListViewModel>
+@using ikifikir.CORE.Helper.Extends;
+
+@{
+    var prevDisabled = !Model.HasPrevious ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+@{
+    ViewData["Title"] = "projeler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h4 class="card-title">Projeler</h4>
+                        <p class="card-title-desc">Projeler ile tüm işlemlerinizi gerçekleştirin</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination" style="float:right">
+                                <li class="page-item">
+                                    <a asp-action="projeler" class="btn btn-link">Başa Dön</a>
+                                </li>
+                                <li class="page-item">
+                                    <a asp-action="projeler" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn-link @prevDisabled">Önceki</a>
+                                </li>
+                                <li class="page-item">
+                                    <a asp-action="projeler" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn-link @nextDisabled">Sonraki</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="table-rep-plugin">
+                    <div class="table-responsive mb-0" data-bs-pattern="priority-columns">
+                        <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center;">#</th>
+                                    <th>Başlık</th>
+                                    <th>Yayın Tarihi</th>
+                                    <th>Kategori</th>
+                                    <th>Müşteri</th>
+                                    <th>İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a class="btn btn-primary" asp-controller="proje" asp-action="projeler" style="top: 7px; margin: auto 0; display: block; position: relative;"><i class="mdi mdi-refresh"></i></a></td>
+                                    <td>
+                                        <form asp-controller="proje" asp-action="projeler" method="get">
+                                            <div class="btn btn-group-sm" style="width: 100%;">
+                                                <div class="btn-group" style="width: 91%;">
+                                                    <input type="text" class="form-control" name="searchstring">
+                                                </div>
+                                                <div class="btn-group" style="position:relative; left:-38px; width: 7%;">
+                                                    <button type="submit" class="btn btn-primary btn-sm" style="float:right;"><i class="fas fa-search"></i></button>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <form asp-controller="proje" asp-action="projeler" method="get">
+                                            @Html.DropDownList("categoryId", (SelectList)ViewBag.Categories, ("Kategori Seçiniz"), new { @class = "has-arrow form-control", @style = "position:relative; top:8px;", onchange = "this.form.submit();", name = "categoryId" })
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a asp-controller="proje" asp-action="projeekle" style=" position: relative; top: 12px;" class="btn btn-primary btn-sm">Proje Ekle <i class="fas fa-plus fa-sm"></i></a>
+                                    </td>
+                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="button-items" id="tooltip-container">
+                                        <td style="text-align:center;">@Html.DisplayFor(model => item.Id)</td>
+
+                                        @if (item.projectName.Length > 40)
+                                        {
+                                            <td>
+                                                <a data-bs-container="#tooltip-container"
+                                                   data-bs-toggle="tooltip"
+                                                   data-bs-placement="top" title="Projeyi Düzenle"
+                                                   asp-action="projeduzenle" asp-controller="proje" asp-route-id="@item.Id">@item.projectName.Substring(0, 40)<span>...</span></a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <a data-bs-container="#tooltip-container"
+                                                   data-bs-toggle="tooltip"
+                                                   data-bs-placement="top" title="Projeyi Düzenle"
+                                                   asp-action="projeduzenle" asp-controller="proje" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.projectName)</a>
+                                            </td>
+                                        }
+
+                                        <td>@Html.DisplayFor(model => item.CreatedTime)</td>
+                                        <td>@Html.DisplayFor(model => item.category.name)</td>
+                                        <td>@Html.DisplayFor(model => item.client)</td>
+                                        <td>
+                                            <a style="padding:3px;" data-bs-container="#tooltip-container"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="Projeyi Göster" asp-action="projedetay" asp-route-id="@item.Id"><i class="mdi mdi-book-edit mdi-24px"></i></a>
+                                            
+                                            @if (item.IsActive == false)
+                                            {
+                                                <a style="padding:3px;" data-bs-container="#tooltip-container"
+                                                   data-bs-toggle="tooltip" data-bs-placement="top"
+                                                   title="Projeyi Aktifleştir" asp-action="projeaktiflestir" asp-route-id="@item.Id"><i class="mdi mdi-publish mdi-24px"></i></a>
+                                            }
+                                            else
+                                            {
+                                                <a style="padding:3px;" data-bs-container="#tooltip-container"
+                                                   data-bs-toggle="tooltip" data-bs-placement="top"
+                                                   title="Projeyi Pasifleştir" asp-action="projeaktiflestir" asp-route-id="@item.Id"><i class="mdi mdi-earth-remove text-danger mdi-24px"></i></a>
+                                            }
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

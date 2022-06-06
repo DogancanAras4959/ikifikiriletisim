@@ -1,0 +1,124 @@
+﻿@model ikifikirweb.ViewModels.EmailModel.EmailSenderViewModel
+@{
+    ViewData["Title"] = "iletisim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="tt-map"></div>
+
+<section id="contact-section" class="contact-style-3">
+    <div class="contact-section-inner tt-wrap">
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="tt-heading tt-heading-xlg margin-bottom-20">
+                    <div class="tt-heading-inner">
+                        <h1 class="tt-heading-title">İletişim</h1>
+                        <div class="tt-heading-subtitle">Sizin için ne yapalım?</div>
+
+                        <div class="zig-zag-separator">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <div class="social-buttons margin-top-25">
+                            <h5>Bizi Takip Edin:</h5>
+                            <ul>
+                                <li><a href="https://www.facebook.com/ikifikiriletisim/" class="btn btn-social-min btn-default btn-rounded-full" title="Follow us on Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="https://www.instagram.com/ikifikiriletisim/?hl=tr" class="btn btn-social-min btn-default btn-rounded-full" title="Follow us on Instagram" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="https://www.youtube.com/channel/UC8kQIpi71NqMqp3tmAKZ2Dw" class="btn btn-social-min btn-default btn-rounded-full" title="Follow us on Youtube" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="contact-info-wrap margin-bottom-40 margin-top-20">
+
+                            <h3 class="contact-info-title">
+                                <span class="lnr lnr-map-marker"></span>
+                                <a href="https://www.google.com/maps/search/?api=1&query=41.0748033,28.935252" target="_blank">İstanbul</a>
+                                <small> (Konumumuz)</small>
+                            </h3>
+
+                            <ul class="contact-info">
+                                <li><span class="address"><span class="lnr lnr-home"></span> <a href="https://www.google.com/maps/search/?api=1&query=-37.817251,144.955891" target="_blank">Merkez Mah. Perihan Sok. Emek İş Hanı No: 68 Kat:4 Şişli / İstanbul</a></span></li>
+                                <li><span class="phone"><span class="lnr lnr-phone"></span> +90 0543 143 07 29</span></li>
+                                <li><span class="email"><span class="lnr lnr-envelope"></span> <a href="mailto:info@ikifikir.net" target="_blank">info@ikifikir.net</a></span></li>
+                            </ul> <!-- /.contact-info -->
+
+                        </div>
+                        <!-- End social buttons -->
+
+                    </div> <!-- /.tt-heading-inner -->
+                </div>
+                <!-- End tt-heading -->
+
+            </div> <!-- /.col -->
+
+            <div class="col-md-6">
+
+                <!-- Begin contact form
+                ========================= -->
+                <form method="post" action="@Url.Action("FormGonderIletisim","anasayfa")">
+                    <div class="contact-form-inner bg-gray-3 padding-5-p">
+
+                        <input type="hidden" name="project_name" value="ikifikir.net"> <!-- Change value to your site name -->
+                        <input type="hidden" name="admin_email" value="info@ikifikir.net"> <!-- Change value to your valid email address (where a message will be sent) -->
+                        <input type="hidden" name="form_subject" value="Bu mesaj ikifikir.net tarafından gönderildi"> <!-- Change value to your own message subject -->
+                        <!-- End hidden required fields -->
+
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="namesurname" asp-for="namesurname" placeholder="Adınız Soyadınız" required>
+                                </div>
+                            </div> <!-- /.col -->
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" asp-for="email" placeholder="Email Adresiniz">
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row -->
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="phone" asp-for="phone" placeholder="Telefon Numaranız">
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row -->
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="subject" asp-for="subject" placeholder="Konu">
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row -->
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="message" rows="4" asp-for="content" placeholder="Mesajınız"></textarea>
+                                </div>
+                            </div> <!-- /.col -->
+                        </div> <!-- /.row -->
+
+                        <div class="small text-gray"><em>* Gerekli alanları doldurnuz</em></div>
+
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary margin-top-40">Gönder</button>
+
+                    </div> <!-- /.contact-form-inner -->
+                </form>
+                <!-- End contact form -->
+
+            </div> <!-- /.col -->
+        </div> <!-- /.row -->
+
+    </div> <!-- /.contact-section-inner -->
+</section>
+

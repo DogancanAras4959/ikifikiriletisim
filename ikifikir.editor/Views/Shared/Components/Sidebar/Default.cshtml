@@ -1,0 +1,28 @@
+﻿<div class="vertical-menu">
+
+    <div data-simplebar class="h-100">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li class="menu-title">Hesap Ayarları</li>
+
+                <li><a href="@Url.Action("kullanicilar","kullanici")" class="waves-effect"> <i class="mdi mdi-account"></i><span>Kullanıcılar</span></a></li>
+                <li><a href="@Url.Action("roller","kullanici")" class="waves-effect"> <i class="mdi mdi-two-factor-authentication"></i><span>Roller</span></a></li>
+
+                <li class="menu-title">İçerik</li>
+
+                <li><a href="@Url.Action("ekipler","takim")" class="waves-effect"> <i class="mdi mdi-microsoft-teams"></i><span>Ekip</span></a></li>
+                <li><a href="@Url.Action("kategoriler","proje")" class="waves-effect"> <i class="mdi mdi-file-document"></i><span>Kategoriler</span></a></li>
+                <li><a href="@Url.Action("projeler","proje")" class="waves-effect"> <i class="mdi mdi-application-cog"></i><span>Projeler</span></a></li>
+                <li><a href="@Url.Action("media","proje")" class="waves-effect"> <i class="mdi mdi-file-video"></i><span>Videolar</span></a></li>
+
+                <li class="menu-title">Blog</li>
+                <li><a href="@Url.Action("icerikler","blog")" class="waves-effect"> <i class="mdi mdi-blogger"></i><span>İçerikler</span></a></li>
+
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>

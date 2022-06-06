@@ -1,0 +1,70 @@
+﻿@using ikifikir.editor.Models.TeamsModel
+@model List<TeamsListViewModel>
+
+
+@{
+    ViewData["Title"] = "ekipler";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h4 class="card-title mb-4" style="position:relative; top:7px;">Kullanıcılar</h4>
+                    </div>
+                    <div class="col-6">
+                        <a href="@Url.Action("personelekle","takim")" class="btn btn-primary" style="float:right;">Personel Ekle</a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-centered table-vertical table-nowrap mb-0">
+                        <thead>
+                            <tr>
+                                <th style="font-weight:bold">#</th>
+                                <th style="font-weight:bold">İsim Soyisim</th>
+                                <th style="font-weight:bold">Departman</th>
+                                <th style="font-weight:bold">Durum</th>
+                                <th style="font-weight:bold">Oluşturma</th>
+                                <th style="font-weight:bold">Güncelleme</th>
+                                <th style="font-weight:bold">İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="font-weight:bold">@item.Id</td>
+                                    <td><a href="@Url.Action("personelduzenle","takim",new { id = item.Id })">@item.name</a></td>
+                                    <td>@item.role</td>
+                                    <td>
+                                        @if (item.IsActive == true)
+                                        {<span>Aktif</span> }
+                                        else
+                                        { <span>Pasif</span>}
+                                    </td>
+                                    <td>
+                                        @item.CreatedTime.ToShortDateString()
+                                    </td>
+                                    <td>
+                                        @item.UpdatedTime.ToShortDateString()
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("personelsil","takim",new { id = item.Id })" class="btn btn-danger btn-xs waves-effect"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
