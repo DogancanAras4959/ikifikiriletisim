@@ -1,8 +1,32 @@
 ﻿@model IEnumerable<ikifikirweb.ViewModels.TeamModel.TeamListViewModel>
+@using ikifikirweb.ViewModels.ReferenceModel
+
 @{
     ViewData["Title"] = "ekibimiz";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<ReferenceListViewModel> references = ViewBag.Reference as List<ReferenceListViewModel>;
 }
+
+<style>
+    body.header-transparent-on #page-header.ph-lg .page-header-inner {
+        padding-top: 100px;
+        padding-bottom: 5px;
+    }
+
+    .simple-text-section {
+        position: relative;
+        padding: 60px 3%;
+    }
+
+    #team-section.team-classic {
+        padding: 50px 0 80px 0;
+    }
+    #clients-section {
+        position: relative;
+        padding: 0px 0 100px 0;
+    }
+</style>
 
 <section id="page-header" class="ph-lg ph-center">
 
@@ -14,9 +38,9 @@
 
     <div class="page-header-inner tt-wrap">
 
-        <div class="page-header-caption ph-cap-xlg ph-cap-light ph-cap-shadow parallax-5 fade-out-scroll-4">
+        <div class="page-header-caption ph-cap-xlg ph-cap-light ph-cap-shadow parallax-4 fade-out-scroll-5">
             <div class="ph-title-wrap">
-                <h1 class="page-header-title">Biz Kimiz?</h1>
+                <h2 class="page-header-title">Biz Kimiz?</h2>
             </div>
             <div class="ph-subtitle-wrap">
                 <h2 class="page-header-subtitle">Deneyim ve Dinamizm buluştu</h2>
@@ -48,7 +72,7 @@
 <section id="team-section" class="team-classic">
     <div class="team-inner tt-wrap">
 
-        <ul class="member-list col-4 mb-hover-card mb-hover-shadow">
+        <ul class="member-list col-5 mb-hover-card mb-hover-shadow">
 
             @foreach (var item in Model)
             {
@@ -82,6 +106,39 @@
 
         </ul>
     </div>
+</section>
+
+<section id="clients-section" class="clients-style-2">
+    <div class="clients-inner tt-wrap max-width-1200">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="tt-heading tt-heading-xxlg text-center no-padding-right margin-bottom-60">
+                    <div class="tt-heading-inner">
+                        <h1 class="tt-heading-title">Referanslar</h1>
+                        <div class="zig-zag-separator">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                   
+                    </div> <!-- /.tt-heading-inner -->
+                </div>
+
+                <ul class="client-list">
+                    @foreach (var item in references)
+                    {
+                        <li><a target="_blank" href="#" title="Client Logo"><img class="lazy" data-src="https://uploads.ikifikir.net/images/@item.slug" alt="client"></a></li>
+                    }
+
+                </ul>
+                <!-- End client list -->
+
+            </div> <!-- /.col -->
+        </div> <!-- /.row -->
+
+    </div> <!-- /.clients-inner -->
 </section>
 
 <section class="call-to-action-section cta-style-2 bg-dark text-white bg-pattern" style="background-image: url('https://uploads.ikifikir.net/site/pt-1.png');">

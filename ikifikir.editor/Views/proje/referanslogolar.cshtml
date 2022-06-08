@@ -1,8 +1,8 @@
-﻿@model PaginationList<ikifikir.editor.Models.VideoModel.VideoListViewModel>
+﻿@model PaginationList<ikifikir.editor.Models.ReferenceLogoModel.ReferenceLogoListViewModel>
 @using ikifikir.CORE.Helper.Extends;
 
 @{
-    ViewData["Title"] = "media";
+    ViewData["Title"] = "referanslogolar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,13 +12,6 @@
 }
 
 <style type="text/css">
-    .video-frame {
-        width: 100%;
-        height: 195px;
-        border: 4px solid #dc3545;
-        box-shadow: 1px 2px 3px #dc3545;
-        border-radius: 3px;
-    }
 
     .title {
         font-weight: 500;
@@ -69,6 +62,7 @@
     }
 </style>
 
+
 <div class="container-fluid">
 
     <div class="row">
@@ -76,48 +70,31 @@
             <div class="card">
                 <div class="card-body">
                     <button style="margin-left: 27px; margin-bottom:10px; position:relative; float:right; top:6px;" type="button" class="btn btn-info rounded-0" data-bs-toggle="modal" data-bs-target="#UploadVideo">
-                        <i class="fa fa-plus-circle"></i> Yeni Video
+                        <i class="fa fa-plus-circle"></i> Yeni Logolar Ekle
                     </button>
-                    <h4 class="card-title">Ortam Medyası</h4>
-                    <p class="card-title-desc">Video Kurguları barındıran projeleriniz için videolarınızı ortam medyasına ekleyin</p>
+                    <h4 class="card-title">Logolar</h4>
+                    <p class="card-title-desc">Refefanslarınız ve İş Ortaklarınızın logolarını ortam medyasına ekleyin</p>
 
                     <div class="modal fade" id="UploadVideo" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Yeni bir video ekleyin</h4>
+                                    <h4 class="modal-title">Yeni logolar ekleyin</h4>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    @using (Html.BeginForm("videoekle", "proje", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                    {
+                                    <form enctype="multipart/form-data" method="post" action="@Url.Action("logolariekleyin","proje")" class="dropzone">
+                                        <div class="fallback">
+                                            <input type="file" multiple accept="image/*" name="file" id="files">
+                                        </div>
+                                        <div class="dz-message needsclick">
+                                            <div class="mb-3">
+                                                <i class="mdi mdi-cloud-upload display-4 text-muted"></i>
+                                            </div>
 
-                                        <p style="color:#dc3545;">Video boyutu max: 20mb</p>
-                                        <hr />
-                                        <div class="form-group">
-                                            <label>Video Seçin:</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" id="fileupload" name="fileupload" class="custom-file-input" />
-                                                    <label class="custom-file-label"></label>
-                                                </div>
-                                            </div>
+                                            <h4>Fotoğraflarınızı sürükleyip bırakın ve yüklensin.</h4>
                                         </div>
-                                        <br />
-                                        <br />
-                                        <div class="form-group">
-                                            <label>Veya iframe girin:</label>
-                                            <textarea autocomplete="off" rows="4" cols="50" maxlength="320" name="iframe"
-                                                      id="defaultconfig" data-toggle="tooltip" data-placement="bottom"
-                                                      class="form-control" type="text" placeholder="Video iframe kodunu gömün"></textarea>
-                                        </div>
-                                        <br />
-                                        <div class="form-group">
-                                            <div class="input-group-append">
-                                                <input type="submit" id="btnUpload" class="btn btn-secondary" value="Yükle" />
-                                            </div>
-                                        </div>
-                                    }
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -159,32 +136,10 @@
             <div class="col-sm-4">
                 <div class="card">
                     <div class="card-body">
-
-                        @if (item.iframe != null || item.iframe != "")
-                        {
-                            <div class="ratio ratio-16x9">
-                               @Html.Raw(item.iframe)
-                            </div>
-                        }
-                        else
-                        {
-                            <h4 class="card-title">
-                                @item.name
-                            </h4>
-                            <p class="card-title-desc" style="margin-bottom:10px;">@item.slug </p>
-
-                            <!-- 16:9 aspect ratio -->
-                            <div class="ratio ratio-16x9">
-                                <iframe src="@item.slug" frameborder="0"
-                                        allowfullscreen></iframe>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <a href=""></a> />
-                                </div>
-                            </div>
-                        }
-
+                        <a class="image-popup-no-margins" href="https://uploads.ikifikir.net/images/@item.slug">
+                            <img src="https://uploads.ikifikir.net/images/@item.slug" alt="" class="img-fluid">
+                        </a>
+                        <a href="@Url.Action("fotografisil","proje", new { Id = item.Id })" class="btn btn-danger mt-2"><i class="fa fa-trash-alt"></i> Fotoğrafı Sil</a>
                     </div>
                 </div>
             </div>
@@ -192,3 +147,20 @@
 
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/libs/dropzone/min/dropzone.min.js"></script>
+    <link href="~/libs/dropzone/min/dropzone.min.css" rel="stylesheet" />
+
+    <script>
+        $(document).ready(function () {
+            Dropzone.options.dropzoneForm = {
+                paramName: "file",
+                maxFilesize: 20,
+                maxFiles: 4,
+                acceptedFiles: "image/*",
+                dictMaxFilesExceeded: "Custom max files msg"
+            }
+        });
+    </script>
+}

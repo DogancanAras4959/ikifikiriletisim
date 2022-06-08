@@ -1,4 +1,5 @@
 ﻿using ikifikir.COMMON.DataTransfer.ProjectData;
+using ikifikir.COMMON.DataTransfer.ReferenceData;
 using ikifikir.COMMON.DataTransfer.TagData;
 using ikifikir.COMMON.DataTransfer.TagProjectData;
 using System;
@@ -25,8 +26,14 @@ namespace ikifikir.ENGINES.Interface
 
         #endregion
 
-        #region Tags
+        #region Referans Logolar
 
+        List<ReferenceListItemDto> referenceLogos();
+        Task<bool> insertReferenceLogoImage(List<ReferenceListItemDto> model);
+
+        #endregion
+
+        #region Tags
         Task<bool> createTag(TagDto model);
         TagDto getTags(string name);
         bool tagDelete(int id);

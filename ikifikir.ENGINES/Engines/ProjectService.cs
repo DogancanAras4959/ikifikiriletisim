@@ -1,4 +1,5 @@
 ﻿using ikifikir.COMMON.DataTransfer.ProjectData;
+using ikifikir.COMMON.DataTransfer.ReferenceData;
 using ikifikir.COMMON.DataTransfer.TagData;
 using ikifikir.COMMON.DataTransfer.TagProjectData;
 using ikifikir.CORE.UnitOfWork;
@@ -20,6 +21,8 @@ namespace ikifikir.ENGINES.Engines
         {
             _unitOfWork = unitOfWork;
         }
+
+        #region Project
 
         public bool deleteProject(int id)
         {
@@ -296,6 +299,8 @@ namespace ikifikir.ENGINES.Engines
             }).ToList();
         }
 
+        #endregion
+
         #region Tag
         public async Task<bool> createTag(TagDto model)
         {
@@ -391,6 +396,50 @@ namespace ikifikir.ENGINES.Engines
             else
             {
                 return null;
+            }
+        }
+
+        #endregion
+
+        #region Reference Logos
+
+        public List<ReferenceListItemDto> referenceLogos()
+        {
+            IEnumerable<referenceLogo> roles = _unitOfWork.GetRepository<referenceLogo>().Where(null, x => x.OrderBy(y => y.Id), "", null, null);
+
+            return roles.Select(x => new ReferenceListItemDto
+            {
+                Id = x.Id,
+                IsActive = x.IsActive,            
+                CreatedTime = x.CreatedTime,    
+                UpdatedTime = x.UpdatedTime,
+                slug = x.slug,
+                sorted = x.sorted
+
+            }).ToList();
+        }
+
+        public async Task<bool> insertReferenceLogoImage(List<ReferenceListItemDto> model)
+        {
+            try
+            {
+                foreach (var item in model)
+                {
+                    referenceLogo gal = await _unitOfWork.GetRepository<referenceLogo>().AddAsync(new referenceLogo
+                    {
+                        IsActive = true,
+                        CreatedTime = DateTime.Now,
+                        UpdatedTime = DateTime.Now,
+                        slug = item.slug,
+                        sorted = item.sorted,
+                    });
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 

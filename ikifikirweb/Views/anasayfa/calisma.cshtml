@@ -16,14 +16,14 @@
 }
 
 <style>
-    body.header-transparent-on #page-header .page-header-inner {
-        padding-top: 130px;
+    body.header-transparent-on #page-header.ph-xlg .page-header-inner {
+        padding-top: 125px;
         padding-bottom: 15px;
     }
 
     .page-header-inner {
         position: relative;
-        padding: 35px 8%;
+        padding: 10px 8%;
     }
 </style>
 
@@ -121,9 +121,9 @@
 
             </div>
 
-            @if (videos != null)
+            @if (videos.Count() > 0)
             {
-        <div class="col-xs-12 col-md-8">
+                <div class="col-xs-12 col-md-8">
             @foreach (var item in videos)
             {
 
@@ -235,7 +235,7 @@
 
                             <div class="pl-item-image-wrap">
 
-                                <a href="portfolio-single-1.html" class="pl-item-image-inner">
+                                <a href="@Url.Action("calisma","anasayfa", new { Id = item.Id, projectName = item.projectName })" class="pl-item-image-inner">
                                     <div class="pl-item-image bg-image owl-lazy" data-src="https://uploads.ikifikir.net/images/@item.imageThumbnail"></div>
 
                                     <div class="pl-item-icon"><span class="lnr lnr-link"></span></div>

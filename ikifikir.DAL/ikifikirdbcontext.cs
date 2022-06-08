@@ -27,6 +27,7 @@ namespace ikifikir.DAL
         public DbSet<tagProject> tagProjects { get; set; }
         public DbSet<tags> tags { get; set; }
         public DbSet<post> posts { get; set; }
+        public DbSet<referenceLogo> referenceLogos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,6 +42,7 @@ namespace ikifikir.DAL
             modelBuilder.ApplyConfiguration(new TagMapping());
             modelBuilder.ApplyConfiguration(new tagProjectMapping());
             modelBuilder.ApplyConfiguration(new PostMapping());
+            modelBuilder.ApplyConfiguration(new ReferenceLogsMapping());
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -33,7 +33,7 @@ namespace ikifikir.ENGINES.Engines
                 {
                     client.CheckCertificateRevocation = false;
                     client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-                    await client.ConnectAsync(_emailConfig.Host, _emailConfig.Port, MailKit.Security.SecureSocketOptions.None);
+                    await client.ConnectAsync(_emailConfig.Host, _emailConfig.Port, false);
                     await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
                     await client.SendAsync(emailMessage);
                 }

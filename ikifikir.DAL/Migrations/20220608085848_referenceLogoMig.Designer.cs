@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ikifikir.DAL;
 
 namespace ikifikir.DAL.Migrations
 {
     [DbContext(typeof(ikifikirdbcontext))]
-    partial class ikifikirdbcontextModelSnapshot : ModelSnapshot
+    [Migration("20220608085848_referenceLogoMig")]
+    partial class referenceLogoMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

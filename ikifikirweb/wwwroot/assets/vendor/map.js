@@ -20,18 +20,18 @@ function initMap() {
 // End map style
 
 
-  var myLatlng = new google.maps.LatLng(-37.817251, 144.955891); // Set coordinates.
+    var myLatlng = new google.maps.LatLng(41.0616094, 28.985301); // Set coordinates.
   var mapOptions = {
     mapTypeControl: true,
     scrollwheel: false,
     styles: styleArray, // Apply the map style array to the map.
-    zoom: 15,
+    zoom: 19,
     center: myLatlng
   }
   var map = new google.maps.Map(document.getElementById("tt-map"), mapOptions);
 
   // Marker image
-  var iconBase = 'assets/img/';
+  var iconBase = 'https://uploads.ikifikir.net/site/';
   var marker = new google.maps.Marker({
       position: myLatlng,
       title:"Hello! We Are Here. :)",

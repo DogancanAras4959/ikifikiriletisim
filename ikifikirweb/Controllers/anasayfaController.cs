@@ -2,6 +2,7 @@
 using ikifikir.COMMON.DataTransfer.CategoryData;
 using ikifikir.COMMON.DataTransfer.ProjectData;
 using ikifikir.COMMON.DataTransfer.ProjectData.GalleryData;
+using ikifikir.COMMON.DataTransfer.ReferenceData;
 using ikifikir.COMMON.DataTransfer.TagProjectData;
 using ikifikir.COMMON.DataTransfer.TeamsData;
 using ikifikir.COMMON.DataTransfer.VideoData;
@@ -13,6 +14,7 @@ using ikifikirweb.ViewModels.CategoryModel;
 using ikifikirweb.ViewModels.EmailModel;
 using ikifikirweb.ViewModels.GalleryModel;
 using ikifikirweb.ViewModels.ProjectModel;
+using ikifikirweb.ViewModels.ReferenceModel;
 using ikifikirweb.ViewModels.TagProjectModel;
 using ikifikirweb.ViewModels.TeamModel;
 using ikifikirweb.ViewModels.VideoModel;
@@ -140,15 +142,23 @@ namespace ikifikirweb.Controllers
         public IActionResult ekibimiz()
         {
             TempData["isTransparent"] = 1;
+          
             List<TeamListViewModel> values;
 
             values = _mapper.Map<List<TeamsListItemDto>, List<TeamListViewModel>>(_teamService.getTeamList());
+
+            List<ReferenceListViewModel> references;
+
+            references = _mapper.Map<List<ReferenceListItemDto>, List<ReferenceListViewModel>>(_projectService.referenceLogos());
+
+            ViewBag.Reference = references;
+
             return View(values);
         }
 
         public IActionResult iletisim()
         {
-            TempData["isTransparent"] = 1;
+            TempData["isTransparent"] = 0;
             return View();
         }
 
@@ -192,13 +202,13 @@ namespace ikifikirweb.Controllers
                 string messages = model.content;
                 var message = new Message()
                 {
-                    To = "info@ikifikir.net",
+                    To = "emre@ikifikir.net",
                     Subject = model.subject,
                     Phone = "",
                     Email = model.email,
                     GuestCount = "",
                     NameSurname = model.namesurname,
-                    Content = $@"<p>{model.namesurname} iletişim formunu doldurdu<p> <hr/> <p>Email Adresi: {model.email}</p> <hr/> <p>{messages}</p> <hr/> <p>Telefon: {model.phone}</p>",
+                    Content = $@"<p>{model.namesurname} iletişim formunu doldurdu. (Bu form https://ikifikir.net/iletisim üzerinden gelmiştir.) <p> <hr/> <p>Email Adresi: {model.email}</p> <hr/> <p>{messages}</p> <hr/> <p>Telefon: {model.phone}</p>",
                 };
 
                 await _emailSender.SendEmailAsync(message);

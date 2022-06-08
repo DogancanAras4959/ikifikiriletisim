@@ -75,7 +75,7 @@
                                         <a asp-controller="proje" asp-action="projeekle" style=" position: relative; top: 12px;" class="btn btn-primary btn-sm">Proje Ekle <i class="fas fa-plus fa-sm"></i></a>
                                     </td>
                                 </tr>
-                                @foreach (var item in Model)
+                                @foreach (var item in Model.OrderBy(x=> x.sorted))
                                 {
                                     <tr class="button-items" id="tooltip-container">
                                         <td style="text-align:center;">@Html.DisplayFor(model => item.Id)</td>

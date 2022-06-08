@@ -2,12 +2,14 @@
 using ikifikir.COMMON.DataTransfer.CategoryData;
 using ikifikir.COMMON.DataTransfer.ProjectData;
 using ikifikir.COMMON.DataTransfer.ProjectData.GalleryData;
+using ikifikir.COMMON.DataTransfer.ReferenceData;
 using ikifikir.COMMON.DataTransfer.TagProjectData;
 using ikifikir.COMMON.DataTransfer.VideoData;
 using ikifikir.CORE.Helper.Extends;
 using ikifikir.editor.Models.CategoryModel;
 using ikifikir.editor.Models.GalleryModel;
 using ikifikir.editor.Models.ProjectModel;
+using ikifikir.editor.Models.ReferenceLogoModel;
 using ikifikir.editor.Models.TagProjectModel;
 using ikifikir.editor.Models.VideoModel;
 using ikifikir.ENGINES.Interface;
@@ -353,6 +355,57 @@ namespace ikifikir.editor.Controllers
             }
 
             return RedirectToAction("projedetay","proje", new { Id = model.Id  });
+        }
+
+        #endregion
+
+        #region Referens Logolar
+
+        [Authorize]
+        public IActionResult referanslogolar(int? pagenumber)
+        {
+            int pageSize = 40;
+            List<ReferenceLogoListViewModel> values;
+            values = _mapper.Map<List<ReferenceListItemDto>,List<ReferenceLogoListViewModel>> (_projectService.referenceLogos());
+            return View(PaginationList<ReferenceLogoListViewModel>.Create(values.ToList(), pagenumber ?? 1, pageSize));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> logolariekleyin(List<IFormFile> file)
+        {
+            try
+            {
+                long size = file.Sum(f => f.Length);
+
+                if (file.Count != 0)
+                {
+                    List<ReferenceLogoListViewModel> model = new List<ReferenceLogoListViewModel>();
+                    foreach (var formFile in file)
+                    {
+                        var gallery = new ReferenceLogoListViewModel()
+                        {
+                            slug = SaveFileProcess.ImageInsert(formFile, "Admin"),
+                            sorted = 0,
+                        };
+                        model.Add(gallery);
+                    }
+
+                    bool result = await _projectService.insertReferenceLogoImage(_mapper.Map<List<ReferenceLogoListViewModel>, List<ReferenceListItemDto>>(model));
+
+                    return RedirectToAction("referanslogolar", "proje");
+                }
+                else
+                {
+                    return RedirectToAction("referanslogolar", "proje");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("referanslogolar", "proje");
+            }
+            
+
         }
 
         #endregion
