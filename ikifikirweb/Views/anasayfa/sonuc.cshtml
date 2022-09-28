@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewData["Title"] = "sonuc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .page-header-inner {
+        position: relative;
+        padding: 20px 8%;
+    }
+</style>
+
+<section id="page-header">
+
+    <div class="page-header-image parallax-6 bg-image" style="background-image: url('https://uploads.ikifikir.net/site/sonuc.jpg'); top: -82.5px; bottom: -82.5px; transform: translate3d(0px, 120px, 0px);">
+        <div class="cover cover-opacity-4"></div>
+    </div>
+
+    <div class="page-header-inner tt-wrap">
+
+        <div class="page-header-caption ph-cap-xlg ph-cap-light ph-cap-shadow parallax-5 fade-out-scroll-4" style="transform: translate3d(0px, 100px, 0px); opacity: 0.555556;">
+            <div class="ph-title-wrap">
+                <h1 class="page-header-title">Sonuç</h1>
+            </div>
+
+        </div>
+        <!-- End page header caption -->
+
+    </div>
+
+</section>
+
+<section id="page-section" class="page-classic">
+    <div class="page-section-inner tt-wrap">
+
+        <div class="page-content">
+            @if (ViewBag.Type == 1)
+            {
+                <div class="tt-heading tt-heading-lg">
+                    <div class="tt-heading-inner">
+
+                        <h1 class="tt-heading-title text-success">@ViewBag.Result</h1>
+
+                    </div>
+                </div>
+
+                <div class="margin-top-20">
+                    <p class="max-width-600">Formu doldurduğunuz için teşekkürler. En kısa sürede sizinle iletişime geçeceğiz!</p>
+                </div>
+            }
+
+            @if (ViewBag.Type == 0)
+            {
+                <div class="tt-heading tt-heading-lg">
+                    <div class="tt-heading-inner">
+                        <h1 class="tt-heading-title text-success">@ViewBag.Result</h1>
+                    </div> <!-- /.tt-heading-inner -->
+                </div>
+            }
+
+            <div class="margin-top-30">
+                <a href="@Url.Action("sayfa","anasayfa")" class="btn btn-primary margin-top-5 margin-right-10">Ana Sayfa</a>
+                <a href="@Url.Action("iletisim","anasayfa")" class="btn btn-dark-bordered margin-top-5">İletişim</a>
+            </div>
+
+        </div>
+
+    </div> <!-- /.page-section-inner -->
+</section>

@@ -32,7 +32,7 @@ namespace ikifikir.ENGINES.Engines
 
         public List<ProjectListItemDto> getProjectList()
         {
-            IEnumerable<project> roles = _unitOfWork.GetRepository<project>().Where(null, x => x.OrderBy(y => y.Id), "category", null, null);
+            IEnumerable<project> roles = _unitOfWork.GetRepository<project>().Where(null, x => x.OrderBy(y => y.sorted), "category", null, null);
 
             return roles.Select(x => new ProjectListItemDto
             {
@@ -56,7 +56,32 @@ namespace ikifikir.ENGINES.Engines
 
             }).ToList();
         }
+        public List<ProjectListItemDto> getProjectListWeb()
+        {
+            IEnumerable<project> roles = _unitOfWork.GetRepository<project>().Where(x=> x.IsActive == true, x => x.OrderBy(y => y.sorted), "category", null, null);
 
+            return roles.Select(x => new ProjectListItemDto
+            {
+                Id = x.Id,
+                projectName = x.projectName,
+                seoDescription = x.seoDescription,
+                seoTitle = x.seoTitle,
+                IsActive = x.IsActive,
+                projectSpot = x.projectSpot,
+                categoryId = x.categoryId,
+                client = x.client,
+                parentProjectId = x.parentProjectId,
+                isSlider = x.isSlider,
+                CreatedTime = x.CreatedTime,
+                isTitle = x.isTitle,
+                description = x.description,
+                imageThumbnail = x.imageThumbnail,
+                UpdatedTime = x.UpdatedTime,
+                website = x.website,
+                category = x.category,
+
+            }).ToList();
+        }
         public List<ProjectListItemDto> getProjectListByCategoryId(int categoryId)
         {
             IEnumerable<project> roles = _unitOfWork.GetRepository<project>().Where(x => x.categoryId == categoryId, x => x.OrderBy(y => y.Id), "category", null, null);
@@ -83,7 +108,32 @@ namespace ikifikir.ENGINES.Engines
 
             }).ToList();
         }
+        public List<ProjectListItemDto> getProjectListByCategoryIdWeb(int categoryId)
+        {
+            IEnumerable<project> roles = _unitOfWork.GetRepository<project>().Where(x => x.categoryId == categoryId && x.IsActive == true, x => x.OrderBy(y => y.Id), "category", null, null);
 
+            return roles.Select(x => new ProjectListItemDto
+            {
+                Id = x.Id,
+                projectName = x.projectName,
+                seoDescription = x.seoDescription,
+                seoTitle = x.seoTitle,
+                IsActive = x.IsActive,
+                projectSpot = x.projectSpot,
+                categoryId = x.categoryId,
+                isSlider = x.isSlider,
+                parentProjectId = x.parentProjectId,
+                client = x.client,
+                isTitle = x.isTitle,
+                CreatedTime = x.CreatedTime,
+                description = x.description,
+                imageThumbnail = x.imageThumbnail,
+                UpdatedTime = x.UpdatedTime,
+                website = x.website,
+                category = x.category,
+
+            }).ToList();
+        }
         public ProjectDto getProjectById(int id)
         {
             project prj = _unitOfWork.GetRepository<project>().Where(x => x.Id == id, x => x.OrderBy(y => y.Id), "category", null, null).SingleOrDefault();
@@ -115,7 +165,6 @@ namespace ikifikir.ENGINES.Engines
                 Id = prj.Id
             };
         }
-
         public async Task<bool> insertProject(ProjectDto model)
         {
 
@@ -141,7 +190,6 @@ namespace ikifikir.ENGINES.Engines
 
             return prj != null && prj.Id != 0;
         }
-
         public async Task<bool> updateProject(ProjectDto model)
         {
             project prjGet = await _unitOfWork.GetRepository<project>().FindAsync(x => x.Id == model.Id);
@@ -169,7 +217,6 @@ namespace ikifikir.ENGINES.Engines
 
             return getPrj != null;
         }
-
         public List<ProjectListItemDto> searchDataInProject(string searchKey)
         {
             try
@@ -210,7 +257,6 @@ namespace ikifikir.ENGINES.Engines
                 return null;
             }
         }
-
         public async Task<bool> projectTitleShowProcess(int id)
         {
             project getNews = _unitOfWork.GetRepository<project>().FindAsync(x => x.Id == id).Result;
@@ -227,7 +273,6 @@ namespace ikifikir.ENGINES.Engines
                 return getNews != null;
             }
         }
-
         public async Task<bool> projectIsActiveProcess(int id)
         {
             project getNews = _unitOfWork.GetRepository<project>().FindAsync(x => x.Id == id).Result;
@@ -244,7 +289,6 @@ namespace ikifikir.ENGINES.Engines
                 return getNews != null;
             }
         }
-
         public List<ProjectListItemDto> getProjectParent()
         {
             IEnumerable<project> roles = _unitOfWork.GetRepository<project>().Where(x => x.parentProjectId == 0, x => x.OrderBy(y => y.Id), "", null, null);
@@ -271,7 +315,6 @@ namespace ikifikir.ENGINES.Engines
 
             }).ToList();
         }
-
         public List<ProjectListItemDto> getProjectListInSlider()
         {
             IEnumerable<project> roles = _unitOfWork.GetRepository<project>().Where(null, x => x.OrderBy(y => y.Id), "category", 0, 10);

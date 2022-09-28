@@ -1,0 +1,102 @@
+﻿@model IEnumerable<ikifikir.editor.Models.PricingDataModel.PricingModel.PricingListViewModel>
+
+@{
+    ViewData["Title"] = "fiyatpaketleri";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h4 class="card-title">Paketler</h4>
+                        <p class="card-title-desc">Fiyat paketleri ile ilgili işlemlerinizi gerçekleştirin</p>
+                    </div>
+                    <div class="col-sm-3">
+                        <a asp-controller="fiyatpaket" asp-action="fiyatpaketEkle"
+                           style="position: relative; top: 12px; float:right;"
+                           class="btn btn-primary btn-sm">Paket Ekle <i class="fas fa-plus fa-sm"></i></a>
+                    </div>
+                </div>
+                <div class="table-rep-plugin">
+                    <div class="table-responsive mb-0" data-bs-pattern="priority-columns">
+                        <table class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Başlık</th>
+                                    <th>Fiyat</th>
+                                    <th>Paket</th>
+                                    <th>İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr class="button-items" id="tooltip-container">
+                                    <td style="text-align:center;">@Html.DisplayFor(model => item.Id)</td>
+
+                                    @if (item.Title.Length > 40)
+                                    {
+                                        <td>
+                                            <a data-bs-container="#tooltip-container"
+                                               data-bs-toggle="tooltip"
+                                               data-bs-placement="top" title="Bileşeni Düzenle"
+                                               asp-action="fiyatpaketdetay" asp-controller="fiyatpaket"
+                                               asp-route-id="@item.Id">@item.Title.Substring(0, 40)<span>...</span></a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <a data-bs-container="#tooltip-container"
+                                               data-bs-toggle="tooltip"
+                                               data-bs-placement="top" title="Bileşeni Düzenle"
+                                               asp-action="fiyatpaketdetay" asp-controller="fiyatpaket"
+                                               asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Title)</a>
+                                        </td>
+                                    }
+
+                                    <td>@item.MonthPrice ₺</td>
+                                    <td>@item.YearPrice ₺</td>
+
+                                    <td>
+                                        <a data-bs-container="#tooltip-container"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-placement="top" title="Paketi Düzenle"
+                                           asp-action="fiyatpaketGuncelle" asp-controller="fiyatpaket"
+                                           asp-route-id="@item.Id"><i class="mdi mdi-file-edit mdi-24px"></i></a>
+
+                                        <a style="padding:3px;" data-bs-container="#tooltip-container"
+                                           data-bs-toggle="tooltip" data-bs-placement="top"
+                                           title="Paket Sil" asp-action="paketsil"
+                                           asp-route-id="@item.Id"><i class="mdi mdi-trash-can mdi-24px"></i></a>
+
+                                        @if (item.IsActive == false)
+                                        {
+                                            <a style="padding:3px;" data-bs-container="#tooltip-container"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="Paketi Aktifleştir" asp-action="paketaktiflestir"
+                                               asp-route-id="@item.Id"><i class="mdi mdi-publish mdi-24px"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a style="padding:3px;" data-bs-container="#tooltip-container"
+                                               data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="Paketi Pasifleştir" asp-action="paketpasiflestir"
+                                               asp-route-id="@item.Id"><i class="mdi mdi-earth-remove text-danger mdi-24px"></i></a>
+                                        }
+
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

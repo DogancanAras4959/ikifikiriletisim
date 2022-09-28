@@ -1,10 +1,15 @@
 ﻿@model ikifikirweb.ViewModels.CategoryModel.CategoryViewModel
 @using ikifikirweb.ViewModels.ProjectModel
+@using ikifikirweb.Models.MetaConfig
+
+
 @{
     ViewData["Title"] = "kategori";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     List<ProjectListViewModel> projects = ViewBag.Projects as List<ProjectListViewModel>;
+    MetaViewModel meta = ViewBag.Meta as MetaViewModel;
+
 }
 
 <style>
@@ -27,13 +32,6 @@
         <div class="page-header-caption ph-cap-lg parallax-5">
             <div class="ph-title-wrap">
                 <h1 class="page-header-title">@Model.name</h1>
-            </div>
-
-            <div class="zig-zag-separator zig-zag-lg">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
             </div>
 
         </div>

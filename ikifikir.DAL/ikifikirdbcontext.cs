@@ -28,7 +28,9 @@ namespace ikifikir.DAL
         public DbSet<tags> tags { get; set; }
         public DbSet<post> posts { get; set; }
         public DbSet<referenceLogo> referenceLogos { get; set; }
-
+        public DbSet<pricing> pricings { get; set; }
+        public DbSet<pricingComponents> pricingComponents { get; set; }
+        public DbSet<pricingComponentTypes> pricingComponentTypes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserMapping());

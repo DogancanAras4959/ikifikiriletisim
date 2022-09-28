@@ -20,8 +20,10 @@ namespace ikifikir.ENGINES.Interface
         Task<bool> projectIsActiveProcess(int id);
         ProjectDto getProjectById(int id);
         List<ProjectListItemDto> getProjectList();
+        List<ProjectListItemDto> getProjectListWeb();
         List<ProjectListItemDto> getProjectParent();
         List<ProjectListItemDto> getProjectListByCategoryId(int categoryId);
+        List<ProjectListItemDto> getProjectListByCategoryIdWeb(int categoryId);
         List<ProjectListItemDto> searchDataInProject(string searchKey);
 
         #endregion

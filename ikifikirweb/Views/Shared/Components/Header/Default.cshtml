@@ -1,4 +1,7 @@
-﻿<style>
+﻿@using ikifikirweb.Models.MetaConfig
+
+
+<style>
     .h-attr-side-panel-widget {
         padding: 0 8% 10px 8%;
         font-size: 15px;
@@ -16,17 +19,22 @@
 </style>
 
 @{
+
+    MetaViewModel meta = ViewBag.Meta as MetaViewModel;
+
     int isTransparent = Convert.ToInt32(TempData["isTransparent"]);
+
     string transparent = "";
 
     if (isTransparent == 0)
     {
         transparent = "";
     }
-    else if(isTransparent == 1)
+    else if (isTransparent == 1)
     {
         transparent = "header-transparent";
     }
+
 }
 
 <header id="header" class="header-show-hide-on-scroll @transparent.Trim() menu-align-right">
@@ -58,12 +66,14 @@
                             </form>
                             <div class="h-attr-search-suggestions">
                                 <h3 class="h-attr-search-sugg-title">- Önerebilir miyiz?</h3>-->
-                                <!-- Random or most used tags. Note: maximum 20 suggestions/tags! -->
-                                <!--<p><a href="">#aşk</a> <a href="">#eğlence</a> <a href="">#gif</a> <a href="">#yazım</a> <a href="">#dijital</a> <a href="">#duygusal</a> <a href="">#neşeli</a> <a href="">#iyi</a> <a href="">#süper</a></p>
-                            </div>
-                        </div>--> <!-- /.h-attr-search-inner -->
-                        <!--<div class="h-attr-search-close"><i class="tt-close-btn tt-close-light"></i> <span>Kapat</span></div>
-                    </div>--> <!-- /.h-attr-search -->
+                <!-- Random or most used tags. Note: maximum 20 suggestions/tags! -->
+                <!--<p><a href="">#aşk</a> <a href="">#eğlence</a> <a href="">#gif</a> <a href="">#yazım</a> <a href="">#dijital</a> <a href="">#duygusal</a> <a href="">#neşeli</a> <a href="">#iyi</a> <a href="">#süper</a></p>
+                    </div>
+                </div>-->
+                <!-- /.h-attr-search-inner -->
+                <!--<div class="h-attr-search-close"><i class="tt-close-btn tt-close-light"></i> <span>Kapat</span></div>
+                </div>-->
+                <!-- /.h-attr-search -->
                 <!--</li>-->
 
                 <li>
@@ -115,8 +125,7 @@
                                     <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-11.jpg"></a></li>
                                     <li><a target="_blank" href="https://www.instagram.com" class="thumb-list-item bg-image lazy" data-src="~/assets/img/thumb-list/img-12.jpg"></a></li>
                                 </ul>-->
-                                <!-- End thumbnail list -->
-
+                            <!-- End thumbnail list -->
                             <!--</div>-->
                             <!-- End header attributes side panel widget -->
 
@@ -141,9 +150,13 @@
             <div class="tt-menu-collapse tt-submenu-dark">
                 <ul class="tt-menu-nav">
 
-                    <li class="tt-submenu-wrap tt-submenu-master active">
+                    <li class="tt-submenu-wrap tt-submenu-master">
                         <a href="@Url.Action("sayfa","anasayfa")">Ana Sayfa</a>
                     </li>
+
+                    @*<li class="tt-submenu-wrap">
+                            <a href="@Url.Action("icerik","blog")">Blog</a>
+                        </li>*@
 
                     <li class="tt-submenu-wrap tt-submenu-master">
                         <a href="@Url.Action("calismalar","anasayfa")">Ne Yaparız?</a>
@@ -156,12 +169,8 @@
                     </li>
 
                     <li class="tt-submenu-wrap tt-submenu-master">
-                        <a href="@Url.Action("hizmetler","anasayfa")">Hizmetler</a>
+                        <a href="@Url.Action("fiyatpaketleri","anasayfa")">Paketlerimiz</a>
 
-                    </li>
-
-                    <li class="tt-submenu-wrap">
-                        <a href="@Url.Action("icerik","blog")">Blog</a>
                     </li>
 
                     <li class="tt-submenu-wrap tt-submenu-master">

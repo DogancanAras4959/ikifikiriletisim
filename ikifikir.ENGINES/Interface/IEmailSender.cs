@@ -9,6 +9,7 @@ namespace ikifikir.ENGINES.Interface
 {
     public interface IEmailSender
     {
-        Task SendEmailAsync(Message message);
+        Task<string> SendEmailAsync(Message message);
+        Task<string> SendEmailAsyncCalculate(AppoinmentContact contact);
     }
 }

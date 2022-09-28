@@ -41,6 +41,7 @@ namespace ikifikir.editor.Core
             services.AddTransient(typeof(IGalleryService), typeof(GalleryService));
             services.AddTransient(typeof(IVideoService), typeof(VideoService));
             services.AddTransient(typeof(IPostService), typeof(PostService));
+            services.AddTransient(typeof(IPricingService), typeof(PricingService));
             //services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IFlurlClientFactory, PerBaseUrlFlurlClientFactory>();
             services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));

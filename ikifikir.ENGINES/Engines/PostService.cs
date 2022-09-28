@@ -77,6 +77,30 @@ namespace ikifikir.ENGINES.Engines
             }).ToList();
         }
 
+        public List<PostListItemDto> getPostTakeToLast()
+        {
+            IEnumerable<post> roles = _unitOfWork.GetRepository<post>().Where(x => x.IsActive == true, x => x.OrderByDescending(y => y.Id), "", null, null);
+
+            return roles.Select(x => new PostListItemDto
+            {
+                Id = x.Id,
+                content = x.content,
+                IsActive = x.IsActive,
+                CreatedTime = x.CreatedTime,
+                UpdatedTime = x.UpdatedTime,
+                seoSpot = x.seoSpot,
+                seoTitle = x.seoTitle,
+                sorted = x.sorted,
+                spot = x.spot,
+                image = x.image,
+                title = x.title,
+                isNotification = x.isNotification,
+                author = x.author,
+                keywords = x.keywords,
+
+            }).Take(1).ToList();
+        }
+
         public async Task<bool> insertPost(PostDto model)
         {
             post getPost = await _unitOfWork.GetRepository<post>().AddAsync(new post

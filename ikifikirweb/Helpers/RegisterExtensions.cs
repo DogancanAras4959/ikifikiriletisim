@@ -39,6 +39,8 @@ namespace ikifikirweb.Helpers
             services.AddTransient(typeof(IEmailSender), typeof(EmailSender));
             services.AddTransient(typeof(IVideoService), typeof(VideoService));
             services.AddTransient(typeof(IPostService), typeof(PostService));
+            services.AddTransient(typeof(IPricingService), typeof(PricingService));
+            services.AddScoped<IViewRenderService, ViewRenderService>();
             services.AddTransient<reCaptchaService>();
             services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
         }

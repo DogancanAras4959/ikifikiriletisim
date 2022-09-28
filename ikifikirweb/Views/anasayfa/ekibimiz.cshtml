@@ -1,14 +1,38 @@
 ﻿@model IEnumerable<ikifikirweb.ViewModels.TeamModel.TeamListViewModel>
 @using ikifikirweb.ViewModels.ReferenceModel
+@using ikifikirweb.Models.MetaConfig
+
 
 @{
     ViewData["Title"] = "ekibimiz";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     List<ReferenceListViewModel> references = ViewBag.Reference as List<ReferenceListViewModel>;
+    MetaViewModel meta = ViewBag.Meta as MetaViewModel;
+
 }
 
 <style>
+    .member-list.mb-hover-card .member-box .member-image-wrap::before {
+        position: absolute;
+        display: none;
+        content: "";
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #e4e6ec;
+        background-color: #8e2492;
+        outline: 1px solid transparent;
+        z-index: -1;
+        opacity: 0;
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+    }
+
     body.header-transparent-on #page-header.ph-lg .page-header-inner {
         padding-top: 100px;
         padding-bottom: 5px;
@@ -22,47 +46,115 @@
     #team-section.team-classic {
         padding: 50px 0 80px 0;
     }
+
     #clients-section {
         position: relative;
         padding: 0px 0 100px 0;
     }
+
+    .page-header-caption.ph-cap-xlg .page-header-title {
+        font-size: 45px;
+    }
+    
+    .tt-heading.tt-heading-xxlg .tt-heading-title {
+        font-size: 35px !important;
+    }
+
+    .page-header-caption.ph-cap-xlg .page-header-subtitle {
+        font-size: 25px;
+        font-weight: 500;
+    }
+    body.tt-boxed .tt-wrap {
+        max-width: 1282px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .page-header-title {
+        max-width: 900px;
+        margin: 0 0 0px 0;
+        font-size: 52px;
+        font-weight: 700;
+        color: #181c25;
+    }
+    body.header-transparent-on #page-header.ph-xlg .page-header-inner {
+        padding-top: 110px;
+        padding-bottom: 30px;
+    }
+
+    .isotope-filter.fi-btn-tansparent-light .isotope-filter-button {
+        background-color: transparent;
+        padding: 0;
+        font-weight: bold;
+        font-weight: 600;
+        color: #fff;
+    }
+    .simple-text-section-content {
+        position: relative;
+        max-width: 100%;
+        z-index: 3;
+    }
+
+    p {
+        margin: 0 0 10px;
+        font-weight: 500;
+    }
+    .member-list > li {
+        float: left;
+        width: 20%;
+        position: relative;
+        left: 136px;
+    }
+
 </style>
 
-<section id="page-header" class="ph-lg ph-center">
+<section id="page-header" class="ph-xlg">
 
-    <div class="page-header-image parallax-6 bg-image" style="background-image: url('https://uploads.ikifikir.net/site/page-header-bg-4.jpg');">
-
-        <div class="cover cover-opacity-4"></div>
-
+    <div class="page-header-image parallax-6 bg-image" style="background-image: url('https://uploads.ikifikir.net/images/header-bizkimiz.jpg');">
+        <div class="cover cover-opacity-1"></div>
     </div>
-
+    <!-- End page header image -->
+    <!-- Begin page header inner -->
     <div class="page-header-inner tt-wrap">
 
         <div class="page-header-caption ph-cap-xlg ph-cap-light ph-cap-shadow parallax-4 fade-out-scroll-5">
             <div class="ph-title-wrap">
-                <h2 class="page-header-title">Biz Kimiz?</h2>
+                <h2 class="page-header-title" style="color:#fff;">Biz Kimiz?</h2>
             </div>
-            <div class="ph-subtitle-wrap">
-                <h2 class="page-header-subtitle">Deneyim ve Dinamizm buluştu</h2>
-            </div>
-
-            <div class="zig-zag-separator zig-zag-lg">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
         </div>
+        <!-- End page header caption -->
 
     </div>
+
+    <div class="ph-anim-element-wrap hide-ph-anim parallax-4 fade-out-scroll-4">
+        <div class="ph-anim-element-holder">
+            <div class="ph-anim-element"></div>
+        </div>
+    </div>
+    <!-- End page header animated element -->
+
 </section>
 
 <section class="simple-text-section no-padding-bottom">
     <div class="simple-text-inner tt-wrap">
+        <div class="simple-text-section-content" style="text-align:center;">
+            <p><strong>İkifikir buluşmadır.</strong></p>
+            <p>Hayalgücü ve Füzyon’un, dinamizm ve tecrübenin, tencereyle kapağın buluşması…</p>
+            <p>Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi. </p>
 
-        <div class="simple-text-section-content text-center">
-            <p>Müşterilerimizin gerçek ihtiyaçlarını tespit ederek, onlara danışmanlık da yapıyoruz. Çok çalışıyoruz. Müşteri kazanmak ve müşteriyi elde tutmanın çok çalışmaktan geçtiğinin farkındayız</p>
+            <p>Marka yönetimi, grafik tasarım, dijital pazarlama, video prodüksiyonları ve etkinlik yönetimi alanlarında;
+            360 derece, özgün, etkili ve fark yaratan işler üretiyoruz.
+            Müşterilerimizin gerçek ihtiyaçlarını tespit ederek, onlara danışmanlık da yapıyoruz.</p>
+
+            <p>Çok çalışıyoruz. Müşteri kazanmak ve müşteriyi elde tutmanın çok çalışmaktan geçtiğinin farkındayız.</p>
+
+            <p>Bununla birlikte, profesyonel tutumumuzdan ve değerlerimizden taviz vermiyoruz.
+               Büyük – küçük iş ayrımı yapmadan her türlü işe aynı özeni gösteriyoruz.
+               Sizin için en iyi sonucu sağlamak için teknolojik imkanları ve emeğimizi esirgemiyoruz.
+               Sadece reklamverene karşı değil, topluma karşı sorumluluğumuzun da bilincindeyiz.
+            </p>
         </div>
         <!-- End simple text section content -->
 
@@ -73,7 +165,6 @@
     <div class="team-inner tt-wrap">
 
         <ul class="member-list col-5 mb-hover-card mb-hover-shadow">
-
             @foreach (var item in Model)
             {
                 <li>
@@ -96,13 +187,14 @@
                                     <li><a href="@item.facebook" class="btn btn-social-min btn-default btn-link" title="Follow me on Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
                                     <li><a href="@item.twitter" class="btn btn-social-min btn-default btn-link" title="Follow me on Twitter" target="_blank"><i class="fab fa-twitter"></i></a></li>
                                     <li><a href="@item.instagram" class="btn btn-social-min btn-default btn-link" title="Follow me on Instagram" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                                    <li><a href="mailto:@item.gmail" class="btn btn-social-min btn-default btn-link" title="Contact me" target="_blank"><i class="fas fa-envelope"></i></a></li>
+                                    <li><a href="@item.gmail" class="btn btn-social-min btn-default btn-link" title="Contact me" target="_blank"><i class="fas fa-envelope"></i></a></li>
                                 </ul> <!-- /.member-social -->
                             </div> <!-- /.level-down -->
                         </div>
                     </div>
                 </li>
             }
+
 
         </ul>
     </div>
@@ -113,16 +205,9 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="tt-heading tt-heading-xxlg text-center no-padding-right margin-bottom-60">
+                <div class="tt-heading tt-heading-xxlg text-center no-padding-right">
                     <div class="tt-heading-inner">
                         <h1 class="tt-heading-title">Referanslar</h1>
-                        <div class="zig-zag-separator">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                   
                     </div> <!-- /.tt-heading-inner -->
                 </div>
 
@@ -154,13 +239,6 @@
                     <div class="tt-heading-inner">
                         <h1 class="tt-heading-title">Ne Yaparız?</h1>
                         <div class="tt-heading-subtitle">Çalışmalarımızı görmek istermisiniz?</div>
-
-                        <div class="zig-zag-separator">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
                         <!-- End zig-zag separator -->
 
                     </div> <!-- /.tt-heading-inner -->

@@ -73,13 +73,13 @@ var getYTPVideoID = function (url) {
       mask           : false, /* Ex: mask:{ 0:'assets/mask-1.png', 5:'assets/mask-2.png', 30: false, 50:'assets/mask-3.png'}*/
       opacity        : 1,
       quality        : "default", /* or “small”, “medium”, “large”, “hd720”, “hd1080”, “highres” */
-      mute           : false,
+      mute           : true,
       loop           : true,
       fadeOnStartTime: 1500, /* fade in timing at video start */
       showControls   : true,
       showAnnotations: false,
       cc_load_policy : false,
-      showYTLogo     : true,
+      showYTLogo     : false,
       stopMovieOnBlur: true,
       realfullscreen : true,
       abundance      : 0.2,
@@ -90,7 +90,7 @@ var getYTPVideoID = function (url) {
   
       gaTrack           : true,
       optimizeDisplay   : true,
-      remember_last_time: false,
+      remember_last_time: true,
       playOnlyIfVisible : false,
       anchor            : "center,center", /* top,bottom,left,right combined in pair */
       addFilters        : null,

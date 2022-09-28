@@ -30,9 +30,25 @@ namespace ikifikirweb.Controllers
         public IActionResult icerik(int? pageNumber)
         {
             TempData["isTransparent"] = 0;
+            TempData["isHaveFooter"] = 1;
 
             var categories = _mapper.Map<List<CategoryListItemDto>, List<CategoryListViewModel>>(_categoryService.getCategoryList());
             ViewBag.Categories = categories;
+
+            #region Meta
+
+            MetaViewModel meta = new MetaViewModel();
+            meta.Title = "İkifikir İletişim";
+            meta.Keywords = "ikifikir, iletişim, showreels, kurumsal, dijital";
+            meta.Description = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.Image = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
+            meta.ogDescription = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.ogTitle = "İkifikir İletişim";
+            meta.ogImage = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
+            meta.Url = "https://www.ikifikir.net";
+            ViewBag.Meta = meta;
+
+            #endregion
 
             int pageSize = 10;
             List<PostListViewModel> values;
@@ -46,6 +62,7 @@ namespace ikifikirweb.Controllers
         public IActionResult detay(int Id, string title)
         {
             TempData["isTransparent"] = 0;
+            TempData["isHaveFooter"] = 1;
 
             var value = _mapper.Map<PostDto, PostViewModel>(_postService.getPostById(Id));
             string friendlyTitle = title;

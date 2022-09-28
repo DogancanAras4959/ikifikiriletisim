@@ -1,0 +1,82 @@
+﻿@model ikifikir.CORE.EmailConfig.AppoinmentContact
+
+@{ 
+    decimal total = 0;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>la-premiere-902-465061</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+    <!-- Save for Web Slices (la-premiere-902-465061.jpg) -->
+    <table id="Table_01" width="452" height="783" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td colspan="9">
+                <img src="images/index_01.jpg" width="452" height="39" alt="">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" rowspan="7">
+            <td colspan="5">
+                <a href="https://uploads.ikifikir.net/site/logo-dark-ikifikir.png">
+                    <img src="https://uploads.ikifikir.net/site/logo-dark-ikifikir.png" width="224" height="134" border="0" alt="logo">
+                </a>
+            </td>
+            <td colspan="2" rowspan="7"></td>
+        </tr>
+        <tr>
+            <td colspan="5"></td>
+        </tr>
+        <tr>
+            <td width="224" height="42" colspan="5">@Model.NameSurname</td>
+        </tr>
+        <tr>
+            <td width="224" height="25" colspan="5">@Model.CompanyName</td>
+        </tr>
+        <tr>
+            <td colspan="5"></td>
+        </tr>
+        <tr>
+            <td width="224" height="31" colspan="5">@Model.PhoneNumber</td>
+        </tr>
+        <tr>
+            <td colspan="5"></td>
+        </tr>
+        <tr>
+            <td rowspan="8"></td>
+            <td width="297" height="36" colspan="7">@Model.EmailAdress</td>
+            <td rowspan="8"></td>
+        </tr>
+        <tr>
+            <td colspan="7"></td>
+        </tr>
+
+        @foreach (var item in Model.componentResult)
+        {
+            <tr>
+                <td colspan="2" rowspan="6"></td>
+                <td width="203" height="36" colspan="3">@item.Title</td>
+                <td colspan="2" rowspan="6"></td>
+            </tr>
+            <tr>
+                <td rowspan="2"></td>
+                <td width="85" height="30">@item.Price ₺</td>
+                <td rowspan="2"></td>
+            </tr>
+
+            total += item.Price;
+        }
+
+        <tr>
+            <td width="203" height="44" colspan="3">Toplam Tutar</td>
+        </tr>
+        <tr>
+            <td width="203" height="64" colspan="3">@total ₺</td>
+        </tr>
+
+    </table>
+    <!-- End Save for Web Slices -->
+</body>
+</html>

@@ -1,10 +1,31 @@
 ﻿@model ikifikirweb.ViewModels.EmailModel.EmailSenderViewModel
+@using ikifikirweb.Models.MetaConfig
+
 @{
     ViewData["Title"] = "iletisim";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    MetaViewModel meta = ViewBag.Meta as MetaViewModel;
+
 }
 
-<div id="tt-map"></div>
+<style>
+    #contact-section {
+        position: relative;
+        padding: 36px 0;
+    }
+</style>
+
+<section id="contact-section" class="contact-style-3">
+    <div class="contact-section-inner tt-wrap">
+        <div class="row">
+            <div class="col-sm-12">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d188.02101916121603!2d28.985503409836802!3d41.0616408567918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab71b7b61adb7%3A0x9709c21fcd530b85!2zRW1layDEsMWfIEhhbsSx!5e0!3m2!1str!2str!4v1655901474046!5m2!1str!2str"
+                        height="450" style="border:0; width:100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section id="contact-section" class="contact-style-3">
     <div class="contact-section-inner tt-wrap">
@@ -16,13 +37,6 @@
                     <div class="tt-heading-inner">
                         <h1 class="tt-heading-title">İletişim</h1>
                         <div class="tt-heading-subtitle">Sizin için ne yapalım?</div>
-
-                        <div class="zig-zag-separator">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
 
                         <div class="social-buttons margin-top-25">
                             <h5>Bizi Takip Edin:</h5>
@@ -37,13 +51,12 @@
 
                             <h3 class="contact-info-title">
                                 <span class="lnr lnr-map-marker"></span>
-                                <a href="https://www.google.com/maps/search/?api=1&query=41.0748033,28.935252" target="_blank">İstanbul</a>
-                                <small> (Konumumuz)</small>
+                                <a href="https://www.google.com/maps/search/?api=1&query=41.0748033,28.935252" target="_blank">Konumumuz</a>
                             </h3>
 
                             <ul class="contact-info">
-                                <li><span class="address"><span class="lnr lnr-home"></span> <a href="https://www.google.com/maps/search/?api=1&query=-37.817251,144.955891" target="_blank">Merkez Mah. Perihan Sok. Emek İş Hanı No: 68 Kat:4 Şişli / İstanbul</a></span></li>
-                                <li><span class="phone"><span class="lnr lnr-phone"></span> +90 0543 143 07 29</span></li>
+                                <li style="margin-bottom:10px;"><span class="address"><span class="lnr lnr-home"></span> <a href="https://www.google.com/maps/search/?api=1&query=-37.817251,144.955891" target="_blank">Merkez Mah. Perihan Sok. Emek İş Hanı No: 68 Kat:4 Şişli / İstanbul</a></span></li>
+                                <li style="margin-bottom:10px;"><span class="phone"><span class="lnr lnr-phone"></span> +90 0543 143 07 29</span></li>
                                 <li><span class="email"><span class="lnr lnr-envelope"></span> <a href="mailto:info@ikifikir.net" target="_blank">info@ikifikir.net</a></span></li>
                             </ul> <!-- /.contact-info -->
 
@@ -106,8 +119,6 @@
                                 </div>
                             </div> <!-- /.col -->
                         </div> <!-- /.row -->
-
-                        <div class="small text-gray"><em>* Gerekli alanları doldurnuz</em></div>
 
                         <!-- Submit button -->
                         <button type="submit" class="btn btn-primary margin-top-40">Gönder</button>

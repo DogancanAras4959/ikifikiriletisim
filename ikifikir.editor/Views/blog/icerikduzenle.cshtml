@@ -46,6 +46,7 @@
 <script src="~/ckeditor/ckeditor.js"></script>
 
 <form method="post" asp-action="icerikguncellestir" asp-controller="blog" enctype="multipart/form-data">
+    @Html.HiddenFor(x=> x.Id)
     <div class="row">
         <div class="col-sm-8">
             <div class="card">

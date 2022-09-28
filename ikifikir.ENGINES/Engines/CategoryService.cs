@@ -39,6 +39,7 @@ namespace ikifikir.ENGINES.Engines
                 CreatedTime = category.CreatedTime,
                 UpdatedTime = category.UpdatedTime,
                 filterType = category.filterType,
+                categoryTags = category.categoryTags,
                 Id = category.Id
             };
         }
@@ -54,6 +55,7 @@ namespace ikifikir.ENGINES.Engines
                 UpdatedTime = x.UpdatedTime,
                 CreatedTime = x.CreatedTime,
                 IsActive = x.IsActive,
+                categoryTags = x.categoryTags,
                 filterType = x.filterType,
             }).ToList();
         }
@@ -64,6 +66,7 @@ namespace ikifikir.ENGINES.Engines
             {
                 name = model.name,
                 CreatedTime = DateTime.Now,
+                categoryTags = model.categoryTags,
                 UpdatedTime = DateTime.Now,
                 IsActive = true,
                 filterType = model.filterType,
@@ -83,6 +86,7 @@ namespace ikifikir.ENGINES.Engines
                 UpdatedTime = DateTime.Now,
                 CreatedTime = category.CreatedTime,
                 IsActive = category.IsActive,
+                categoryTags = model.categoryTags,
                 filterType = model.filterType,
 
             });

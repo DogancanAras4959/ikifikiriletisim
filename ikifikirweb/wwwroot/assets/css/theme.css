@@ -9071,8 +9071,8 @@ body.tt-boxed .blog-list-inner.tt-wrap {
 }
 .bl-item-title:hover, .bl-item-title:focus,
 .bl-item-title h2:hover, .bl-item-title h2:focus {
-	text-decoration: underline;
-	color: #0040d8;
+	text-decoration: none;
+	color: #333;
 }
 @media (max-width: 992px) {
 	.bl-item-title, .bl-item-title h2 {
@@ -9091,8 +9091,8 @@ body.tt-boxed .blog-list-inner.tt-wrap {
 	color: #888;
 }
 .bl-item-meta a:hover {
-	text-decoration: underline;
-	color: #0040d8;
+	text-decoration: none;
+	color: #333;
 }
 
 .bl-item-meta .published {
@@ -9931,6 +9931,7 @@ img.sp-image {
 	.bs-nav-title, .bs-nav-title h4 {
 		font-size: 16px;
 	}
+
 }
 .bs-nav-title:hover, .bs-nav-title h4:hover {
 	color: #0040d8;

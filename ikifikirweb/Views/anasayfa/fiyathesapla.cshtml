@@ -1,0 +1,265 @@
+﻿@model ikifikirweb.ViewModels.PricingDataModelWeb.PricingWebModel.PricingViewModel
+@using ikifikirweb.ViewModels.PricingDataModelWeb.PricingComponentWebModel
+@using ikifikirweb.ViewModels.PricingDataModelWeb.PricingComponentTypeWebModel
+
+@{
+    ViewData["Title"] = "fiyathesapla";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<PricingComponentTypeListViewModel> types = ViewBag.Tipler as List<PricingComponentTypeListViewModel>;
+    List<PricingComponentListViewModel> components = ViewBag.Bilesenler as List<PricingComponentListViewModel>;
+
+}
+<link href="~/assets/css/mobile.css" rel="stylesheet" />
+<style>
+
+    .fixed-total {
+        padding-right: 5px;
+        position: fixed;
+        top: 273px;
+        margin: auto 0;
+        display: inline-block;
+    }
+
+    .parent {
+        display: inline-block;
+        padding: 3.5em;
+    }
+
+
+    .btn {
+        padding: 10px 20px;
+        background-color: #0040d8;
+        cursor: pointer;
+        border: none;
+        transition: all .30s;
+        color: white;
+    }
+
+        .active, .btn:hover {
+            background-color: rgb(236, 16, 89) !important;
+            color: white;
+        }
+
+    .box-button {
+        font-size: 14px;
+        vertical-align: middle !important;
+        border: 2px solid #b5b5b5 !important;
+        padding: 20px !important;
+        box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 5%);
+    }
+
+    #prices-section {
+        padding: 90px 3%;
+    }
+
+    .price-box .price-features > ul > li {
+        padding: 3px 0;
+        font-size: 17px;
+        font-weight: 500;
+    }
+
+    .tt-heading.padding-on {
+        padding: 0% 0% 2% 0%;
+    }
+
+    .tt-heading.tt-heading-xlg .tt-heading-subtitle {
+        margin-top: 5px;
+        font-size: 19px;
+    }
+
+    .tt-heading.tt-heading-xlg .tt-heading-title {
+        font-size: 40px;
+    }
+
+    .price-box .price-features > ul > li {
+        padding: 3px 0;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .price-box .pr-box {
+        padding: 0px 20px 0px 15px;
+    }
+
+    .price-box .price-box-price .price {
+        position: relative;
+        display: inline-block;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .price-box .price-heading .price-title {
+        margin: 0;
+        font-size: 19px;
+    }
+
+    .price-box {
+        position: relative;
+        background-color: #fff;
+        margin: 10px 0px 10px 0px;
+        padding: 20px 0;
+        text-align: center;
+        z-index: 2;
+        overflow: hidden;
+        -webkit-box-shadow: 0 0 30px 1px rgb(0 0 0 / 14%);
+        -moz-box-shadow: 0 0 30px 1px rgba(0, 0, 0, 0.14);
+        box-shadow: 0 0 30px 1px rgb(0 0 0 / 14%);
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+    }
+
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .price-box .price-heading .price-title {
+        margin: 0;
+        font-size: 13px;
+    }
+
+    .pay-box {
+        width: 315px;
+    }
+</style>
+<section id="prices-section">
+    <div class="prices-section-inner tt-wrap">
+        <div class="price-boxes-container">
+            <div class="row price-pb-m">
+                <div class="col-sm-12">
+                    <div class="tt-heading tt-heading-xlg padding-on" style="position: relative; top: 15px;">
+                        <div class="tt-heading-inner">
+                            <h1 class="tt-heading-title">@Model.Title</h1>
+                            <div class="tt-heading-subtitle">Lütfen fiyat hesaplama modulünden istediğiniz hizmetleri seçin</div>
+                        </div> <!-- /.tt-heading-inner -->
+                    </div>
+                </div>     
+            </div>
+            <div class="row">
+                <div class="col-sm-9" id="col-pb-mobile">
+                    <div class="row">
+                        @foreach (var item in components)
+                        {
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3" style="padding-right: 5px;">
+                                <div class="price-box">
+                                    <div class="pr-box price-heading">
+                                        <div class="price-heading-inner">
+                                            <div class="prh-icon"><span class="lnr lnr-layers"></span></div>
+                                            <h3 class="price-title">@item.ComponentTitle</h3>
+                                        </div>
+                                    </div>
+                                    <div class="pr-box price-features">
+                                        <ul class="list-unstyled">
+                                            <li>@*@Decimal.Parse(item.Price.ToString("0.00##"))*@ @Convert.ToInt32(item.Price) ₺</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pr-box">
+                                        <button style="padding: 5px 25px; font-size: 15px;" value="@item.Price" class="btn btn-price-box btn-primary">Seç</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-sm-3 fixed-total" style="padding-right: 5px;">
+                    <div class="pay-box">
+                        <div class="price-box pr-box-featured" id="btn-width">
+                            <div class="pr-box price-heading" id="price-heading">
+                                <div class="price-heading-inner">
+                                    <h3 class="price-title" style="position: relative; top: 7px;">Toplam Fiyat</h3>
+                                </div>
+                            </div>
+                            <div class="pr-box price-box-price" style="padding: 0px 20px 0px 35px; position: relative; top: 2px;">
+                                <div class="price"><span id="count-price">0</span> ₺</div>
+                            </div>
+                        </div>
+                        <a href="" onclick="confirmCalculate();" style="background: none; border: 0; width: 100%; padding: 0;" class="btn-left" id="btn-width">
+                            <div class="price-box pr-box-featured" id="btnNext">
+                                <div class="pr-box price-box-price btn-padding" style="padding: 7px 20px 15px 35px;">
+                                    <div class="price"><span>Onayla</span></div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/assets/vendor/jquery/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    let buttons = document.querySelectorAll('button');
+    const countPrice = document.getElementById("count-price");
+    const btnNext = document.getElementById("btnNext");
+    let totalPrice = 0;
+    let sumTotal = 0;
+
+    var IdS = [];
+
+    btnNext.style.cursor = "not-allowed";
+    btnNext.style.backgroundColor = "#84a8ff";
+    btnNext.style.disabled = "disabled";
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            btnNext.style.cursor = "pointer";
+            btnNext.style.backgroundColor = "#0040d8";
+            btnNext.style.disabled = "false";
+
+            if (this.innerHTML == "Seç") {
+                IdS.push($(this).val());
+                selected = true;
+                this.classList.add('active');
+                this.innerHTML = "Seçildi";
+                totalPrice = Number.parseInt($(this).val());
+                countPrice.innerHTML = increment(totalPrice);
+            }
+            else if (this.innerHTML == "Seçildi") {
+                selected = false;
+                this.classList.remove('active');
+                this.innerHTML = "Seç";
+                totalPrice = Number.parseInt($(this).val());
+                countPrice.innerHTML = deIncrement(totalPrice);
+            }
+        });
+    });
+
+    function increment(totalPriceValue) {
+        sumTotal += totalPriceValue;
+        return Number.parseInt(sumTotal);
+    }
+
+    function deIncrement(totalPriceDeValue) {
+        sumTotal -= totalPriceDeValue;
+        return Number.parseInt(sumTotal);
+    }
+
+</script>
+
+<script>
+
+     var confirmCalculate = function () {
+
+        var id = @Model.Id;
+
+        $.ajax({
+
+            type: "POST",
+            url: "/anasayfa/secimiOnayla/",
+            data: {Ids: IdS },
+            success: function (response) {         
+                    window.location.href = "@Url.Action("fiyatOnayla","anasayfa")";
+            }
+
+         });
+
+    }
+</script>

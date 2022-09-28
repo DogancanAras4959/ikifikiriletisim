@@ -1,12 +1,16 @@
 ﻿@model PaginationList<ikifikirweb.ViewModels.PostModel.PostListViewModel>
 @using ikifikir.CORE.Helper.Extends;
 @using ikifikirweb.ViewModels.CategoryModel
+@using ikifikirweb.Models.MetaConfig
 
 @{
     var prevDisabled = !Model.HasPrevious ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 
     List<CategoryListViewModel> categories = ViewBag.Categories as List<CategoryListViewModel>;
+
+    MetaViewModel meta = ViewBag.Meta as MetaViewModel;
+
 }
 <style>
     .blog-author-img {
@@ -24,7 +28,6 @@
         -o-transition: all .2s ease-in-out;
         transition: all .2s ease-in-out;
     }
-
 </style>
 
 @{
@@ -158,21 +161,18 @@
                             <!-- End sidebar widget -->
 
                         </div> <!-- /.col -->
-
                         <!--<div class="col-sm-12">-->
-
-                            <!-- Begin sidebar widget -->
-                            <!--<div class="sidebar-widget sidebar-search">
-                                <h3 class="sidebar-heading">Arama Yap</h3>
-                                <form id="blog-search-form" class="form-btn-inside" method="get" action="search-results.html">
-                                    <div class="form-group no-margin">
-                                        <input type="text" class="form-control" id="blog-search" name="search" placeholder="Arama yap...">
-                                        <button type="submit"><i class="fas fa-search"></i></button>
-                                    </div>
-                                </form>
-                            </div>-->
-                            <!-- End sidebar widget -->
-
+                        <!-- Begin sidebar widget -->
+                        <!--<div class="sidebar-widget sidebar-search">
+                            <h3 class="sidebar-heading">Arama Yap</h3>
+                            <form id="blog-search-form" class="form-btn-inside" method="get" action="search-results.html">
+                                <div class="form-group no-margin">
+                                    <input type="text" class="form-control" id="blog-search" name="search" placeholder="Arama yap...">
+                                    <button type="submit"><i class="fas fa-search"></i></button>
+                                </div>
+                            </form>
+                        </div>-->
+                        <!-- End sidebar widget -->
                         <!--</div>--> <!-- /.col -->
 
                         <div class="col-md-12 col-sm-6">

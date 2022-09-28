@@ -19,7 +19,10 @@
                         <input type="text" class="form-control" placeholder="Kategori adı giriniz..." maxlength="25" asp-for="name" name="name" id="defaultconfig">
                     </div>
                     <div class="form-group mt-3">
-                        <input type="text" class="form-control" placeholder="Filterleme tipi giriniz. Örn(.digital)" asp-for="filterType"/>
+                        <input type="text" class="form-control" placeholder="Etiket giriniz..." asp-for="categoryTags" name="categoryTags" id="defaultconfig">
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" placeholder="Filterleme tipi giriniz. Örn(.digital)" asp-for="filterType" />
                     </div>
                     <div class="form-group mt-3">
                         <button class="btn btn-primary" type="submit">Kategori Oluştur</button>

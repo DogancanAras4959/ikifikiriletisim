@@ -35,6 +35,9 @@ namespace ikifikir.DAL.Migrations
                     b.Property<DateTime>("UpdatedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("categoryTags")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("filterType")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -137,6 +140,109 @@ namespace ikifikir.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("post");
+                });
+
+            modelBuilder.Entity("ikifikir.DAL.Models.pricing", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("MonthPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("YearPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("pricing");
+                });
+
+            modelBuilder.Entity("ikifikir.DAL.Models.pricingComponentTypes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("pricingComponentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("pricingComponentId");
+
+                    b.ToTable("pricingComponentTypes");
+                });
+
+            modelBuilder.Entity("ikifikir.DAL.Models.pricingComponents", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("ChooseType")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ComponentTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("PricingId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PricingId");
+
+                    b.ToTable("pricingComponents");
                 });
 
             modelBuilder.Entity("ikifikir.DAL.Models.project", b =>
@@ -458,6 +564,28 @@ namespace ikifikir.DAL.Migrations
                     b.Navigation("projectToGalleries");
                 });
 
+            modelBuilder.Entity("ikifikir.DAL.Models.pricingComponentTypes", b =>
+                {
+                    b.HasOne("ikifikir.DAL.Models.pricingComponents", "pricingComponents")
+                        .WithMany("pricingComponentTypeList")
+                        .HasForeignKey("pricingComponentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("pricingComponents");
+                });
+
+            modelBuilder.Entity("ikifikir.DAL.Models.pricingComponents", b =>
+                {
+                    b.HasOne("ikifikir.DAL.Models.pricing", "pricing")
+                        .WithMany("pricingComponentsList")
+                        .HasForeignKey("PricingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("pricing");
+                });
+
             modelBuilder.Entity("ikifikir.DAL.Models.project", b =>
                 {
                     b.HasOne("ikifikir.DAL.Models.category", "category")
@@ -521,6 +649,16 @@ namespace ikifikir.DAL.Migrations
             modelBuilder.Entity("ikifikir.DAL.Models.category", b =>
                 {
                     b.Navigation("projects");
+                });
+
+            modelBuilder.Entity("ikifikir.DAL.Models.pricing", b =>
+                {
+                    b.Navigation("pricingComponentsList");
+                });
+
+            modelBuilder.Entity("ikifikir.DAL.Models.pricingComponents", b =>
+                {
+                    b.Navigation("pricingComponentTypeList");
                 });
 
             modelBuilder.Entity("ikifikir.DAL.Models.project", b =>

@@ -90,7 +90,7 @@ namespace ikifikir.editor.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> icerikguncelle(PostEditViewModel model, IFormFile file)
+        public async Task<IActionResult> icerikguncellestir(PostEditViewModel model, IFormFile file)
         {
             try
             {

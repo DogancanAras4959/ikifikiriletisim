@@ -1,0 +1,120 @@
+﻿@model ikifikir.CORE.EmailConfig.AppoinmentContact
+@using ikifikir.CORE.EmailConfig
+
+@{
+    ViewData["Title"] = "fiyatOnayla";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<ComponentResult> resultList = ViewBag.ResultList as List<ComponentResult>;
+}
+
+<style>
+    .tt-heading.padding-on {
+        padding: 2% 0% 3% 0%;
+    }
+
+    .price-box .price-box-price .price {
+        position: relative;
+        display: inline-block;
+        font-size: 45px;
+        font-weight: bold;
+    }
+
+    .price-box .pr-box {
+        padding: 0px 0px 5px 0px;
+    }
+    .price-box {
+        position: relative;
+        background-color: #fff;
+        padding: 20px 0;
+        text-align: center;
+        z-index: 2;
+        overflow: hidden;
+        -webkit-box-shadow: 0 0 30px 1px rgb(0 0 0 / 14%);
+        -moz-box-shadow: 0 0 30px 1px rgba(0, 0, 0, 0.14);
+        box-shadow: 0 0 30px 1px rgb(0 0 0 / 14%);
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+    }
+</style>
+
+<section id="prices-section">
+    <div class="prices-section-inner tt-wrap">
+        <div class="price-boxes-container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="tt-heading tt-heading-xlg text-center padding-on">
+                        <div class="tt-heading-inner">
+                            <h1 class="tt-heading-title">Fiyat Onaylandı</h1>
+                            <div class="tt-heading-subtitle">Sizinle iletişime geçebilmemiz için formu doldurun</div>
+                        </div> <!-- /.tt-heading-inner -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="price-box">
+                        <div class="price-heading-inner">
+                            <h3 class="price-title">Hizmetler</h3>
+                        </div>
+                        <div class="pr-box price-features">
+                            <ul class="list-unstyled">
+                                @foreach (var item in resultList)
+                                {
+                                    <li>@item.Title<span>:</span> <strong>@Convert.ToInt32(item.Price) ₺</strong></li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="pr-box price-box-price">
+                            <div class="price">@Convert.ToInt32(ViewBag.Total) ₺</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-7">
+                    <form method="post" action="@Url.Action("fiyatformgonder","anasayfa")">
+                        <div class="contact-form-inner bg-gray-3 padding-5-p">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="NameSurname" asp-for="NameSurname" placeholder="Adınız Soyadınız..." required>
+                                    </div>
+                                </div> <!-- /.col -->
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="PhoneNumber" asp-for="PhoneNumber" placeholder="Telefon Numarası...">
+                                    </div>
+                                </div> <!-- /.col -->
+                            </div> <!-- /.row -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="EmailAdress" asp-for="EmailAdress" placeholder="Email Adresi" required>
+                                    </div>
+                                </div> <!-- /.col -->
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="CompanyName" asp-for="CompanyName" placeholder="Firma Adı">
+                                    </div>
+                                </div> <!-- /.col -->
+                            </div> <!-- /.row -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="Message" rows="4" asp-for="Message" placeholder="Mesajınız"></textarea>
+                                    </div>
+                                </div> <!-- /.col -->
+                            </div> <!-- /.row -->
+                            <button type="submit" class="btn btn-primary margin-top-40">Gönder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

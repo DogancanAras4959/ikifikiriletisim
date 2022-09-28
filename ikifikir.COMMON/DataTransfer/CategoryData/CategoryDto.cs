@@ -10,6 +10,8 @@ namespace ikifikir.COMMON.DataTransfer.CategoryData
     {
         public string name { get; set; }
         public string filterType { get; set; }
+        public string categoryTags { get; set; }
+
 
     }
 }

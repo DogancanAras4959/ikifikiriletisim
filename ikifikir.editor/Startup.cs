@@ -50,6 +50,7 @@ namespace ikifikir.editor
                 mc.AddProfile(new ProjectProfile());
                 mc.AddProfile(new TagProfile());
                 mc.AddProfile(new PostProfile());
+                mc.AddProfile(new PricingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();

@@ -52,11 +52,21 @@ namespace ikifikirweb
                 mc.AddProfile(new TeamProfiles());
                 mc.AddProfile(new CategoryProfiles());
                 mc.AddProfile(new PostProfile());
+                mc.AddProfile(new PricingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
 
             services.AddSingleton(mapper);
+
+            services.AddSession(options =>
+            {
+
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.IsEssential = true;
+                options.Cookie.HttpOnly = true;
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,6 +86,7 @@ namespace ikifikirweb
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

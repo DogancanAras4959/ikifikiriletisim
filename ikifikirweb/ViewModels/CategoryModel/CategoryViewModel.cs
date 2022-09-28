@@ -9,5 +9,8 @@ namespace ikifikirweb.ViewModels.CategoryModel
     {
         public string name { get; set; }
         public string filterType { get; set; }
+        public string categoryTags { get; set; }
+        public List<string> tagsListToCategory { get; set; }
+
     }
 }

@@ -19,7 +19,7 @@ namespace ikifikir.ENGINES.Engines
             _emailConfig = emailConfig.Value;
         }
 
-        public async Task SendEmailAsync(Message message)
+        public async Task<string> SendEmailAsync(Message message)
         {
             try
             {
@@ -37,12 +37,39 @@ namespace ikifikir.ENGINES.Engines
                     await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
                     await client.SendAsync(emailMessage);
                 }
-
+                return "Başarılı!";
             }
             catch (Exception ex)
             {
+                return ex.ToString();
 
+            }
+        }
 
+        public async Task<string> SendEmailAsyncCalculate(AppoinmentContact contact)
+        {
+            try
+            {
+                var emailMessage = new MimeMessage();
+                emailMessage.From.Add(MailboxAddress.Parse(_emailConfig.From));
+                emailMessage.To.Add(MailboxAddress.Parse(contact.To));
+                emailMessage.Subject = contact.Subject;
+                emailMessage.Date = DateTime.Now;
+                emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html) { Text = string.Format("<div>{0}</div>", contact.Content) };
+
+                using (var client = new SmtpClient())
+                {
+                    client.CheckCertificateRevocation = false;
+                    client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                    await client.ConnectAsync(_emailConfig.Host, _emailConfig.Port, false);
+                    await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
+                    await client.SendAsync(emailMessage);
+                }
+                return "Başarılı!";
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
             }
         }
     }

@@ -1,18 +1,222 @@
-﻿@{
+﻿@using ikifikirweb.Models.MetaConfig
+@using ikifikirweb.ViewModels.PostModel
+
+@{
     ViewData["Title"] = "sayfa";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    MetaViewModel meta = ViewBag.Meta as MetaViewModel;
+    List<PostListViewModel> postGet = ViewBag.Post as List<PostListViewModel>;
 }
 
+<style>
+    .bl-item-info {
+        position: relative;
+        padding: 4% 4% 14px 4%;
+        z-index: 2;
+        -webkit-box-shadow: 0 16px 25px -15px rgb(0 0 0 / 20%);
+        -moz-box-shadow: 0 16px 25px -15px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 18px 25px -15px rgb(0 0 0 / 20%);
+    }
+
+    .isotope-item {
+        float: right;
+        width: 25%;
+        position: fixed;
+        right: 15px;
+        bottom: 15px;
+        z-index: 998;
+    }
+
+    #popUp {
+        opacity: 0;
+        visibility: hidden;
+        position: fixed;
+        right: 30px !important;
+        bottom: 124px !important;
+        width: 0px;
+        height: 0px;
+        transition: width 1s, height 1s, transform 1s;
+    }
+
+        #popUp.show {
+            opacity: 1;
+            visibility: visible;
+            width: 300px;
+            height: 200px;
+            transform: rotate(0deg);
+        }
+
+        #popUp.quit {
+            opacity: 0;
+            visibility: hidden;
+            width: 0px;
+            height: 0px;
+            -webkit-transition: all 1s;
+            transition: all 1s;
+        }
+
+    .exit-btn {
+        color: #fff;
+        position: absolute;
+        padding: 15px;
+        right: 3px;
+        z-index: 999;
+        background: none;
+        border: 0;
+    }
+
+    .bl-item-title, .bl-item-title h2 {
+        display: inline;
+        margin: 0;
+        font-weight: bold;
+        font-size: 18px;
+        color: #333;
+        line-height: 1.2;
+    }
+
+</style>
+
+<style>
+    #tt-intro .intro-caption-wrap.bottom-left .intro-caption {
+        bottom: 40%;
+        left: 4%;
+        margin-right: 5%;
+        text-align: left;
+    }
+
+    #tt-intro .intro-caption-wrap.intro-caption-lg .intro-title {
+        font-size: 50px;
+    }
+
+    #tt-intro .intro-title {
+        display: block;
+        margin: 0 0 0px 0;
+        font-size: 68px;
+        font-weight: bold;
+        color: #FFF;
+        text-shadow: 0 0 20px rgb(0 0 0 / 30%);
+    }
+
+    #tt-intro .intro-subtitle {
+        display: block;
+        margin: 0px;
+        font-size: 26px;
+        font-weight: bold;
+        color: #FFF;
+        text-shadow: 0 0 20px rgb(0 0 0 / 30%);
+    }
+
+    #tt-intro .intro-buttons {
+        margin-top: 5px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 12% auto;
+        padding: 10px;
+        border: 1px solid #888;
+        width: 70%;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+<link href="~/assets/css/mobile.css" rel="stylesheet" />
 <section id="tt-intro" class="intro-full">
     <div class="tt-intro-inner">
 
-        <div class="owl-carousel cursor-grab bg-dark nav-bottom-right" data-lazy-load="true" data-items="1" data-loop="true" data-dots="false" data-nav="true" data-autoplay="true" data-autoplay-timeout="8000" data-animate-in="fadeIn" data-animate-out="fadeOut">
+
+        <div class="owl-carousel cursor-grab bg-dark nav-bottom-right"
+             data-lazy-load="true"
+             data-items="1"
+             data-loop="true"
+             data-dots="false"
+             data-nav="true"
+             data-autoplay="true"
+             data-autoplay-timeout="16000"
+             data-animate-in="fadeIn" data-animate-out="fadeOut">
+
+            <!--<div class="cc-item">
+                <div class="youtube-bg-wrap parallax-6 bg-dark">
+                    <!-- Class "parallax-6" is for tt-intro only!!! -->
+            <!--<div class="youtube-bg"
+                 style="background-image: url(https://uploads.ikifikir.net/images/1225434056.webp);"
+                 data-property="{
+                    videoURL: 'https://www.youtube.com/watch?v=8YJ2MJBVKDs',
+                    containment: 'self',
+                    quality: 'default',
+                    startAt: 0,
+                    stopAt: 0,
+                    autoPlay: true,
+                    loop: true,
+                    mute: true,
+
+                    showControls: false,
+                    showYTLogo: false,
+                    realfullscreen: true,
+                    addRaster: false,
+                    optimizeDisplay: true,
+                    stopMovieOnBlur: true
+                }">
+
+                <div class="cover cover-opacity-6"></div>
+
+            </div>-->
+            <!-- /.youtube-bg -->
+            <!--</div>
+            <div class="intro-caption-wrap caption-animate intro-caption-lg bottom-left parallax-4">
+                <div class="intro-caption-holder">
+                    <div class="intro-caption center">
+                        <h1 class="intro-title">İkifikir'e</h1>
+                        <h2 class="intro-subtitle">hızla bir göz at</h2>-->
+            <!-- Begin intro description (recommended max 170 characters!)
+            ============================= -->
+            <!--@*<div class="intro-description">
+                    Aivo – is a complete HTML5 and CSS3 website template. It fits perfectly for freelancers, artists and design agencies. It looks great with all types of devices.
+                </div>*@-->
+            <!-- End intro-description -->
+            <!-- Begin intro buttons -->
+            <!--<div class="intro-buttons">
+                <button id="myBtn" style="border:2px solid #fff;" class="btn btn-white-bordered margin-top-5 margin-right-10">Şimdi İzle</button>
+            </div>-->
+            <!-- End intro buttons -->
+            <!--</div>--> <!-- /.intro-caption -->
+            <!--</div>--> <!-- /.intro-caption-holder -->
+            <!--</div>
+            </div>-->
 
             <div class="cc-item">
 
                 <div class="intro-image-wrap parallax-6">
                     <div class="intro-image bg-dark bg-image owl-lazy" data-src="https://uploads.ikifikir.net/site/1.jpg">
-                        <div class="cover cover-opacity-5"></div>
                     </div> <!-- /.intro-image -->
                 </div>
 
@@ -20,14 +224,13 @@
                     <div class="intro-caption-holder">
                         <div class="intro-caption center">
 
-                            <h1 class="intro-title" style="margin:0">ABRA</h1>
-                            <h1 class="intro-title">KADABRA!</h1>
+                            <h1 class="intro-title" style="margin:0">Abrakadabra!</h1>
                             @*<div class="intro-description">
 
-                        </div>*@
+                                </div>*@
 
                             <div class="intro-buttons">
-                                <a href="@Url.Action("hizmetler","anasayfa")" class="btn btn-white-bordered margin-top-5">İŞE BAKIŞIMIZ</a>
+                                <a href="@Url.Action("hizmetler","anasayfa")" class="btn btn-white-bordered margin-top-5">İşe Bakışımız</a>
                             </div>
                             <!-- End intro buttons -->
 
@@ -42,7 +245,6 @@
 
                 <div class="intro-image-wrap parallax-6">
                     <div class="intro-image bg-dark bg-image owl-lazy" data-src="https://uploads.ikifikir.net/site/3.jpg">
-                        <div class="cover cover-opacity-5"></div>
                     </div> <!-- /.intro-image -->
                 </div>
 
@@ -50,14 +252,13 @@
                     <div class="intro-caption-holder">
                         <div class="intro-caption center">
 
-                            <h1 class="intro-title" style="margin:0">NE</h1>
-                            <h1 class="intro-title">YAPARIZ?</h1>
+                            <h1 class="intro-title" style="margin:0">Ne Yaparız?</h1>
                             @*<div class="intro-description">
 
-                        </div>*@
+                                </div>*@
 
                             <div class="intro-buttons">
-                                <a href="@Url.Action("calismalar","anasayfa")" class="btn btn-white-bordered margin-top-5">İŞLERİMİZİ GÖRÜN</a>
+                                <a href="@Url.Action("calismalar","anasayfa")" class="btn btn-white-bordered margin-top-5">İşlerimizi Görün</a>
                             </div>
                             <!-- End intro buttons -->
 
@@ -72,7 +273,6 @@
 
                 <div class="intro-image-wrap parallax-6">
                     <div class="intro-image bg-dark bg-image owl-lazy" data-src="https://uploads.ikifikir.net/site/2.jpg">
-                        <div class="cover cover-opacity-5"></div>
                     </div> <!-- /.intro-image -->
                 </div>
 
@@ -80,14 +280,13 @@
                     <div class="intro-caption-holder">
                         <div class="intro-caption center">
 
-                            <h1 class="intro-title" style="margin:0">BİZ</h1>
-                            <h1 class="intro-title">KİMİZ?</h1>
+                            <h1 class="intro-title" style="margin:0">Biz Kimiz?</h1>
                             @*<div class="intro-description">
 
-                        </div>*@
+                                </div>*@
 
                             <div class="intro-buttons">
-                                <a href="@Url.Action("ekibimiz","anasayfa")" class="btn btn-white-bordered margin-top-5">KENDİMİZİ TANITALIM</a>
+                                <a href="@Url.Action("ekibimiz","anasayfa")" class="btn btn-white-bordered margin-top-5">Kendimizi Tanıtalıım</a>
                             </div>
                             <!-- End intro buttons -->
 
@@ -102,7 +301,6 @@
 
                 <div class="intro-image-wrap parallax-6">
                     <div class="intro-image bg-dark bg-image owl-lazy" data-src="https://uploads.ikifikir.net/site/4.jpg">
-                        <div class="cover cover-opacity-5"></div>
                     </div> <!-- /.intro-image -->
                 </div>
 
@@ -110,13 +308,12 @@
                     <div class="intro-caption-holder">
                         <div class="intro-caption center">
 
-                            <h1 class="intro-title" style="margin:0">ÇAY</h1>
-                            <h1 class="intro-title">KAHVE?</h1>
+                            <h1 class="intro-title" style="margin:0">Çay Kahve?</h1>
                             @*<div class="intro-description">
-                        </div>*@
+                                </div>*@
 
                             <div class="intro-buttons">
-                                <a href="@Url.Action("iletisim","anasayfa")" class="btn btn-white-bordered margin-top-5">HADİ TANIŞALIM</a>
+                                <a href="@Url.Action("iletisim","anasayfa")" class="btn btn-white-bordered margin-top-5">Hadi Tanışalım</a>
                             </div>
                             <!-- End intro buttons -->
 
@@ -126,11 +323,100 @@
                 <!-- End intro caption wrap -->
 
             </div>
-
         </div>
 
     </div>
 </section>
 
+@if (postGet.Count() > 0)
+{
+    <div class="isotope-item btn-width-mobile" id="popUp-button">
+        <button class="btn btn-primary" id="btn-open-popup" style="background-color: #ff0034; border-color: #ff0034;"><i class="fa fa-bell"></i> Yeni Haberimizi Görün</button>
+    </div>
+
+    @foreach (var item in postGet)
+    {
+        <div class="isotope-item" id="popUp">
+
+            <!-- Begin blog list item -->
+            <article class="blog-list-item">
+
+                <!-- Begin blog list item image -->
+                <div class="bl-item-image-wrap">
+                    <button id="btn-exit" class="exit-btn">&Chi;</button>
+                    <a href="" class="bl-item-image bg-image lazy" data-src="https://uploads.ikifikir.net/images/@item.image"></a>
+                </div>
+                <!-- End blog list item image -->
+                <!-- Begin blog list item info -->
+                <div class="bl-item-info">
+                    <a href="@Url.Action("detay","blog", new { Id = item.Id, title = item.GenerateSlug() })" class="bl-item-title"><h2>@item.title</h2></a>
+                </div>
+                <!-- End blog list item info -->
+
+            </article>
+            <!-- End blog list item -->
+
+        </div>
+    }
+
+}
 
 
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <br />
+        <iframe class="frame-mobile" style="width:100%; height:500px;"
+                src="https://www.youtube.com/embed/8YJ2MJBVKDs"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+    </div>
+
+</div>
+
+<script>
+    var modal = document.getElementById("myModal");
+
+    var btn = document.getElementById("myBtn");
+
+    var span = document.getElementsByClassName("close")[0];
+
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+<script src="~/assets/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $("#btn-open-popup").click(function () {
+        var btnPopOpen = document.getElementById("popUp-button");
+        var popUpScreen = document.getElementById("popUp");
+
+        btnPopOpen.style.visibility = "hidden";
+        popUpScreen.classList.add("show");
+        popUpScreen.classList.remove("quit");
+    });
+
+    $("#btn-exit").click(function () {
+        var btnPopOpen = document.getElementById("popUp-button");
+        var popUpScreen = document.getElementById("popUp");
+
+        btnPopOpen.style.visibility = "visible";
+        popUpScreen.classList.remove("show");
+        popUpScreen.classList.add("quit");
+    });
+
+</script>

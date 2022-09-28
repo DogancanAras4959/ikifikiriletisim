@@ -1,2 +1,82 @@
-﻿body {
+﻿@media (max-width: 768px) {
+
+    .portfolio-single-info {
+        margin-bottom: 20px !important;
+    }
+    .portfolio-single-inner {
+        padding-bottom: 0px !important;
+    }
+
+    .frame-mobile {
+        max-width: 100%;
+        height: 260px;
+    }
+
+    .fixed-total {
+        padding-right: 5px;
+        position: inherit !important;
+        width: 100% !important;
+    }
+
+    .price-pb-m{
+        padding-bottom:25px;
+    }
+
+    #prices-section {
+        padding: 23px 3% !important;
+    }
+
+    .pay-box {
+        display: table-cell !important;
+        position: fixed !important;
+        bottom: 0;
+        width: 100% !important;
+        right: 0;
+        left: 0;
+        z-index: 999;
+        padding: 20px !important;
+        background: #fff;
+        box-shadow: 1px -7px 20px 1px rgb(0 0 0 / 13%);
+    }
+
+    .price-box.pr-box-featured {
+        background: rgb(0, 64, 216);
+        color: rgb(255, 255, 255);
+        box-shadow: none !important;
+    }
+
+    #btn-width{
+        width:48% !important;
+        float:left;
+    }
+
+    .btn-padding {
+/*        padding: 2px 20px 15px 20px !important;
+*/        padding: 0px !important;
+    }
+
+    .btn-left{
+        margin-left:10px;
+    }
+
+    .price-box .price-box-price .price {
+        font-size: 25px !important;
+    }
+
+    #price-heading {
+        display: none !important;
+    }
+
+    #col-pb-mobile{
+        padding-bottom:100px;
+    }
+    .btn-width-mobile {
+        right: 0px;
+        width: 69% !important;
+    }
+}
+
+.btn-width-mobile {
+    right: 0px;
+    width: 21%;
 }

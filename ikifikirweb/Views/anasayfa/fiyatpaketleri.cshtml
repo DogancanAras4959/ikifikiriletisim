@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ikifikirweb.ViewModels.PricingDataModelWeb.PricingWebModel.PricingListViewModel>
+@{
+    ViewData["Title"] = "fiyatpaketleri";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .tt-heading.padding-on {
+        padding: 3% 3% 1% 3%;
+    }
+</style>
+
+<div class="tt-heading tt-heading-xxlg text-center padding-on">
+    <div class="tt-heading-inner">
+        <h1 class="tt-heading-title">Paketlerimiz</h1>
+
+        <div class="tt-heading-text">
+            <p>Fiyat hesaplaması yapmak ve hizmetlerimizden seçeneklerimizi görmek için paketlerimizden birini seçin</p>
+        </div>
+
+    </div>
+</div>
+<section id="portfolio-list-section">
+    <div class="portfolio-list-inner isotope-wrap">
+     
+    <div class="isotope col-3 gutter-5">
+   
+        <div class="isotope-items-wrap pli-colored pli-alter-3" style="position: relative; height: 1014.52px;">
+
+            <div class="grid-sizer"></div>
+
+            @foreach (var item in Model)
+            {
+                <div class="isotope-item print iso-height-1" style="position: absolute; left: 463.266px; top: 0px;">
+
+                    <!-- Begin portfolio list item -->
+                    <div class="portfolio-list-item">
+
+                        <!-- Begin portfolio list item image -->
+                        <div class="pl-item-image-wrap">
+
+                            <!-- Begin portfolio list item image inner -->
+                            <a href="@Url.Action("fiyathesapla","anasayfa", new { Id = item.Id })" class="pl-item-image-inner">
+                                <div class="pl-item-image bg-image lazy" style="background-image: url(https://uploads.ikifikir.net/images/@item.Image );"></div>
+
+                                <!-- Portfolio list item icon (displayed only with default hover overlay and "pli-alter-4" class in isotope-items-wrap) -->
+                                <div class="pl-item-icon"><span class="lnr lnr-link"></span></div>
+                            </a>
+                            <!-- End portfolio list item image inner -->
+
+                        </div>
+                        <!-- End portfolio list item image -->
+                        <!-- Begin portfolio list item info -->
+                        <div class="pl-item-info">
+                            <div class="pl-item-caption">
+                                <h2 class="pl-item-title"><a href="@Url.Action("fiyathesapla","anasayfa", new { Id = item.Id })">@item.Title</a></h2>
+                            </div>
+                        </div>
+                        <!-- End portfolio list item info -->
+
+                    </div>
+                    <!-- End portfolio list item -->
+
+                </div>
+            }
+
+
+
+        </div>
+
+        </div>
+
+    </div>
+</section>

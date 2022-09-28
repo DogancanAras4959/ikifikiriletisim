@@ -1,0 +1,38 @@
+﻿@model ikifikir.editor.Models.PricingDataModel.PricingComponentModel.PricingComponentViewModel
+
+@{
+    ViewData["Title"] = "kategoriekle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-header">
+                <p class="card-title">Bileşen Düzenle</p>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("paketBilesenleriDuzenle", "fiyatpaket", FormMethod.Post))
+                {
+                    @Html.HiddenFor(x => x.Id)
+
+                    <div class="form-group">
+                        <label>Bileşen Adı</label>
+                        <input type="text" class="form-control" placeholder="Bileşen adı giriniz..." maxlength="325" asp-for="ComponentTitle" name="ComponentTitle" id="defaultconfig">
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Fiyat</label>
+                        <input type="text" class="form-control" placeholder="Fiyat giriniz..." maxlength="25" asp-for="Price" name="Price" id="defaultconfig">
+                    </div>
+                    <br />
+                    <div class="form-group mt-3">
+                        <button class="btn btn-primary" type="submit">Bileşen Güncelle</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

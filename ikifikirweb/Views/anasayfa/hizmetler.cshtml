@@ -1,52 +1,91 @@
-﻿
+﻿@using ikifikirweb.Models.MetaConfig
+
 @{
     ViewData["Title"] = "hizmetler";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    MetaViewModel meta = ViewBag.Meta as MetaViewModel;
+
 }
 
 <style>
-    body.header-transparent-on #page-header .page-header-inner {
-        padding-top: 100px;
-        padding-bottom: 20px;
+
+    .info-box-heading {
+        margin: 0 0 20px 0;
+        font-size: 16px;
     }
+
+    .info-box-icon:hover {
+        font-size: 45px;
+        cursor: pointer;
+        transition: all 0.35s ease-in-out;
+    }
+
+    body.tt-boxed .tt-wrap {
+        max-width: 1282px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .page-header-caption.ph-cap-xlg .page-header-title {
+        font-size: 45px;
+    }
+
+    .page-header-caption.ph-cap-xlg .page-header-subtitle {
+        font-size: 25px;
+        font-weight: 500;
+    }
+
+    .page-header-title {
+        max-width: 900px;
+        margin: 0 0 0px 0;
+        font-size: 52px;
+        font-weight: 700;
+        color: #181c25;
+    }
+
+    body.header-transparent-on #page-header.ph-xlg .page-header-inner {
+        padding-top: 110px;
+        padding-bottom: 30px;
+    }
+
+    #services-section {
+        position: relative;
+        padding: 35px 0 15px 0;
+    }
+
+    .tt-heading.tt-heading-xxlg .tt-heading-title {
+        font-size: 35px;
+    }
+
 </style>
 
-<section id="page-header" class="ph-center">
+<section id="page-header" class="ph-xlg">
 
-    <div class="page-header-image parallax-6 bg-image" style="background-image: url('https://uploads.ikifikir.net/site/page-header-bg-6.jpg');">
-
-        <div class="cover cover-opacity-4"></div>
-
+    <div class="page-header-image parallax-6 bg-image" style="background-image: url('https://uploads.ikifikir.net/images/header-hizmetler.jpg');">
+        <div class="cover cover-opacity-1"></div>
     </div>
-
+    <!-- End page header image -->
+    <!-- Begin page header inner -->
     <div class="page-header-inner tt-wrap">
 
-        <div class="page-header-caption ph-cap-xlg ph-cap-light ph-cap-shadow parallax-5 fade-out-scroll-4">
+        <div class="page-header-caption ph-cap-xlg ph-cap-light ph-cap-shadow parallax-4 fade-out-scroll-5">
             <div class="ph-title-wrap">
-                <h1 class="page-header-title">Hizmetler</h1>
+                <h2 class="page-header-title" style="color:#fff;">Hizmetler</h2>
             </div>
-            <div class="ph-subtitle-wrap">
-                <h2 class="page-header-subtitle">Ne Yaparız?</h2>
-            </div>
-
-            <div class="zig-zag-separator zig-zag-lg">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-            @*<div class="page-header-description">
-                <div class="ph-desc-inner">
-                    Fusce imperdiet, arcu non tempor aliquam, justo tortor cursus est, sed facilisis eros purus et felis. Sed eros sapien, iaculis eget gravida euismod, dapibus vitae turpis namino eksmino marvelis.
-                </div>
-            </div>*@
-            <!-- End page header description -->
-
         </div>
         <!-- End page header caption -->
 
     </div>
+
+    <div class="ph-anim-element-wrap hide-ph-anim parallax-4 fade-out-scroll-4">
+        <div class="ph-anim-element-holder">
+            <div class="ph-anim-element"></div>
+        </div>
+    </div>
+    <!-- End page header animated element -->
 
 </section>
 
@@ -56,51 +95,68 @@
         <div class="info-box-wrap ib-boxed ib-icon-color">
 
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-3">
 
                     <!-- Begin info box -->
                     <div class="info-box">
-                        <span class="info-box-icon"><span class="lnr lnr-screen"></span></span>
+                        <span class="info-box-icon"><span class="lnr lnr-tag"></span></span>
                         <div class="info-box-info">
                             <h3 class="info-box-heading"><a href="@Url.Action("kategori","anasayfa",new { categoryId = 2 })">Marka Yönetimi</a></h3>
                             <!--<div class="info-box-text tt-ellipsis">-->
-                                <!-- Use class "tt-ellipsis" to enable text element fixed height with ellipsis -->
-                                <!--Aenean ac consectetur quam. Donec malesuada lacus nec ullamcorper pellentesque praesent ulis. Proin pulvinar scelerisque lorem apti.
-                            </div>-->
+                            <!-- Use class "tt-ellipsis" to enable text element fixed height with ellipsis -->
+                            <!--Aenean ac consectetur quam. Donec malesuada lacus nec ullamcorper pellentesque praesent ulis. Proin pulvinar scelerisque lorem apti.
+                </div>-->
                         </div> <!-- /.info-box-info -->
                     </div>
                     <!-- End info box -->
 
                 </div> <!-- /.col -->
 
-                <div class="col-sm-4">
+                <div class="col-sm-3">
 
                     <!-- Begin info box -->
                     <div class="info-box">
-                        <span class="info-box-icon"><span class="lnr lnr-code"></span></span>
+                        <span class="info-box-icon"><span class="lnr lnr-picture"></span></span>
                         <div class="info-box-info">
-                            <h3 class="info-box-heading"><a href="@Url.Action("kategori","anasayfa",new { categoryId = 3 })">Tasarım</a></h3>
+                            <h3 class="info-box-heading"><a href="@Url.Action("kategori","anasayfa",new { categoryId = 3 })">Grafik Tasarım</a></h3>
                             <!--<div class="info-box-text tt-ellipsis">-->
-                                <!-- Use class "tt-ellipsis" to enable text element fixed height with ellipsis -->
-                                <!--Integer at condimentum orci, ut euismod ante. Class aptent taciti sociosqu ad litora torquent. Proin pulvinar scelerisque lorem apti.
-                            </div>-->
+                            <!-- Use class "tt-ellipsis" to enable text element fixed height with ellipsis -->
+                            <!--Integer at condimentum orci, ut euismod ante. Class aptent taciti sociosqu ad litora torquent. Proin pulvinar scelerisque lorem apti.
+                </div>-->
                         </div> <!-- /.info-box-info -->
                     </div>
                     <!-- End info box -->
 
                 </div> <!-- /.col -->
 
-                <div class="col-sm-4">
+                <div class="col-sm-3">
 
                     <!-- Begin info box -->
                     <div class="info-box">
-                        <span class="info-box-icon"><span class="lnr lnr-laptop"></span></span>
+                        <span class="info-box-icon"><span class="lnr lnr-smartphone"></span></span>
                         <div class="info-box-info">
-                            <h3 class="info-box-heading"><a href="@Url.Action("kategori","anasayfa",new { categoryId = 4 })">Dijital</a></h3>
+                            <h3 class="info-box-heading"><a href="@Url.Action("kategori","anasayfa",new { categoryId = 4 })">Sosyal Medya Yönetimi</a></h3>
                             <!--<div class="info-box-text tt-ellipsis">-->
-                                <!-- Use class "tt-ellipsis" to enable text element fixed height with ellipsis -->
-                                <!--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit necessit officia tempor. Proin pulvinar scelerisque lorem apti.
-                            </div>-->
+                            <!-- Use class "tt-ellipsis" to enable text element fixed height with ellipsis -->
+                            <!--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit necessit officia tempor. Proin pulvinar scelerisque lorem apti.
+                </div>-->
+                        </div> <!-- /.info-box-info -->
+                    </div>
+                    <!-- End info box -->
+
+                </div> <!-- /.col -->
+
+                <div class="col-sm-3">
+
+                    <!-- Begin info box -->
+                    <div class="info-box">
+                        <span class="info-box-icon"><span class="lnr lnr-gift"></span></span>
+                        <div class="info-box-info">
+                            <h3 class="info-box-heading"><a href="@Url.Action("kategori","anasayfa",new { categoryId = 5 })">Etkinlik Yönetimi</a></h3>
+                            <!--<div class="info-box-text tt-ellipsis">-->
+                            <!-- Use class "tt-ellipsis" to enable text element fixed height with ellipsis -->
+                            <!--Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit necessit officia tempor. Proin pulvinar scelerisque lorem apti.
+                </div>-->
                         </div> <!-- /.info-box-info -->
                     </div>
                     <!-- End info box -->
@@ -109,40 +165,73 @@
             </div> <!-- /.row -->
 
             <div class="row">
-                <div class="col-sm-4">
-
-                    <!-- Begin info box -->
-                    <div class="info-box">
-                        <span class="info-box-icon"><span class="lnr lnr-users"></span></span>
-                        <div class="info-box-info">
-                            <h3 class="info-box-heading"><a href="@Url.Action("kategori","anasayfa",new { categoryId = 5 })">Etkinlik</a></h3>
-                            <!--<div class="info-box-text tt-ellipsis">-->
-                                <!-- Use class "tt-ellipsis" to enable text element fixed height with ellipsis -->
-                                <!--Aenean ac consectetur quam. Donec malesuada lacus nec ullamcorper pellentesque praesent ulis. Proin pulvinar scelerisque lorem apti.
-                            </div>-->
-                        </div> <!-- /.info-box-info -->
-                    </div>
-                    <!-- End info box -->
-
-                </div> <!-- /.col -->
-
-                <div class="col-sm-4">
+                <div class="col-sm-3">
 
                     <!-- Begin info box -->
                     <div class="info-box">
                         <span class="info-box-icon"><span class="lnr lnr-camera-video"></span></span>
                         <div class="info-box-info">
-                            <h3 class="info-box-heading"><a href="@Url.Action("kategori","anasayfa",new { categoryId = 6 })">Video Prodüksiyon</a></h3>
+                            <h3 class="info-box-heading"><a href="@Url.Action("kategori","anasayfa",new { categoryId = 6 })">Video & Dijital Prodüksiyon</a></h3>
                             <!--<div class="info-box-text tt-ellipsis">-->
-                                <!-- Use class "tt-ellipsis" to enable text element fixed height with ellipsis -->
-                                <!--Integer at condimentum orci, ut euismod ante. Class aptent taciti sociosqu ad litora torquent. Proin pulvinar scelerisque lorem apti.
-                            </div>-->
+                            <!-- Use class "tt-ellipsis" to enable text element fixed height with ellipsis -->
+                            <!--Aenean ac consectetur quam. Donec malesuada lacus nec ullamcorper pellentesque praesent ulis. Proin pulvinar scelerisque lorem apti.
+                </div>-->
                         </div> <!-- /.info-box-info -->
                     </div>
                     <!-- End info box -->
 
                 </div> <!-- /.col -->
 
+                <div class="col-sm-3">
+
+                    <!-- Begin info box -->
+                    <div class="info-box">
+                        <span class="info-box-icon"><span class="lnr lnr-code"></span></span>
+                        <div class="info-box-info">
+                            <h3 class="info-box-heading"><a href="@Url.Action("kategori","anasayfa",new { categoryId = 7 })">Web Site Geliştirme</a></h3>
+                            <!--<div class="info-box-text tt-ellipsis">-->
+                            <!-- Use class "tt-ellipsis" to enable text element fixed height with ellipsis -->
+                            <!--Integer at condimentum orci, ut euismod ante. Class aptent taciti sociosqu ad litora torquent. Proin pulvinar scelerisque lorem apti.
+                </div>-->
+                        </div> <!-- /.info-box-info -->
+                    </div>
+                    <!-- End info box -->
+
+                </div> <!-- /.col -->
+
+                <div class="col-sm-3">
+
+                    <!-- Begin info box -->
+                    <div class="info-box">
+                        <span class="info-box-icon"><span class="lnr lnr-cog"></span></span>
+                        <div class="info-box-info">
+                            <h3 class="info-box-heading"><a href="@Url.Action("kategori","anasayfa",new { categoryId = 8 })">İçerik Geliştirme</a></h3>
+                            <!--<div class="info-box-text tt-ellipsis">-->
+                            <!-- Use class "tt-ellipsis" to enable text element fixed height with ellipsis -->
+                            <!--Aenean ac consectetur quam. Donec malesuada lacus nec ullamcorper pellentesque praesent ulis. Proin pulvinar scelerisque lorem apti.
+                </div>-->
+                        </div> <!-- /.info-box-info -->
+                    </div>
+                    <!-- End info box -->
+
+                </div> <!-- /.col -->
+
+                <div class="col-sm-3">
+
+                    <!-- Begin info box -->
+                    <div class="info-box">
+                        <span class="info-box-icon"><span class="lnr lnr-rocket"></span></span>
+                        <div class="info-box-info">
+                            <h3 class="info-box-heading"><a href="@Url.Action("kategori","anasayfa",new { categoryId = 9 })">Dijital Reklam Yönetimi</a></h3>
+                            <!--<div class="info-box-text tt-ellipsis">-->
+                            <!-- Use class "tt-ellipsis" to enable text element fixed height with ellipsis -->
+                            <!--Integer at condimentum orci, ut euismod ante. Class aptent taciti sociosqu ad litora torquent. Proin pulvinar scelerisque lorem apti.
+                </div>-->
+                        </div> <!-- /.info-box-info -->
+                    </div>
+                    <!-- End info box -->
+
+                </div> <!-- /.col -->
             </div> <!-- /.row -->
 
         </div>
@@ -161,15 +250,7 @@
                 <div class="tt-heading tt-heading-xxlg">
                     <div class="tt-heading-inner">
                         <h1 class="tt-heading-title">Ne yapıyoruz?</h1>
-                        <div class="tt-heading-subtitle">Bizimle çalışmak ister misiniz?</div>
-
-                        <div class="zig-zag-separator">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <!-- End zig-zag separator -->
+                        <div class="tt-heading-subtitle">Çalışmalarımız hakkında bilgi almak ister misiniz?</div>
 
                     </div> <!-- /.tt-heading-inner -->
                 </div>
@@ -179,7 +260,7 @@
 
             <div class="col-md-6">
 
-                <p>Fusce et velit sed augue rhoncus tempor. Sed ac lacinia augue, nec lacinia felis. Sed sit amet diam leo. Praesent vel malesuada arcu. Donec mattis, arcu vel vehicula feugiat sem turpis.</p>
+                <p>Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.</p>
 
                 <div class="margin-top-30">
                     <a href="@Url.Action("iletisim","anasayfa")" class="btn btn-primary btn-lg margin-top-5">İletişime Geçin!</a>
