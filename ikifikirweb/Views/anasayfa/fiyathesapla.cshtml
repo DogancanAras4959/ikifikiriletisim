@@ -286,13 +286,13 @@
                         @if (total > 0)
                         {
                             <a onclick="confirmCalculate();" style="background: none; border: 0; width: 100%; padding: 0;" class="btn-left" id="btn-width">
-                                <div class="price-box pr-box-featured" id="btnNext" style="cursor: default; background-color: #84a8ff;">
+                                <div class="price-box pr-box-featured" id="btnNext">
                                     <div class="pr-box price-box-price btn-padding" style="padding: 7px 20px 15px 35px;">
-                                        <div class="price"><span>Sepete Ekle</span></div>
+                                        <div class="price"><span>Sepete Git</span></div>
                                     </div>
                                 </div>
                             </a>
-                        }
+                        }   
                         else
                         {
                             <a onclick="confirmCalculate();" style="background: none; border: 0; width: 100%; padding: 0;" class="btn-left" id="btn-width">
@@ -324,9 +324,18 @@
 
     var IdS = [];
 
-    btnNext.style.cursor = "not-allowed";
-    btnNext.style.backgroundColor = "#84a8ff";
-    btnNext.style.disabled = "disabled";
+    if (@total > 0) {
+        sumTotal = @total;
+        btnNext.style.cursor = "pointer";
+        btnNext.style.backgroundColor = "#0040d8";
+    }
+    else {
+        btnNext.style.cursor = "not-allowed";
+        btnNext.style.backgroundColor = "#84a8ff";
+        btnNext.style.disabled = "disabled";
+    }
+
+   
 
     buttons.forEach(button => {
         button.addEventListener('click', function () {
