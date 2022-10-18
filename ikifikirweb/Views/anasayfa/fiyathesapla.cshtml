@@ -232,7 +232,7 @@
                                         {
                                             foreach (var item2 in nameList)
                                             {
-                                                if(item.ComponentTitle == item2)
+                                                if (item.ComponentTitle == item2)
                                                 {
                                                     titleCurrent = item.ComponentTitle;
                                                 }
@@ -242,14 +242,14 @@
                                         @if (item.ComponentTitle == titleCurrent)
                                         {
                                             <button style="padding: 5px 25px; font-size: 15px;" value="@item.Id" class="btn btn-price-box btn-primary active">Seçildi</button>
+                                            <input type="hidden" value="@item.Price" id="price_@item.Id" />
                                         }
 
                                         else
                                         {
                                             <button style="padding: 5px 25px; font-size: 15px;" value="@item.Id" class="btn btn-price-box btn-primary">Seç</button>
+                                            <input type="hidden" value="@item.Price" id="price_@item.Id" />
                                         }
-
-                                        <input type="hidden" value="@item.Price" id="price_@item.Id" />
                                     </div>
                                 </div>
                             </div>
@@ -292,7 +292,7 @@
                                     </div>
                                 </div>
                             </a>
-                        }   
+                        }
                         else
                         {
                             <a onclick="confirmCalculate();" style="background: none; border: 0; width: 100%; padding: 0;" class="btn-left" id="btn-width">
@@ -323,6 +323,7 @@
     let sumTotal = 0;
 
     var IdS = [];
+    var IdsRemove = [];
 
     if (@total > 0) {
         sumTotal = @total;
@@ -352,6 +353,7 @@
             }
             else if (this.innerHTML == "Seçildi") {
                 var id = $(this).val();
+                IdsRemove.push($(this).val());
                 selected = false;
                 this.classList.remove('active');
                 this.innerHTML = "Seç";
@@ -383,7 +385,7 @@
 
                type: "POST",
                url: "/anasayfa/secimiOnayla/",
-               data: { Ids: IdS },
+               data: { Ids: IdS, IdsRemove: IdsRemove },
                success: function (response) {
                     console.log("deneme");
                    window.location.href = "@Url.Action("fiyatOnayla","anasayfa")";

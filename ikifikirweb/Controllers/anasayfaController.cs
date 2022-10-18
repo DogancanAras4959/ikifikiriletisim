@@ -480,7 +480,7 @@ namespace ikifikirweb.Controllers
         }
 
         [HttpPost]
-        public JsonResult secimiOnayla(int[] Ids)
+        public JsonResult secimiOnayla(int[] Ids, int[] IdsRemove)
         {
             try
             {
@@ -506,11 +506,35 @@ namespace ikifikirweb.Controllers
 
                 #region Cookie
 
-
                 if (cookieIsHave != null)
                 {
                     List<ComponentResult> cookieResult = JsonSerializer.Deserialize<List<ComponentResult>>(cookieIsHave);
                     result.AddRange(cookieResult);
+
+                    foreach (var item2 in IdsRemove)
+                    {
+                        var componentRemove = _pricingService.getPricingComponentById(item2);
+
+                        if (componentRemove != null)
+                        {
+                            //foreach (var item3 in result)
+                            //{
+                            //   if(item3.Title == componentRemove.ComponentTitle)
+                            //    {
+                            //        result.Remove(item3);
+                            //    } 
+                            //}
+
+                            for (int i = 0; i < result.Count; i++)
+                            {
+                                if(result[i].Title == componentRemove.ComponentTitle)
+                                {
+                                    result.RemoveAt(i);
+                                }
+                            }
+                        }
+                    }
+
                     string componentList = JsonSerializer.Serialize(result);
                     Response.Cookies.Append("ComponentList", componentList);
                 }
@@ -596,7 +620,9 @@ namespace ikifikirweb.Controllers
             try
             {
                 decimal total = 0;
-                List<ComponentResult> resultList = SessionExtensionMethod.GetObject<List<ComponentResult>>(HttpContext.Session, "result");
+
+                var cookieIsHave = Request.Cookies["ComponentList"];
+                List<ComponentResult> resultList = JsonSerializer.Deserialize<List<ComponentResult>>(cookieIsHave);
 
                 foreach (var item in resultList)
                 {
@@ -614,7 +640,7 @@ namespace ikifikirweb.Controllers
                 contactMessage.To = "emre@ikifikir.net";
                 contactMessage.Total = Convert.ToInt32(total);
                 contactMessage.componentResult = resultList;
-                contactMessage.Content = $@"<p>{contactMessage.NameSurname} iletişim formunu doldurdu. (Bu form https://ikifikir.net/iletisim üzerinden gelmiştir.) <p> <hr/> <p><strong>Email Adresi:</strong> {contactMessage.EmailAdress}</p> <hr/> <p>{contactMessage.Message}</p> <hr/> <p><strong>Telefon: </strong>{contactMessage.PhoneNumber}</p> <hr/> <p><strong>Toplam Teklif:</strong> {contactMessage.Total}₺</p> <hr/> <p><strong>Hizmetler:</strong></p> <table style='table-layout: auto; width: 215px;'><thead><tr><th style='text-align:center; border: 1px solid black; border-collapse: collapse; padding:5px;'>Hizmet Adı</th><th style='text-align:left; border: 1px solid black; padding:5px; border-collapse: collapse;'>Fiyat</th></tr></thead><tbody>{items}</tbody></table>";
+                contactMessage.Content = $@"<p>{contactMessage.NameSurname} iletişim formunu doldurdu. (Bu form https://ikifikir.net/fiyatpaketleri üzerinden gelmiştir.) <p> <hr/> <p><strong>Email Adresi:</strong> {contactMessage.EmailAdress}</p> <hr/> <p>{contactMessage.Message}</p> <hr/> <p><strong>Telefon: </strong>{contactMessage.PhoneNumber}</p> <hr/> <p><strong>Toplam Teklif:</strong> {contactMessage.Total}₺</p> <hr/> <p><strong>Hizmetler:</strong></p> <table style='table-layout: auto; width: 215px;'><thead><tr><th style='text-align:center; border: 1px solid black; border-collapse: collapse; padding:5px;'>Hizmet Adı</th><th style='text-align:left; border: 1px solid black; padding:5px; border-collapse: collapse;'>Fiyat</th></tr></thead><tbody>{items}</tbody></table>";
 
                 result = await _emailSender.SendEmailAsync(contactMessage);
 
