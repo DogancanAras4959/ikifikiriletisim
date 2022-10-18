@@ -206,6 +206,7 @@ namespace ikifikirweb.Controllers
         #endregion
 
         #region Secondary
+     
         public IActionResult ekibimiz()
         {
             TempData["isTransparent"] = 1;
@@ -331,10 +332,12 @@ namespace ikifikirweb.Controllers
             TempData["isHaveFooter"] = 1;
             return View();
         }
+     
         public IActionResult notifView()
         {
             return PartialView("notifView");
         }
+   
         #endregion
 
         #region External
