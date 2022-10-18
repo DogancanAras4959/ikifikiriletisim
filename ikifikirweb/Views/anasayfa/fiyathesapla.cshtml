@@ -14,6 +14,7 @@
 
     string[] nameList = { };
     List<string> stringArray = new List<string>();
+    string titleCurrent = "";
 
     if (componentChoosed != null)
     {
@@ -180,7 +181,10 @@
 
                                         @foreach (var item in pricingList)
                                         {
-                                            <li><button onclick="window.location.href='@Url.Action("fiyathesapla", "anasayfa", new { Id = item.Id })'" data-filter=".branding">+ @item.Title</button></li>
+                                            if (item.Id != Model.Id)
+                                            {
+                                                <li><button onclick="window.location.href='@Url.Action("fiyathesapla", "anasayfa", new { Id = item.Id })'" data-filter=".branding">+ @item.Title</button></li>
+                                            }
 
                                         }
 
@@ -223,16 +227,23 @@
                                         </ul>
                                     </div>
                                     <div class="pr-box">
+
                                         @if (nameList != null && nameList.Length > 0)
                                         {
                                             foreach (var item2 in nameList)
                                             {
-                                                if (item.ComponentTitle == item2)
+                                                if(item.ComponentTitle == item2)
                                                 {
-                                                    <button style="padding: 5px 25px; font-size: 15px;" value="@item.Id" class="btn btn-price-box btn-primary active">Seçildi</button>
-                                                } 
+                                                    titleCurrent = item.ComponentTitle;
+                                                }
                                             }
                                         }
+
+                                        @if (item.ComponentTitle == titleCurrent)
+                                        {
+                                            <button style="padding: 5px 25px; font-size: 15px;" value="@item.Id" class="btn btn-price-box btn-primary active">Seçildi</button>
+                                        }
+
                                         else
                                         {
                                             <button style="padding: 5px 25px; font-size: 15px;" value="@item.Id" class="btn btn-price-box btn-primary">Seç</button>
