@@ -1,5 +1,14 @@
 ﻿@media (max-width: 768px) {
 
+    .mobile-badge {
+        position: relative !important;
+        left: 34px !important;
+        right: 0 !important;
+        top: 23px !important;
+        bottom: 0px !important;
+        z-index: 20 !important;
+    }
+
     .portfolio-single-info {
         margin-bottom: 20px !important;
     }
@@ -71,12 +80,90 @@
         padding-bottom:100px;
     }
     .btn-width-mobile {
-        right: 0px;
-        width: 69% !important;
+        left: 299px !important;
+        width: 21%;
+        bottom: 15px !important;
     }
-}
 
-.btn-width-mobile {
-    right: 0px;
-    width: 21%;
+    .team-title-prel {
+        background: #fff;
+        width: 183px;
+        padding: 10px;
+        position: relative;
+        top: 48px;
+        bottom: 0;
+        right: 0;
+        left: -17px;
+    }
+
+    .work-title-prel {
+        background: #fff;
+        width: 204px;
+        padding: 10px;
+        position: relative;
+        top: 49px;
+        bottom: 0;
+        right: 0;
+        left: -17px;
+    }
+
+    .simple-text-section {
+        position: relative;
+        padding: 33px 3% !important;
+    }
+
+    #team-section.team-classic {
+        padding: 44px 0 0px 0 !important;
+    }
+    #clients-section {
+        position: relative;
+        padding: 0px 0 30px 0 !important;
+    }
+    body.tt-boxed .tt-wrap {
+        max-width: 1282px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    #tt-intro .intro-caption-wrap.intro-caption-lg .intro-title {
+        font-size: 35px;
+    }
+
+    #tt-intro .intro-caption-wrap.bottom-left .intro-caption {
+        bottom: 4%;
+        left: 6%;
+        margin-right: 5%;
+        text-align: left;
+    }
+
+    .portfolio-list-item .pl-item-image-inner {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        height: 215px;
+    }
+
+    #popUp {
+        opacity: 0;
+        visibility: hidden;
+        position: fixed;
+        right: 41px !important;
+        bottom: 124px !important;
+        width: 0px;
+        height: 0px;
+        transition: width 1s, height 1s, transform 1s;
+    }
+
+        #popUp.show {
+            opacity: 1;
+            visibility: visible;
+            width: 316px !important;
+            height: 266px !important;
+            transform: rotate(0deg);
+        }
+
+    .col-10-mb {
+        width: 85.333333%;
+    }
 }

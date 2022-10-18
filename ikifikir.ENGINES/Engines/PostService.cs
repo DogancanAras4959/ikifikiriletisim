@@ -55,7 +55,31 @@ namespace ikifikir.ENGINES.Engines
 
         public List<PostListItemDto> getPostList()
         {
-            IEnumerable<post> roles = _unitOfWork.GetRepository<post>().Where(x=> x.Id > 0, x => x.OrderBy(y => y.Id), "", null, null);
+            IEnumerable<post> roles = _unitOfWork.GetRepository<post>().Where(x => x.Id > 0, x => x.OrderBy(y => y.Id), "", null, null);
+
+            return roles.Select(x => new PostListItemDto
+            {
+                Id = x.Id,
+                content = x.content,
+                IsActive = x.IsActive,
+                CreatedTime = x.CreatedTime,
+                UpdatedTime = x.UpdatedTime,
+                seoSpot = x.seoSpot,
+                seoTitle = x.seoTitle,
+                sorted = x.sorted,
+                spot = x.spot,
+                image = x.image,
+                title = x.title,
+                isNotification = x.isNotification,
+                author = x.author,
+                keywords = x.keywords,
+
+            }).ToList();
+        }
+
+        public List<PostListItemDto> getPostListByNotification()
+        {
+            IEnumerable<post> roles = _unitOfWork.GetRepository<post>().Where(x => x.isNotification == true, x => x.OrderBy(y => y.Id), "", null, null);
 
             return roles.Select(x => new PostListItemDto
             {
@@ -193,6 +217,7 @@ namespace ikifikir.ENGINES.Engines
                 return null;
             }
         }
+
         public async Task<bool> updatePost(PostDto model)
         {
             post postGet = await _unitOfWork.GetRepository<post>().FindAsync(x => x.Id == model.Id);

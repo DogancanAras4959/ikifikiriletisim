@@ -1,0 +1,47 @@
+﻿@using ikifikirweb.ViewModels.PostModel
+
+@{
+    List<PostListViewModel> postGet = ViewBag.Post as List<PostListViewModel>;
+}
+
+@if (postGet.Count() > 0)
+{
+    <div class="isotope-item btn-width-mobile" id="popUp-button">
+        <span class="badge badge-danger mobile-badge" style="position: relative; left: 71px; right: 0; top: -28px; bottom: 0px; z-index: 20;">@postGet.Count</span>
+        <button class="btn btn-primary" id="btn-open-popup"
+                style="background-color:#ff0034;
+                       border-color: #ff0034;
+                       padding: 8px 8px;
+                       border-radius: 35px;">
+            <img class="img-gif" src="https://uploads.ikifikir.net/videos/bell.gif">
+        </button>
+    </div>
+
+    <div class="isotope-item" id="popUp">
+        <article class="blog-list-item" style="border-radius:20px;">
+            <div class="notf-title"><h4 style="text-align: center; margin-top: 14px; margin-bottom: 0px;">İkifikir'den Haberler</h4></div>
+            <div class="seperator-notf"></div>
+            <ul class="ul-notif">
+
+                @foreach (var item in postGet)
+                {
+                    <li style="padding:10px 0px;">
+                        <div class="row">
+                            <div class="col-sm-2 col-xs-2" style="padding-right: 0px; width: 13.666667%;"><img width="17" src="https://uploads.ikifikir.net/images/icon-award.png" /> </div>
+                            <div class="col-sm-10 col-xs-10 col-10-mb" style="padding-left: 0px;">
+                                <div class="bl-item-info">
+                                    <a href="@Url.Action("detay", "blog", new { Id = item.Id, title = item.GenerateSlug() })" class="bl-item-title"><h2>@item.title</h2></a>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div style="width: 100%; margin: 10px 0px; height: 1px; background: #bfbfbf;"></div>*@
+                    </li>
+
+                }
+
+            </ul>
+            <button id="btn-exit" class="exit-btn">Kapat</button>
+
+        </article>
+    </div>
+}

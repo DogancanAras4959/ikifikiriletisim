@@ -23,6 +23,7 @@
     .price-box .pr-box {
         padding: 0px 0px 5px 0px;
     }
+
     .price-box {
         position: relative;
         background-color: #fff;
@@ -71,6 +72,10 @@
                         <div class="pr-box price-box-price">
                             <div class="price">@Convert.ToInt32(ViewBag.Total) ₺</div>
                         </div>
+                        <div class="pr-box price-box-price">
+                            <a href="@Url.Action("hepsinitemizle","anasayfa")" class="btn btn-primary margin-top-40">Hepsini Temizle</a>
+                            <a href="@Url.Action("geridon","anasayfa")" class="btn btn-primary margin-top-40">Geri Dön</a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-7">
@@ -109,7 +114,7 @@
                                     </div>
                                 </div> <!-- /.col -->
                             </div> <!-- /.row -->
-                            <button type="submit" class="btn btn-primary margin-top-40">Gönder</button>
+                            <button type="submit" class="btn btn-primary margin-top-20">Gönder</button>
                         </div>
                     </form>
                 </div>
@@ -118,3 +123,5 @@
     </div>
 </section>
 
+
+<script src="~/assets/vendor/jquery/jquery.min.js"></script>

@@ -16,6 +16,7 @@ namespace ikifikir.ENGINES.Interface
         Task<bool> postNotificationEdit(int id);
         PostDto getPostById(int id);
         List<PostListItemDto> getPostList();
+        List<PostListItemDto> getPostListByNotification();
         List<PostListItemDto> getPostTakeToLast();
         List<PostListItemDto> searchDataInPost(string searchKey);
     }

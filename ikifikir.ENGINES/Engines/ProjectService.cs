@@ -58,9 +58,9 @@ namespace ikifikir.ENGINES.Engines
         }
         public List<ProjectListItemDto> getProjectListWeb()
         {
-            IEnumerable<project> roles = _unitOfWork.GetRepository<project>().Where(x=> x.IsActive == true, x => x.OrderBy(y => y.sorted), "category", null, null);
+            IEnumerable<project> projects = _unitOfWork.GetRepository<project>().Where(x => x.IsActive == true, x => x.OrderBy(y => y.sorted), "category", null, null);        
 
-            return roles.Select(x => new ProjectListItemDto
+            return projects.Select(x => new ProjectListItemDto
             {
                 Id = x.Id,
                 projectName = x.projectName,
@@ -77,6 +77,7 @@ namespace ikifikir.ENGINES.Engines
                 description = x.description,
                 imageThumbnail = x.imageThumbnail,
                 UpdatedTime = x.UpdatedTime,
+                sorted = x.sorted,
                 website = x.website,
                 category = x.category,
 
@@ -84,7 +85,7 @@ namespace ikifikir.ENGINES.Engines
         }
         public List<ProjectListItemDto> getProjectListByCategoryId(int categoryId)
         {
-            IEnumerable<project> roles = _unitOfWork.GetRepository<project>().Where(x => x.categoryId == categoryId, x => x.OrderBy(y => y.Id), "category", null, null);
+            IEnumerable<project> roles = _unitOfWork.GetRepository<project>().Where(x => x.categoryId == categoryId, x => x.OrderBy(y => y.sorted), "category", null, null);
 
             return roles.Select(x => new ProjectListItemDto
             {
@@ -96,6 +97,7 @@ namespace ikifikir.ENGINES.Engines
                 projectSpot = x.projectSpot,
                 categoryId = x.categoryId,
                 isSlider = x.isSlider,
+                sorted = x.sorted,
                 parentProjectId = x.parentProjectId,
                 client = x.client,
                 isTitle = x.isTitle,

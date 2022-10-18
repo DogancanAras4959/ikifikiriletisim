@@ -28,13 +28,18 @@ using ikifikirweb.ViewModels.ReferenceModel;
 using ikifikirweb.ViewModels.TagProjectModel;
 using ikifikirweb.ViewModels.TeamModel;
 using ikifikirweb.ViewModels.VideoModel;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Text.Encodings.Web;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ikifikirweb.Controllers
@@ -89,9 +94,9 @@ namespace ikifikirweb.Controllers
             MetaViewModel meta = new MetaViewModel();
             meta.Title = "İkifikir İletişim";
             meta.Keywords = "ikifikir, iletişim, showreels, kurumsal, dijital";
-            meta.Description = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.Description = "İkifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.Image = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
-            meta.ogDescription = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.ogDescription = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.ogTitle = "İkifikir İletişim";
             meta.ogImage = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
             meta.Url = "https://www.ikifikir.net";
@@ -99,7 +104,7 @@ namespace ikifikirweb.Controllers
 
             #endregion
 
-            var posts = _mapper.Map<List<PostListItemDto>, List<PostListViewModel>>(_postService.getPostTakeToLast());
+            var posts = _mapper.Map<List<PostListItemDto>, List<PostListViewModel>>(_postService.getPostListByNotification());
             ViewBag.Post = posts;
 
             return View();
@@ -172,18 +177,18 @@ namespace ikifikirweb.Controllers
 
             var category = _mapper.Map<CategoryDto, CategoryViewModel>(_categoryService.getCategoryById(categoryId));
 
-            char[] delimiterChars = { ',' };
+            //char[] delimiterChars = { ',' };
 
-            string[] words = category.categoryTags.Split(delimiterChars);
+            //string[] words = category.categoryTags.Split(delimiterChars);
 
-            List<string> newTags = new List<string>();
+            //List<string> newTags = new List<string>();
 
-            foreach (var item in words)
-            {
-                newTags.Add(item.Trim());
-            }
+            //foreach (var item in words)
+            //{
+            //    newTags.Add(item.Trim());
+            //}
 
-            category.tagsListToCategory = newTags;
+            //category.tagsListToCategory = newTags;
 
             List<ProjectListViewModel> values;
             values = _mapper.Map<List<ProjectListItemDto>, List<ProjectListViewModel>>(_projectService.getProjectListByCategoryIdWeb(categoryId));
@@ -192,16 +197,6 @@ namespace ikifikirweb.Controllers
 
             #region Meta
 
-            MetaViewModel meta = new MetaViewModel();
-            meta.Title = "İkifikir İletişim";
-            meta.Keywords = "ikifikir, iletişim, showreels, kurumsal, dijital";
-            meta.Description = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
-            meta.Image = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
-            meta.ogDescription = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
-            meta.ogTitle = "İkifikir İletişim";
-            meta.ogImage = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
-            meta.Url = "https://www.ikifikir.net";
-            ViewBag.Meta = meta;
 
             #endregion
 
@@ -231,9 +226,9 @@ namespace ikifikirweb.Controllers
             MetaViewModel meta = new MetaViewModel();
             meta.Title = "İkifikir İletişim";
             meta.Keywords = "ikifikir, iletişim, showreels, kurumsal, dijital";
-            meta.Description = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.Description = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.Image = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
-            meta.ogDescription = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.ogDescription = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.ogTitle = "İkifikir İletişim";
             meta.ogImage = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
             meta.Url = "https://www.ikifikir.net";
@@ -254,9 +249,9 @@ namespace ikifikirweb.Controllers
             MetaViewModel meta = new MetaViewModel();
             meta.Title = "İkifikir İletişim";
             meta.Keywords = "ikifikir, iletişim, showreels, kurumsal, dijital";
-            meta.Description = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.Description = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.Image = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
-            meta.ogDescription = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.ogDescription = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.ogTitle = "İkifikir İletişim";
             meta.ogImage = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
             meta.Url = "https://www.ikifikir.net";
@@ -278,9 +273,9 @@ namespace ikifikirweb.Controllers
             MetaViewModel meta = new MetaViewModel();
             meta.Title = "İkifikir İletişim";
             meta.Keywords = "ikifikir, iletişim, showreels, kurumsal, dijital";
-            meta.Description = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.Description = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.Image = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
-            meta.ogDescription = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.ogDescription = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.ogTitle = "İkifikir İletişim";
             meta.ogImage = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
             meta.Url = "https://www.ikifikir.net";
@@ -317,9 +312,9 @@ namespace ikifikirweb.Controllers
             MetaViewModel meta = new MetaViewModel();
             meta.Title = "İkifikir İletişim";
             meta.Keywords = "ikifikir, iletişim, showreels, kurumsal, dijital";
-            meta.Description = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.Description = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.Image = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
-            meta.ogDescription = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.ogDescription = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.ogTitle = "İkifikir İletişim";
             meta.ogImage = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
             meta.Url = "https://www.ikifikir.net";
@@ -330,6 +325,16 @@ namespace ikifikirweb.Controllers
             return View(values);
         }
 
+        public IActionResult isebakisimiz()
+        {
+            TempData["isTransparent"] = 1;
+            TempData["isHaveFooter"] = 1;
+            return View();
+        }
+        public IActionResult notifView()
+        {
+            return PartialView("notifView");
+        }
         #endregion
 
         #region External
@@ -343,7 +348,6 @@ namespace ikifikirweb.Controllers
                 string messages = model.content;
                 var message = new Message()
                 {
-                    //To = "emre@ikifikir.net",
                     To = "emre@ikifikir.net",
                     Subject = model.subject,
                     Phone = "",
@@ -355,26 +359,26 @@ namespace ikifikirweb.Controllers
 
                 result = await _emailSender.SendEmailAsync(message);
 
-                return RedirectToAction("sonuc", "anasayfa", new { result = result, type = 1 });
+                return RedirectToAction("sonuc", "anasayfa", new { resultPage = result, type = 1 });
 
             }
             catch (Exception ex)
             {
-                return RedirectToAction("sonuc", "anasayfa", new { result = result, type = 0 });
+                return RedirectToAction("sonuc", "anasayfa", new { resultPage = result, type = 0 });
             }
 
         }
 
-        public IActionResult sonuc(string result, int type)
+        public IActionResult sonuc(string resultPage, int type)
         {
             #region Meta
 
             MetaViewModel meta = new MetaViewModel();
             meta.Title = "İkifikir İletişim";
             meta.Keywords = "ikifikir, iletişim, showreels, kurumsal, dijital";
-            meta.Description = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.Description = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.Image = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
-            meta.ogDescription = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.ogDescription = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.ogTitle = "İkifikir İletişim";
             meta.ogImage = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
             meta.Url = "https://www.ikifikir.net";
@@ -382,7 +386,7 @@ namespace ikifikirweb.Controllers
 
             #endregion
 
-            ViewBag.Result = result;
+            ViewBag.Result = resultPage;
             ViewBag.Type = type;
             return View();
         }
@@ -400,9 +404,9 @@ namespace ikifikirweb.Controllers
             MetaViewModel meta = new MetaViewModel();
             meta.Title = "İkifikir İletişim";
             meta.Keywords = "ikifikir, iletişim, showreels, kurumsal, dijital";
-            meta.Description = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.Description = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.Image = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
-            meta.ogDescription = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.ogDescription = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.ogTitle = "İkifikir İletişim";
             meta.ogImage = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
             meta.Url = "https://www.ikifikir.net";
@@ -421,14 +425,16 @@ namespace ikifikirweb.Controllers
             TempData["isTransparent"] = 0;
             TempData["isHaveFooter"] = 0;
 
+            decimal totalPrice = 0;
+
             #region Meta
 
             MetaViewModel meta = new MetaViewModel();
             meta.Title = "İkifikir İletişim";
             meta.Keywords = "ikifikir, iletişim, showreels, kurumsal, dijital";
-            meta.Description = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.Description = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.Image = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
-            meta.ogDescription = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+            meta.ogDescription = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
             meta.ogTitle = "İkifikir İletişim";
             meta.ogImage = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
             meta.Url = "https://www.ikifikir.net";
@@ -446,35 +452,74 @@ namespace ikifikirweb.Controllers
 
             ViewBag.Tipler = types;
 
+            var pricingList = _mapper.Map<List<PricingListItemDto>, List<PricingListViewModel>>(_pricingService.getPricingList());
+            ViewBag.Paketler = pricingList;
+
+            var cookie = Request.Cookies["ComponentList"];
+
+            if(cookie != null)
+            {
+                List<ComponentResult> resultList = JsonSerializer.Deserialize<List<ComponentResult>>(cookie);
+
+                if (resultList != null)
+                {
+                    foreach (var item in resultList)
+                    {
+                        totalPrice += item.Price;
+                    }
+
+                    ViewBag.Total = totalPrice;
+                    ViewBag.ComponentChoosed = resultList;
+                }
+            }
+          
             return View(value);
         }
 
         [HttpPost]
-        public JsonResult secimiOnayla(decimal[] Ids)
+        public JsonResult secimiOnayla(int[] Ids)
         {
             try
             {
                 List<ComponentResult> result = new List<ComponentResult>();
 
+                var cookieIsHave = Request.Cookies["ComponentList"];
+
                 foreach (var item in Ids)
                 {
-                    decimal priceValue = item;
+                    var component = _pricingService.getPricingComponentById(item);
 
-                    var priceComponent = _pricingService.getPricingToPriceValue(priceValue);
-
-                    if (priceComponent != null)
+                    if (component != null)
                     {
                         ComponentResult data = new ComponentResult
                         {
-                            Title = priceComponent.ComponentTitle,
-                            Price = priceComponent.Price
+                            Title = component.ComponentTitle,
+                            Price = component.Price
                         };
 
                         result.Add(data);
                     }
                 }
 
-                SessionExtensionMethod.SetObject(HttpContext.Session, "result", result);
+                #region Cookie
+
+
+                if (cookieIsHave != null)
+                {
+                    List<ComponentResult> cookieResult = JsonSerializer.Deserialize<List<ComponentResult>>(cookieIsHave);
+                    result.AddRange(cookieResult);
+                    string componentList = JsonSerializer.Serialize(result);
+                    Response.Cookies.Append("ComponentList", componentList);
+                }
+                else
+                {
+                    CookieOptions cookie = new CookieOptions();
+                    cookie.Expires = DateTime.Now.AddYears(1);
+                    string componentList = JsonSerializer.Serialize(result);
+                    Response.Cookies.Append("ComponentList", componentList, cookie);
+                }            
+
+                #endregion
 
                 return Json(true);
             }
@@ -491,37 +536,47 @@ namespace ikifikirweb.Controllers
             try
             {
                 decimal totalPrice = 0;
+                var cookie = Request.Cookies["ComponentList"];
 
-                TempData["isTransparent"] = 0;
-
-                #region Meta
-
-                MetaViewModel meta = new MetaViewModel();
-                meta.Title = "İkifikir İletişim";
-                meta.Keywords = "ikifikir, iletişim, showreels, kurumsal, dijital";
-                meta.Description = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
-                meta.Image = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
-                meta.ogDescription = "İkifkir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
-                meta.ogTitle = "İkifikir İletişim";
-                meta.ogImage = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
-                meta.Url = "https://www.ikifikir.net";
-                ViewBag.Meta = meta;
-
-                #endregion
-
-                List<ComponentResult> resultList = SessionExtensionMethod.GetObject<List<ComponentResult>>(HttpContext.Session, "result");
-
-                foreach (var item in resultList)
+                if(cookie != null)
                 {
-                    totalPrice += item.Price;
+                    TempData["isTransparent"] = 0;
+
+                    #region Meta
+
+                    MetaViewModel meta = new MetaViewModel();
+                    meta.Title = "İkifikir İletişim";
+                    meta.Keywords = "ikifikir, iletişim, showreels, kurumsal, dijital";
+                    meta.Description = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+                    meta.Image = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
+                    meta.ogDescription = "ikifikir İletişim | Abra Kadabra! Yıllardan beri İstanbul’da pazarlama iletişimi alanında başarılı işlere imza atan iki ekip, aynı yolda birlikte yürümeye karar verdi.";
+                    meta.ogTitle = "İkifikir İletişim";
+                    meta.ogImage = "https://uploads.ikifikir.net/site/logo-dark-ikifikir.png";
+                    meta.Url = "https://www.ikifikir.net";
+                    ViewBag.Meta = meta;
+
+                    #endregion
+
+                    List<ComponentResult> resultList = JsonSerializer.Deserialize<List<ComponentResult>>(cookie);
+
+                    foreach (var item in resultList)
+                    {
+                        totalPrice += item.Price;
+                    }
+
+                    var packagePrice = _pricingService.getPricingById(1);
+
+                    ViewBag.PackageTitle = packagePrice.Title;
+                    ViewBag.Total = totalPrice;
+                    ViewBag.ResultList = resultList;
+                    return View();
                 }
+                else
+                {
+                    return RedirectToAction("fiyatpaketleri", "anasayfa");
+                }
+           
 
-                var packagePrice = _pricingService.getPricingById(1);
-
-                ViewBag.PackageTitle = packagePrice.Title;
-                ViewBag.Total = totalPrice;
-                ViewBag.ResultList = resultList;
-                return View();
             }
             catch (Exception ex)
             {
@@ -543,41 +598,37 @@ namespace ikifikirweb.Controllers
                 foreach (var item in resultList)
                 {
                     total += item.Price;
-                    items += $"<tr><td>{item.Title}</td><td>{Convert.ToInt32(item.Price)}₺</td></tr>"; 
-                }
-
-
-                string pathToFile = _webHostEnvironment.ContentRootPath + Path.DirectorySeparatorChar.ToString() + "Views" + Path.DirectorySeparatorChar.ToString() + "anasayfa" + Path.DirectorySeparatorChar.ToString() + "email_calculate_complete.cshtml";
-
-                string htmlBody = "";
-
-                using (StreamReader streamReader = System.IO.File.OpenText(pathToFile))
-                {
-                    htmlBody = streamReader.ReadToEnd();
+                    items += $"<tr><td style='border: 1px solid black; border-collapse: collapse; padding: 5px;'>{item.Title}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 5px;'>{Convert.ToInt32(item.Price)}₺</td></tr>"; 
                 }
 
                 AppoinmentContact contactMessage = new AppoinmentContact();
                 contactMessage.EmailAdress = contact.EmailAdress;
                 contactMessage.CompanyName = contact.CompanyName;
-                contactMessage.Subject = contact.NameSurname + " Fiyat Başvurusu";
+                contactMessage.Subject = contact.NameSurname + " Fiyat Teklif Başvurusu";
                 contactMessage.PhoneNumber = contact.PhoneNumber;
                 contactMessage.NameSurname = contact.NameSurname;
                 contactMessage.Message = contact.Message;
                 contactMessage.To = "emre@ikifikir.net";
                 contactMessage.Total = Convert.ToInt32(total);
                 contactMessage.componentResult = resultList;
-                contactMessage.Content = $@"<p>{contactMessage.NameSurname} iletişim formunu doldurdu. (Bu form https://ikifikir.net/iletisim üzerinden gelmiştir.) <p> <hr/> <p>Email Adresi: {contactMessage.EmailAdress}</p> <hr/> <p>{contactMessage.Message}</p> <hr/> <p>Telefon: {contactMessage.PhoneNumber}</p> <hr/> <p>Toplam Teklif: {contactMessage.Total}₺</p> <hr/> <p>Hizmetler:</p> <table><thead><tr><td>Hizmet Adı</td><td>Fiyat</td></tr></thead><tbody>{items}</tbody></table>";
+                contactMessage.Content = $@"<p>{contactMessage.NameSurname} iletişim formunu doldurdu. (Bu form https://ikifikir.net/iletisim üzerinden gelmiştir.) <p> <hr/> <p><strong>Email Adresi:</strong> {contactMessage.EmailAdress}</p> <hr/> <p>{contactMessage.Message}</p> <hr/> <p><strong>Telefon: </strong>{contactMessage.PhoneNumber}</p> <hr/> <p><strong>Toplam Teklif:</strong> {contactMessage.Total}₺</p> <hr/> <p><strong>Hizmetler:</strong></p> <table style='table-layout: auto; width: 215px;'><thead><tr><th style='text-align:center; border: 1px solid black; border-collapse: collapse; padding:5px;'>Hizmet Adı</th><th style='text-align:left; border: 1px solid black; padding:5px; border-collapse: collapse;'>Fiyat</th></tr></thead><tbody>{items}</tbody></table>";
 
-                result = await _emailSender.SendEmailAsyncCalculate(contactMessage);
+                result = await _emailSender.SendEmailAsync(contactMessage);
 
-                HttpContext.Session.Remove("result");
-                HttpContext.Session.Clear();
+                //HttpContext.Session.Remove("result");
+                //HttpContext.Session.Clear();
+                Response.Cookies.Delete("ComponentList");
 
-                return RedirectToAction("sonuc", "anasayfa", new { result = result, type = 1 });
+                return RedirectToAction("sonuc", "anasayfa", new { resultPage = result, type = 1 });
             }
             catch (Exception ex)
             {
-                return RedirectToAction("sonuc", "anasayfa", new { result = result, type = 0 });
+                Response.Cookies.Delete("ComponentList");
+
+                //HttpContext.Session.Remove("result");
+                //HttpContext.Session.Clear();
+
+                return RedirectToAction("sonuc", "anasayfa", new { resultPage = result, type = 0 });
             }
          
         }
@@ -585,6 +636,17 @@ namespace ikifikirweb.Controllers
         public IActionResult email_calculate_complete()
         {
             return View();
+        }
+
+        public IActionResult hepsinitemizle()
+        {
+            Response.Cookies.Delete("ComponentList");
+            return RedirectToAction("fiyatpaketleri", "anasayfa");
+        }
+
+        public IActionResult geridon()
+        {
+            return RedirectToAction("fiyatpaketleri", "anasayfa");
         }
 
         #endregion

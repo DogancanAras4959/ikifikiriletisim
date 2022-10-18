@@ -46,7 +46,7 @@ namespace ikifikir.ENGINES.Engines
             }
         }
 
-        public async Task<string> SendEmailAsyncCalculate(AppoinmentContact contact)
+        public async Task<string> SendEmailAsync(AppoinmentContact contact)
         {
             try
             {

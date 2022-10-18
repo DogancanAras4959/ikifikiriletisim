@@ -19,9 +19,7 @@
 }
 
 <style>
-    .tt-heading.tt-heading-xlg .tt-heading-title {
-        font-size: 36px;
-    }
+
     body.header-transparent-on #page-header.ph-xlg .page-header-inner {
         padding-top: 125px;
         padding-bottom: 15px;
@@ -36,33 +34,6 @@
 <link href="~/assets/css/mobile.css" rel="stylesheet" />
 
 <section id="page-header">
-
-    @*<div class="page-header-image hide-ph-image parallax-6 bg-image" style="background-image: url('https://uploads.ikifikir.net/site/page-header-bg-9.jpg');">
-
-            <div class="cover cover-opacity-4"></div>
-
-        </div>*@
-
-    @*<div class="page-header-inner tt-wrap">
-
-            <div class="page-header-caption ph-cap-lg parallax-5">
-                <div class="ph-title-wrap">
-                    <h1 class="page-header-title">@Model.projectName</h1>
-                </div>
-                <div class="ph-subtitle-wrap">
-                    <h2 class="page-header-subtitle">@Model.category.name</h2>
-                </div>
-
-            </div>
-
-        </div>*@
-
-    @*<div class="ph-anim-element-wrap parallax-4">
-            <div class="ph-anim-element-holder">
-                <div class="ph-anim-element"></div>
-            </div>
-        </div>*@
-
 </section>
 
 <section id="portfolio-single-section">
@@ -88,11 +59,11 @@
                                 </div>
                             </li>-->
                             <!--<li>
-                                @if (Model.client != null)
-                                {
-                                    <div class="ps-attr-heading">Müşteri:</div>
-                                    <div class="ps-attr-cont">@Model.client</div>
-                                }-->
+                            @if (Model.client != null)
+                            {
+                                <div class="ps-attr-heading">Müşteri:</div>
+                                <div class="ps-attr-cont">@Model.client</div>
+                            }-->
                             <!-- Optional -->
                             <!--</li>-->
                             <li>
@@ -109,18 +80,18 @@
                                         {
                                             <a href=""><span>#</span>@item.tagToTag.name</a><span> </span>
 
-                                        @*<a href="@Url.Action("aramasonucu","anasayfa", new { name = item.tagToTag.name })"><span>#</span>@item.tagToTag.name</a><span></span>*@
-                                    }
+                                            @*<a href="@Url.Action("aramasonucu","anasayfa", new { name = item.tagToTag.name })"><span>#</span>@item.tagToTag.name</a><span></span>*@
+                                        }
                                     </div>
                                 }
                                 <!-- Optional -->
                             </li>
-                            <!--<li>
-                                @if (Model.website != null)
-                                {
-                                    <div class="ps-attr-heading">Website:</div>
-                                    <div class="ps-attr-cont"><a href="@Model.website" target="_blank">@Model.website</a></div>
-                                }-->
+                            <li>
+                            @if (Model.website != null)
+                            {
+                                <div class="ps-attr-heading">Website:</div>
+                                <div class="ps-attr-cont"><a href="@Model.website" target="_blank">@Model.website</a></div>
+                            }
                             <!-- Optional -->
                             <!--</li>-->
                         </ul> <!-- /.ps-attr -->
@@ -131,9 +102,26 @@
 
             </div>
 
-            @if (videos.Count() > 0)
-            {
-                <div class="col-xs-12 col-md-8">
+            <div class="col-xs-12 col-md-8">
+
+                <div class="portfolio-single-gallery digital lightgallery">
+
+                    <!-- Begin portfolio single image -->
+                    <figure class="portfolio-single-image-holder psi-zoom psi-colored">
+                        <a href="https://uploads.ikifikir.net/images/@Model.imageThumbnail"
+                           class="ps-image-link lg-trigger" data-exthumbnail="https://uploads.ikifikir.net/images/@Model.imageThumbnail">
+                            <div class="portfolio-single-image">
+                                <img class="lazy" alt="image" src="https://uploads.ikifikir.net/images/@Model.imageThumbnail" style="">
+                                <div class="ps-image-icon">
+                                    <span class="lnr lnr-eye"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+
+                @if (videos.Count() > 0)
+                {
                     @foreach (var item in videos)
                     {
 
@@ -159,62 +147,54 @@
                             }
                         </div>
                     }
-                </div>
-            }
-
-            else
-            {
-                if (projects.Where(x => x.parentProjectId == Model.Id).Count() == 0)
-                {
-        <div class="col-xs-12 col-md-8">
-
-            <img src="https://uploads.ikifikir.net/images/@Model.imageThumbnail" style="width:100%" />
-            <br />
-            <br />
-            <div class="portfolio-single-gallery lightgallery psi-zoom psi-colored">
-
-                <div class="isotope col-2 gutter-3">
-
-                    <!-- Begin isotope items wrap -->
-                    <div class="isotope-items-wrap">
-
-                        <!-- Grid sizer (do not remove!!!) -->
-                        <div class="grid-sizer"></div>
-
-                        @foreach (var item in galleries)
-                        {
-                            <div class="isotope-item @Model.category.filterType iso-height-1">
-
-                                <!-- Begin portfolio single image -->
-                                <figure class="portfolio-single-image-holder">
-                                    <a href="https://uploads.ikifikir.net/images/@item.slug"
-                                       class="ps-image-link lg-trigger"
-                                       data-exthumbnail="https://uploads.ikifikir.net/images/@item.slug"
-                                       data-sub-html="<p>Evet bu görseli kullanıyorsun :)</p>">
-                                        <div class="portfolio-single-image bg-image lazy"
-                                             data-src="https://uploads.ikifikir.net/images/@item.slug">
-                                            <div class="ps-image-icon">
-                                                <span class="lnr lnr-eye"></span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </figure>
-
-                            </div>
-                        }
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div> <!-- /.col -->
                 }
+
                 else
                 {
-                    <div class="col-xs-12 col-md-8">
+                    if (projects.Where(x => x.parentProjectId == Model.Id).Count() == 0)
+                    {
 
+                        <div class="portfolio-single-gallery lightgallery psi-zoom psi-colored">
+
+                            <div class="isotope col-2 gutter-3">
+
+                                <!-- Begin isotope items wrap -->
+                                <div class="isotope-items-wrap">
+
+                                    <!-- Grid sizer (do not remove!!!) -->
+                                    <div class="grid-sizer"></div>
+
+                                    @foreach (var item in galleries)
+                                    {
+                                        <div class="isotope-item @Model.category.filterType iso-height-1">
+
+                                            <!-- Begin portfolio single image -->
+                                            <figure class="portfolio-single-image-holder">
+                                                <a href="https://uploads.ikifikir.net/images/@item.slug"
+                                                   class="ps-image-link lg-trigger"
+                                                   data-exthumbnail="https://uploads.ikifikir.net/images/@item.slug">
+                                                    <div class="portfolio-single-image bg-image lazy"
+                                                         data-src="https://uploads.ikifikir.net/images/@item.slug">
+                                                        <div class="ps-image-icon">
+                                                            <span class="lnr lnr-eye"></span>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </figure>
+
+                                        </div>
+                                    }
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    }
+
+                    else
+                    {
                         <div class="portfolio-single-gallery lightgallery psi-zoom psi-colored">
 
                             <div class="isotope col-2 gutter-3">
@@ -250,11 +230,9 @@
                             </div>
 
                         </div>
-
-                    </div> <!-- /.col -->
+                    }
                 }
-            }
-
+            </div>
         </div> <!-- /.row -->
     </div> <!-- /.portfolio-single-inner -->
 </section>
@@ -311,3 +289,5 @@
 
     </div>
 </section>
+
+<script src="~/assets/vendor/jquery/jquery.min.js"></script>

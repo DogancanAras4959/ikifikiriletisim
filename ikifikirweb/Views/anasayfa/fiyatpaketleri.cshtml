@@ -22,53 +22,55 @@
 </div>
 <section id="portfolio-list-section">
     <div class="portfolio-list-inner isotope-wrap">
-     
-    <div class="isotope col-3 gutter-5">
-   
-        <div class="isotope-items-wrap pli-colored pli-alter-3" style="position: relative; height: 1014.52px;">
 
-            <div class="grid-sizer"></div>
+        <div class="isotope col-4 gutter-2">
 
-            @foreach (var item in Model)
-            {
-                <div class="isotope-item print iso-height-1" style="position: absolute; left: 463.266px; top: 0px;">
+            <div class="isotope-items-wrap pli-colored pli-alter-3" style="position: relative; height: 1014.52px;">
 
-                    <!-- Begin portfolio list item -->
-                    <div class="portfolio-list-item">
+                <div class="grid-sizer"></div>
 
-                        <!-- Begin portfolio list item image -->
-                        <div class="pl-item-image-wrap">
+                @foreach (var item in Model)
+                {
+                    <div class="isotope-item print iso-height-1" style="position: absolute; left: 463.266px; top: 0px;">
 
-                            <!-- Begin portfolio list item image inner -->
-                            <a href="@Url.Action("fiyathesapla","anasayfa", new { Id = item.Id })" class="pl-item-image-inner">
-                                <div class="pl-item-image bg-image lazy" style="background-image: url(https://uploads.ikifikir.net/images/@item.Image );"></div>
+                        <!-- Begin portfolio list item -->
+                        <div class="portfolio-list-item">
 
-                                <!-- Portfolio list item icon (displayed only with default hover overlay and "pli-alter-4" class in isotope-items-wrap) -->
-                                <div class="pl-item-icon"><span class="lnr lnr-link"></span></div>
-                            </a>
-                            <!-- End portfolio list item image inner -->
+                            <!-- Begin portfolio list item image -->
+                            <div class="pl-item-image-wrap">
 
-                        </div>
-                        <!-- End portfolio list item image -->
-                        <!-- Begin portfolio list item info -->
-                        <div class="pl-item-info">
-                            <div class="pl-item-caption">
-                                <h2 class="pl-item-title"><a href="@Url.Action("fiyathesapla","anasayfa", new { Id = item.Id })">@item.Title</a></h2>
+                                <!-- Begin portfolio list item image inner -->
+                                <a href="@Url.Action("fiyathesapla","anasayfa", new { Id = item.Id })" class="pl-item-image-inner">
+                                    <div class="pl-item-image bg-image lazy" style="background-image: url(https://uploads.ikifikir.net/images/@item.Image );"></div>
+
+                                    <!-- Portfolio list item icon (displayed only with default hover overlay and "pli-alter-4" class in isotope-items-wrap) -->
+                                    <div class="pl-item-icon"><span class="lnr lnr-link"></span></div>
+                                </a>
+                                <!-- End portfolio list item image inner -->
+
                             </div>
+                            <!-- End portfolio list item image -->
+                            <!-- Begin portfolio list item info -->
+                            <div class="pl-item-info">
+                                <div class="pl-item-caption">
+                                    <h2 class="pl-item-title" style="font-size: 15px;"><a href="@Url.Action("fiyathesapla","anasayfa", new { Id = item.Id })">@item.Title</a></h2>
+                                </div>
+                            </div>
+                            <!-- End portfolio list item info -->
+
                         </div>
-                        <!-- End portfolio list item info -->
+                        <!-- End portfolio list item -->
 
                     </div>
-                    <!-- End portfolio list item -->
-
-                </div>
-            }
+                }
 
 
 
-        </div>
+            </div>
 
         </div>
 
     </div>
 </section>
+
+<script src="~/assets/vendor/jquery/jquery.min.js"></script>

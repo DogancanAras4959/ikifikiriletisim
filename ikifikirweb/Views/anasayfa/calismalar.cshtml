@@ -10,39 +10,16 @@
     MetaViewModel meta = ViewBag.Meta as MetaViewModel;
     List<CategoryListViewModel> model = ViewBag.Categories as List<CategoryListViewModel>;
 }
-
+<link href="~/assets/css/mobile.css" rel="stylesheet" />
 <style>
-    body.page-header-image-on .isotope-filter.fi-btn {
-        top: -95px !important;
-    }
-
-    .isotope-filter-button .ifb-icon {
-        font-size: 22px;
-        line-height: 43px;
-        position: relative;
-        top: 3px;
-    }
 
     body.header-transparent-on #page-header.ph-xlg .page-header-inner {
         padding-top: 110px;
         padding-bottom: 30px;
     }
 
-    .isotope-filter.fi-btn-tansparent-light .isotope-filter-button {
-        background-color: transparent;
-        padding: 0;
-        font-weight: bold;
-        font-weight: 600;
-        color: #fff;
-    }
-
     .page-header-caption.ph-cap-xlg .page-header-title {
         font-size: 45px;
-    }
-
-    .page-header-caption.ph-cap-xlg .page-header-subtitle {
-        font-size: 25px;
-        font-weight: 500;
     }
 
     .page-header-title {
@@ -56,40 +33,6 @@
     #page-header.ph-xlg .page-header-inner {
         padding-top: 18px;
         padding-bottom: 0px;
-    }
-
-    body.tt-boxed .tt-wrap {
-        max-width: 1282px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-
-    .isotope-filter.fi-btn ul.isotope-filter-links {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        min-width: 250px;
-        list-style: none;
-        background-color: #651b66;
-        padding: 15px 0;
-        text-align: left;
-        z-index: 1;
-        visibility: hidden;
-        opacity: 0;
-        -webkit-box-shadow: 0 10px 40px -5px rgb(0 0 0 / 40%);
-        -moz-box-shadow: 0 10px 40px -5px rgba(0, 0, 0, .4);
-        box-shadow: 0 10px 40px -5px rgb(0 0 0 / 40%);
-        -moz-transform: translateY(5px);
-        -ms-transform: translateY(5px);
-        -webkit-transform: translateY(5px);
-        transform: translateY(5px);
-        -webkit-transition: all 0.3s ease-in-out;
-        -moz-transition: all 0.3s ease-in-out;
-        -o-transition: all 0.3s ease-in-out;
-        -ms-transition: all 0.3s ease-in-out;
-        transition: all 0.3s ease-in-out;
     }
 
     .isotope-top-content {
@@ -108,8 +51,8 @@
     <div class="page-header-inner tt-wrap">
 
         <div class="page-header-caption ph-cap-xlg ph-cap-light ph-cap-shadow parallax-4 fade-out-scroll-5">
-            <div class="ph-title-wrap">
-                <h2 class="page-header-title" style="color:#fff;">Ne Yaparız?</h2>
+            <div class="ph-title-wrap work-title-prel">
+                <h2 class="page-header-title" style="font-size: 30px; color: #8e2e91;">Ne Yaparız?</h2>
             </div>
         </div>
         <!-- End page header caption -->
@@ -136,13 +79,12 @@
                     <div class="isotope-filter-button">
                         <span class="ifb-icon"><span class="lnr lnr-funnel"></span></span>
                         <span class="ifb-icon-close"><i class="fas fa-times"></i></span> <!-- effect on small screens!) -->
-                  
+
                         <span class="ifb-text">Filter</span>
 
                     </div> <!-- /.isotope-filter-button -->
                     <!-- Begin isotope filter links -->
                     <ul class="isotope-filter-links" style="text-align:center;">
-                        <li><button class="active" data-filter="*">Hepsi</button></li>
                         @foreach (var item in model)
                         {
                             <li><button data-filter=".@item.filterType">@item.name</button></li>
@@ -160,7 +102,7 @@
                     <div class="isotope col-4 gutter-2">
                         <div class="isotope-items-wrap pli-colored pli-alter-3">
                             <div class="grid-sizer"></div>
-                            @foreach (var item in Model.OrderBy(x => x.sorted).Where(x => x.parentProjectId == 999))
+                            @foreach (var item in Model.Where(x => x.parentProjectId == 999 && x.sorted != 0))
                             {
                                 <div class="isotope-item @item.category.filterType iso-height-1" style="top: 232.719px; position:absolute">
 
@@ -169,22 +111,19 @@
                                         <!-- Begin portfolio list item image -->
                                         <div class="pl-item-image-wrap">
 
-                                            <!-- Begin portfolio list item image inner -->
-                                            <a href="@Url.Action("calisma","anasayfa", new { Id = item.Id, projectName = item.GenerateSlug() })" class="pl-item-image-inner">
-                                                <div class="pl-item-image bg-image lazy" data-src="https://uploads.ikifikir.net/images/@item.imageThumbnail"></div>
+                                                <a href="@Url.Action("calisma","anasayfa", new { Id = item.Id, projectName = item.GenerateSlug() })" class="pl-item-image-inner">
+                                                    <div class="pl-item-image bg-image lazy" data-src="https://uploads.ikifikir.net/images/@item.imageThumbnail"></div>
 
-                                                <!-- Portfolio list item icon (displayed only with default hover overlay and "pli-alter-4" class in isotope-items-wrap) -->
-                                                <div class="pl-item-icon"><span class="lnr lnr-link"></span></div>
-                                            </a>
-                                            <!-- End portfolio list item image inner -->
+                                                    <!-- Portfolio list item icon (displayed only with default hover overlay and "pli-alter-4" class in isotope-items-wrap) -->
+                                                    <div class="pl-item-icon"><span class="lnr lnr-link"></span></div>
+                                                </a>
 
                                         </div>
-                                        <!-- End portfolio list item image -->
-                                        <!-- Begin portfolio list item info -->
+
                                         <div class="pl-item-info">
                                             <div class="pl-item-caption">
                                                 <h2 class="pl-item-title"><a href="@Url.Action("calisma","anasayfa", new { Id = item.Id, projectName = item.GenerateSlug() })">@item.projectName</a></h2>
-                                                <div class="pl-item-category"><a href="@Url.Action("kategori","anasayfa",new { categoryId = item.categoryId })">@item.category.name</a></div>
+                                                <div class="pl-item-category"><a href="">@item.category.name</a></div>
                                             </div>
                                         </div>
                                         <!-- End portfolio list item info -->
@@ -196,20 +135,20 @@
                                     <!--<div class="pl-item-image-wrap">-->
                                     <!-- Begin portfolio list item image inner -->
                                     <!--<a href="@Url.Action("calisma","anasayfa", new { Id = item.Id, projectName = item.GenerateSlug() })" class="pl-item-image-inner">
-                                <div class="pl-item-image bg-image lazy" data-src="https://uploads.ikifikir.net/images/@item.imageThumbnail"></div>-->
-                                    <!-- Portfolio list item icon (displayed only with default hover overlay and "pli-alter-4" class in isotope-items-wrap) -->
+                                    <div class="pl-item-image bg-image lazy" data-src="https://uploads.ikifikir.net/images/@item.imageThumbnail"></div>-->
+                                      <!-- Portfolio list item icon (displayed only with default hover overlay and "pli-alter-4" class in isotope-items-wrap) -->
                                     <!--<div class="pl-item-icon"><span class="lnr lnr-link"></span></div>
-                            </a>-->
+                                    </a>-->
                                     <!-- End portfolio list item image inner -->
                                     <!--</div>-->
                                     <!-- End portfolio list item image -->
                                     <!-- Begin portfolio list item info -->
                                     <!--<div class="pl-item-info">
-                                <div class="pl-item-caption">
-                                    <h2 class="pl-item-title"><a href="@Url.Action("calisma","anasayfa", new { Id = item.Id, projectName = item.GenerateSlug() })">@item.projectName</a></h2>
-                                    <div class="pl-item-category"><a href="@Url.Action("kategori","anasayfa",new { categoryId = item.categoryId })">@item.category.name</a></div>
-                                </div>
-                            </div>-->
+                                        <div class="pl-item-caption">
+                                            <h2 class="pl-item-title"><a href="@Url.Action("calisma","anasayfa", new { Id = item.Id, projectName = item.GenerateSlug() })">@item.projectName</a></h2>
+                                            <div class="pl-item-category"><a href="@Url.Action("kategori","anasayfa",new { categoryId = item.categoryId })">@item.category.name</a></div>
+                                        </div>
+                                    </div>-->
                                     <!-- End portfolio list item info -->
                                     <!--</div>-->
                                     <!-- End portfolio list item -->
@@ -224,3 +163,5 @@
         </div>
     </div>
 </section>
+
+<script src="~/assets/vendor/jquery/jquery.min.js"></script>
