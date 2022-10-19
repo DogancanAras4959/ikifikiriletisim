@@ -65,7 +65,9 @@
                             <ul class="list-unstyled">
                                 @foreach (var item in resultList)
                                 {
-                                    <li>@item.Title<span>:</span> <strong>@Convert.ToInt32(item.Price) ₺</strong></li>
+                                    <li>@item.Title</li>
+                                    <li><strong>@Convert.ToInt32(item.Price) ₺</strong></li>
+                                    <hr style=" margin-top: 10px; margin-bottom: 10px;" />
                                 }
                             </ul>
                         </div>

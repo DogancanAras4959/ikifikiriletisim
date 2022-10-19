@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-9" id="col-pb-mobile">
+                <div class="col-sm-9" @*id="col-pb-mobile"*@>
                     <div class="row">
                         @foreach (var item in components)
                         {
@@ -92,13 +92,90 @@
                             </div>
                         }
                     </div>
+                    <div class="row" style="margin-top:35px;">
+                        <div class="col-sm-12" style="padding:0px;">
+                            <section id="portfolio-list-section">
+                                <div class="portfolio-list-inner isotope-wrap">
+                                    <p class="title-look"><strong>Bu hizmetlerimize de göz atmak ister misiniz?</strong></p>
+                                    <div class="isotope col-4 gutter-2" style="padding:0px;">
+                                        <div class="isotope-items-wrap pli-colored pli-alter-3" style="position: relative; padding-top:20px; height: 1014.52px;">
+                                            <div class="grid-sizer"></div>
+                                         
+                                            @foreach (var item in pricingList)
+                                            {
+                                                if (item.Id != Model.Id)
+                                                {
+                                                    <div class="isotope-item print iso-height-1" style="position: absolute; left: 463.266px; top: 0px;">
+                                                        <div class="portfolio-list-item" style="border: 1px solid #979797;">
+                                                            <div class="pl-item-image-wrap">
+                                                                <a href="@Url.Action("fiyathesapla","anasayfa", new { Id = item.Id })" class="pl-item-image-inner">
+                                                                    <div class="pl-item-image bg-image lazy" style="background-image: url(https://uploads.ikifikir.net/images/@item.Image );"></div>
+                                                                    <div class="pl-item-icon"><span class="lnr lnr-link"></span></div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="pl-item-info">
+                                                                <div class="pl-item-caption">
+                                                                    <h2 class="pl-item-title" style="font-size:15px;"><a href="@Url.Action("fiyathesapla","anasayfa", new { Id = item.Id })">@item.Title</a></h2>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            @*<div class="portfolio-list-inner isotope-wrap tt-wrap">
+            <div class="isotope col-3 gutter-3">
+                <div class="isotope-top-content">
+                    <div class="isotope-filter">
+                        <div class="isotope-filter-button">
+                            <span class="ifb-icon"><span class="lnr lnr-funnel"></span></span>
+                            <span class="ifb-icon-close"><i class="fas fa-times"></i></span>
+                            <span class="ifb-text">Filter</span>
+                        </div>
+                        <span class="margin-bottom-2-p"><strong>Bu hizmetlerimize de göz atmak ister misiniz?</strong></span>
+                        <ul class="isotope-filter-links" style="margin-top:10px;">
+
+                            @foreach (var item in pricingList)
+                            {
+                                if (item.Id != Model.Id)
+                                {
+                                    <li><button onclick="window.location.href='@Url.Action("fiyathesapla", "anasayfa", new { Id = item.Id })'" data-filter=".branding">+ @item.Title</button></li>
+                                }
+
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+                        </div>
+                    </div>
+                    <div class="row" id="showB">
+                        <div class="col-sm-12">
+                            <div style="height:150px;"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-3 fixed-total" style="padding-right: 5px;">
                     <div class="pay-box">
 
-                        @if (componentChoosed != null)
+                        @if (componentChoosed != null && componentChoosed.Count > 0)
                         {
-                            <div class="price-box overflow-y-scroll" style="max-height:272px;">
+                            <div class="price-box" id="cartButton" style="padding:5px 0;">
+                                <div class="pr-box price-features">
+                                    <ul class="list-unstyled" style="margin:0;">
+                                       <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Listeyi Görmek İçin Tıklayınız</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="price-box overflow-y-scroll hideCart" id="cartList">
                                 <div class="pr-box price-features" style="padding: 5px 10px 0px 10px;">
                                     <ul class="list-unstyled">
                                         @foreach (var item in componentChoosed)
@@ -111,6 +188,7 @@
                                 </div>
                             </div>
                         }
+
                         <div class="price-box pr-box-featured" id="btn-width">
                             <div class="pr-box price-box-price">
                                 @if (total > 0)
@@ -123,9 +201,10 @@
                                 }
                             </div>
                         </div>
+
                         @if (total > 0)
                         {
-                            <a onclick="confirmCalculate();" style="background: none; border: 0; width: 100%; padding: 0;" class="btn-left" id="btn-width">
+                            <a href="@Url.Action("sepet","anasayfa")" style="background: none; border: 0; width: 100%; padding: 0;" class="btn-left" id="btn-width">
                                 <div class="price-box pr-box-featured" id="btnNext">
                                     <div class="pr-box price-box-price btn-padding" style="padding: 7px 20px 15px 35px;">
                                         <div class="price"><span>Sepete Git</span></div>
@@ -135,58 +214,15 @@
                         }
                         else
                         {
-                            <a onclick="confirmCalculate();" style="background: none; border: 0; width: 100%; padding: 0;" class="btn-left" id="btn-width">
+                            <a href="@Url.Action("sepet","anasayfa")" style="background: none; border: 0; width: 100%; padding: 0;" class="btn-left" id="btn-width">
                                 <div class="price-box pr-box-featured" id="btnNext">
                                     <div class="pr-box price-box-price btn-padding" style="padding: 7px 20px 15px 35px;">
-                                        <div class="price"><span>Sepete Ekle</span></div>
+                                        <div class="price"><span>Sepete Git</span></div>
                                     </div>
                                 </div>
                             </a>
                         }
 
-                    </div>
-
-
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col-sm-12" style="max-width:85%;">
-                    <div class="portfolio-list-inner isotope-wrap tt-wrap">
-
-                        <div class="isotope col-3 gutter-3">
-
-                            <div class="isotope-top-content">
-
-                                <div class="isotope-filter">
-                                    <div class="isotope-filter-button">
-                                        <span class="ifb-icon"><span class="lnr lnr-funnel"></span></span>
-                                        <span class="ifb-icon-close"><i class="fas fa-times"></i></span>
-
-                                        <span class="ifb-text">Filter</span>
-
-                                    </div>
-
-                                    <span class="margin-bottom-2-p"><strong>Bu hizmetlerimize de göz atmak ister misiniz?</strong></span>
-
-                                    <ul class="isotope-filter-links" style="margin-top:10px;">
-
-                                        @foreach (var item in pricingList)
-                                        {
-                                            if (item.Id != Model.Id)
-                                            {
-                                                <li><button onclick="window.location.href='@Url.Action("fiyathesapla", "anasayfa", new { Id = item.Id })'" data-filter=".branding">+ @item.Title</button></li>
-                                            }
-
-                                        }
-
-                                    </ul>
-
-                                </div>
-
-                            </div>
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -204,8 +240,8 @@
     let totalPrice = 0;
     let sumTotal = 0;
 
-    var IdS = [];
-    var IdsRemove = [];
+    var Id = 0;
+    var IdRemove = 0;
 
     if (@total > 0) {
         sumTotal = @total;
@@ -226,21 +262,25 @@
 
             if (this.innerHTML == "Seç") {
                 var id = $(this).val();
-                IdS.push($(this).val());
+                Id = $(this).val();
                 selected = true;
                 this.classList.add('active');
                 this.innerHTML = "Seçildi";
                 totalPrice = Number.parseInt($("#price_" + id).val());
                 countPrice.innerHTML = increment(totalPrice);
+                insertToCalculate();
+
             }
             else if (this.innerHTML == "Seçildi") {
                 var id = $(this).val();
-                IdsRemove.push($(this).val());
+                IdRemove = $(this).val();
                 selected = false;
                 this.classList.remove('active');
                 this.innerHTML = "Seç";
                 totalPrice = Number.parseInt($("#price_" + id).val());
                 countPrice.innerHTML = deIncrement(totalPrice);
+                removeToCalculate();
+
             }
         });
     });
@@ -259,18 +299,17 @@
 
 <script>
 
-    var confirmCalculate = function () {
+    var insertToCalculate = function () {
 
          try {
 
             $.ajax({
 
                type: "POST",
-               url: "/anasayfa/secimiOnayla/",
-               data: { Ids: IdS, IdsRemove: IdsRemove },
+                url: "/anasayfa/sepeteekle/",
+                data: { Id: Id },
                success: function (response) {
-                    console.log("deneme");
-                   window.location.href = "@Url.Action("fiyatOnayla","anasayfa")";
+                   console.log("deneme");
                },
                error: function (response) {
                     console.log("hata");
@@ -288,5 +327,53 @@
          }
 
     }
+
+    var removeToCalculate = function () {
+
+        try {
+
+            $.ajax({
+
+                type: "POST",
+                url: "/anasayfa/sepetcikar/",
+                data: { IdRemove: IdRemove },
+                success: function (response) {
+                    console.log("deneme");
+                },
+                error: function (response) {
+                    console.log("hata");
+                }
+
+            });
+        }
+
+        catch (err) {
+            alert(err);
+        }
+
+        finally {
+
+        }
+
+    }
+
+    var viewCartList = function () {
+
+        var btn = document.getElementById("btn_view");
+        var cartList = document.getElementById("cartList");
+
+        if (btn.innerHTML == "Listeyi Kapat") {
+            btn.innerHTML = "Listeyi Görmek İçin Tıklayınız";
+            cartList.classList.remove('showCart');
+            cartList.classList.add('hideCart');
+
+        }
+        else if (btn.innerHTML == "Listeyi Görmek İçin Tıklayınız") {
+            btn.innerHTML = "Listeyi Kapat"
+            cartList.classList.remove('hideCart');
+            cartList.classList.add('showCart');
+
+        }
+    };
 
 </script>

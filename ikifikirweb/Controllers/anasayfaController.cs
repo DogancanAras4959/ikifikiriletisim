@@ -59,7 +59,7 @@ namespace ikifikirweb.Controllers
         private readonly IVideoService _videoService;
         private readonly IPricingService _pricingService;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly IViewRenderService _viewRenderService; 
+        private readonly IViewRenderService _viewRenderService;
         private readonly IPostService _postService;
 
         public anasayfaController(reCaptchaService repService, IMapper mapper, IProjectService projectService, ITeamsService teamService, IEmailSender emailSender, ICategoryService categoryService, IGalleryService galleryService, IVideoService videoService, IPricingService pricingService, IWebHostEnvironment webHostEnvironment, IViewRenderService viewRenderService, IPostService postService)
@@ -165,7 +165,7 @@ namespace ikifikirweb.Controllers
         [Route("/anasayfa/hata/{code:int}")]
         public IActionResult hata(int code)
         {
-            ViewData["ErrorCode"] = $"{code}"; 
+            ViewData["ErrorCode"] = $"{code}";
             TempData["isHaveFooter"] = 1;
 
             return View("~/Views/anasayfa/hata.cshtml");
@@ -206,7 +206,7 @@ namespace ikifikirweb.Controllers
         #endregion
 
         #region Secondary
-     
+
         public IActionResult ekibimiz()
         {
             TempData["isTransparent"] = 1;
@@ -332,12 +332,12 @@ namespace ikifikirweb.Controllers
             TempData["isHaveFooter"] = 1;
             return View();
         }
-     
+
         public IActionResult notifView()
         {
             return PartialView("notifView");
         }
-   
+
         #endregion
 
         #region External
@@ -460,7 +460,7 @@ namespace ikifikirweb.Controllers
 
             var cookie = Request.Cookies["ComponentList"];
 
-            if(cookie != null)
+            if (cookie != null)
             {
                 List<ComponentResult> resultList = JsonSerializer.Deserialize<List<ComponentResult>>(cookie);
 
@@ -475,34 +475,70 @@ namespace ikifikirweb.Controllers
                     ViewBag.ComponentChoosed = resultList;
                 }
             }
-          
+
             return View(value);
         }
 
         [HttpPost]
-        public JsonResult secimiOnayla(int[] Ids, int[] IdsRemove)
+        public JsonResult sepeteekle(int Id)
+        {
+            try
+            {
+                List<ComponentResult> result = new List<ComponentResult>();
+
+                var component = _pricingService.getPricingComponentById(Id);
+
+                if (component != null)
+                {
+                    ComponentResult data = new ComponentResult
+                    {
+                        Title = component.ComponentTitle,
+                        Price = component.Price
+                    };
+
+                    result.Add(data);
+                }
+
+
+                #region Cookie
+
+                var cookieIsHave = Request.Cookies["ComponentList"];
+
+                if (cookieIsHave != null)
+                {
+                    List<ComponentResult> cookieResult = JsonSerializer.Deserialize<List<ComponentResult>>(cookieIsHave);
+                    result.AddRange(cookieResult);
+                    string componentList = JsonSerializer.Serialize(result);
+                    Response.Cookies.Append("ComponentList", componentList);
+                }
+
+                else
+                {
+                    CookieOptions cookie = new CookieOptions();
+                    cookie.Expires = DateTime.Now.AddYears(1);
+                    string componentList = JsonSerializer.Serialize(result);
+                    Response.Cookies.Append("ComponentList", componentList, cookie);
+                }
+
+                #endregion
+
+                return Json(true);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
+
+        }
+
+        [HttpPost]
+        public JsonResult sepetcikar(int IdRemove)
         {
             try
             {
                 List<ComponentResult> result = new List<ComponentResult>();
 
                 var cookieIsHave = Request.Cookies["ComponentList"];
-
-                foreach (var item in Ids)
-                {
-                    var component = _pricingService.getPricingComponentById(item);
-
-                    if (component != null)
-                    {
-                        ComponentResult data = new ComponentResult
-                        {
-                            Title = component.ComponentTitle,
-                            Price = component.Price
-                        };
-
-                        result.Add(data);
-                    }
-                }
 
                 #region Cookie
 
@@ -511,26 +547,15 @@ namespace ikifikirweb.Controllers
                     List<ComponentResult> cookieResult = JsonSerializer.Deserialize<List<ComponentResult>>(cookieIsHave);
                     result.AddRange(cookieResult);
 
-                    foreach (var item2 in IdsRemove)
+                    var componentRemove = _pricingService.getPricingComponentById(IdRemove);
+
+                    if (componentRemove != null)
                     {
-                        var componentRemove = _pricingService.getPricingComponentById(item2);
-
-                        if (componentRemove != null)
+                        for (int i = 0; i < result.Count; i++)
                         {
-                            //foreach (var item3 in result)
-                            //{
-                            //   if(item3.Title == componentRemove.ComponentTitle)
-                            //    {
-                            //        result.Remove(item3);
-                            //    } 
-                            //}
-
-                            for (int i = 0; i < result.Count; i++)
+                            if (result[i].Title == componentRemove.ComponentTitle)
                             {
-                                if(result[i].Title == componentRemove.ComponentTitle)
-                                {
-                                    result.RemoveAt(i);
-                                }
+                                result.RemoveAt(i);
                             }
                         }
                     }
@@ -544,7 +569,7 @@ namespace ikifikirweb.Controllers
                     cookie.Expires = DateTime.Now.AddYears(1);
                     string componentList = JsonSerializer.Serialize(result);
                     Response.Cookies.Append("ComponentList", componentList, cookie);
-                }            
+                }
 
                 #endregion
 
@@ -554,18 +579,17 @@ namespace ikifikirweb.Controllers
             {
                 throw new Exception(ex.ToString());
             }
-
         }
 
         [HttpGet]
-        public IActionResult fiyatOnayla()
+        public IActionResult sepet()
         {
             try
             {
                 decimal totalPrice = 0;
                 var cookie = Request.Cookies["ComponentList"];
 
-                if(cookie != null)
+                if (cookie != null)
                 {
                     TempData["isTransparent"] = 0;
 
@@ -602,7 +626,7 @@ namespace ikifikirweb.Controllers
                 {
                     return RedirectToAction("fiyatpaketleri", "anasayfa");
                 }
-           
+
 
             }
             catch (Exception ex)
@@ -627,7 +651,7 @@ namespace ikifikirweb.Controllers
                 foreach (var item in resultList)
                 {
                     total += item.Price;
-                    items += $"<tr><td style='border: 1px solid black; border-collapse: collapse; padding: 5px;'>{item.Title}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 5px;'>{Convert.ToInt32(item.Price)}₺</td></tr>"; 
+                    items += $"<tr><td style='border: 1px solid black; border-collapse: collapse; padding: 5px;'>{item.Title}</td><td style='border: 1px solid black; border-collapse: collapse; padding: 5px;'>{Convert.ToInt32(item.Price)}₺</td></tr>";
                 }
 
                 AppoinmentContact contactMessage = new AppoinmentContact();
@@ -659,7 +683,7 @@ namespace ikifikirweb.Controllers
 
                 return RedirectToAction("sonuc", "anasayfa", new { resultPage = result, type = 0 });
             }
-         
+
         }
 
         public IActionResult email_calculate_complete()

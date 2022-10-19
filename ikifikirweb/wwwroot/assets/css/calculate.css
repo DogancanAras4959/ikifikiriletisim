@@ -1,4 +1,43 @@
-﻿
+﻿@media (max-width: 992px) {
+    .pli-alter-3 .pl-item-info, .isotope.gutter-2 .pli-alter-3 .portfolio-list-item .pl-item-info, .isotope.gutter-3 .pli-alter-3 .portfolio-list-item .pl-item-info, .isotope.gutter-4 .pli-alter-3 .portfolio-list-item .pl-item-info, .isotope.gutter-5 .pli-alter-3 .portfolio-list-item .pl-item-info, .isotope.gutter-6 .pli-alter-3 .portfolio-list-item .pl-item-info {
+        position: absolute;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        height: auto;
+        padding: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+    .pl-item-title{
+        font-size:20px !important;
+        padding:20px;
+    }
+    .pli-alter-3 .pl-item-title {
+        font-size: 20px !important; 
+        text-align:center;
+    }
+    .title-look{
+        text-align:center;
+    }
+    .showCart{
+        display:block;
+    }
+
+    .hideCart{
+        display:none !important;
+    }
+
+    #cartButton{
+        display:block !important;
+    }
+}
+
+.title-look{
+    font-size:25px;
+    margin-left:15px;
+}
+
 .fixed-total {
     padding-right: 5px;
     position: fixed;
@@ -121,3 +160,15 @@
     margin-left: 1.5%;
 }
 /* width */
+
+#cartList {
+    max-height: 272px;
+}
+
+.hideCart{
+    display:block;
+}
+
+#cartButton{
+    display:none;
+}
