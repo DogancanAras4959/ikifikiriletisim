@@ -29,175 +29,12 @@
 
 }
 <link href="~/assets/css/mobile.css" rel="stylesheet" />
-
-<style>
-
-    .fixed-total {
-        padding-right: 5px;
-        position: fixed;
-        top: 230px;
-        margin: auto 25px;
-        display: inline-block;
-    }
-
-    .parent {
-        display: inline-block;
-        padding: 3.5em;
-    }
-
-    .btn {
-        padding: 10px 20px;
-        background-color: #0040d8;
-        cursor: pointer;
-        border: none;
-        transition: all .30s;
-        color: white;
-    }
-
-        .active, .btn:hover {
-            background-color: rgb(236, 16, 89) !important;
-            color: white;
-        }
-
-    .box-button {
-        font-size: 14px;
-        vertical-align: middle !important;
-        border: 2px solid #b5b5b5 !important;
-        padding: 20px !important;
-        box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 5%);
-    }
-
-    #prices-section {
-        padding: 0px 30px 30px 30px;
-    }
-
-    .price-box .price-features > ul > li {
-        padding: 3px 0;
-        font-size: 17px;
-        font-weight: 500;
-    }
-
-    .tt-heading.padding-on {
-        padding: 1% 0% 2% 0%;
-    }
-
-    .tt-heading.tt-heading-xlg .tt-heading-subtitle {
-        margin-top: 5px;
-        font-size: 19px;
-    }
-
-    .tt-heading.tt-heading-xlg .tt-heading-title {
-        font-size: 40px;
-    }
-
-    .price-box .price-features > ul > li {
-        padding: 3px 0;
-        font-size: 20px;
-        font-weight: 500;
-    }
-
-    .price-box .pr-box {
-        padding: 0px 20px 0px 15px;
-    }
-
-    .price-box .price-box-price .price {
-        position: relative;
-        display: inline-block;
-        font-size: 25px;
-        font-weight: bold;
-    }
-
-    .price-box .price-heading .price-title {
-        margin: 0;
-        font-size: 19px;
-    }
-
-    .price-box {
-        position: relative;
-        background-color: #fff;
-        margin: 10px 0px 10px 0px;
-        padding: 15px 0;
-        text-align: center;
-        z-index: 2;
-        overflow: hidden;
-        -webkit-box-shadow: 0 0 30px 1px rgb(0 0 0 / 14%);
-        -moz-box-shadow: 0 0 30px 1px rgba(0, 0, 0, 0.14);
-        box-shadow: 0 0 30px 1px rgb(0 0 0 / 14%);
-        -webkit-transition: all 0.2s ease-in-out;
-        -moz-transition: all 0.2s ease-in-out;
-        -o-transition: all 0.2s ease-in-out;
-        -ms-transition: all 0.2s ease-in-out;
-        transition: all 0.2s ease-in-out;
-    }
-
-    * {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-
-    .price-box .price-heading .price-title {
-        margin: 0;
-        font-size: 13px;
-    }
-
-    .pay-box {
-        width: 265px;
-    }
-
-    .isotope-top-content {
-        position: relative;
-        padding: 16px 32px 10px 3%;
-    }
-
-    .isotope.gutter-3 .isotope-top-content {
-        margin-left: 1.5%;
-    }
-</style>
+<link href="~/assets/css/calculate.css" rel="stylesheet" />
 
 <section id="prices-section">
     <div class="prices-section-inner tt-wrap">
         <div class="price-boxes-container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="portfolio-list-inner isotope-wrap tt-wrap">
 
-                        <div class="isotope col-3 gutter-3">
-
-                            <div class="isotope-top-content">
-
-                                <div class="isotope-filter">
-                                    <div class="isotope-filter-button">
-                                        <span class="ifb-icon"><span class="lnr lnr-funnel"></span></span>
-                                        <span class="ifb-icon-close"><i class="fas fa-times"></i></span>
-
-                                        <span class="ifb-text">Filter</span>
-
-                                    </div>
-
-                                    <span class="margin-bottom-2-p"><strong>Bu hizmetlerimize de göz atmak ister misiniz?</strong></span>
-
-                                    <ul class="isotope-filter-links" style="margin-top:10px;">
-
-                                        @foreach (var item in pricingList)
-                                        {
-                                            if (item.Id != Model.Id)
-                                            {
-                                                <li><button onclick="window.location.href='@Url.Action("fiyathesapla", "anasayfa", new { Id = item.Id })'" data-filter=".branding">+ @item.Title</button></li>
-                                            }
-
-                                        }
-
-                                    </ul>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row price-pb-m">
                 <div class="col-sm-12">
                     <div class="tt-heading tt-heading-xlg padding-on" style="position: relative; top: 15px;">
@@ -258,14 +95,24 @@
                 </div>
                 <div class="col-sm-3 fixed-total" style="padding-right: 5px;">
                     <div class="pay-box">
+
+                        @if (componentChoosed != null)
+                        {
+                            <div class="price-box overflow-y-scroll" style="max-height:272px;">
+                                <div class="pr-box price-features" style="padding: 5px 10px 0px 10px;">
+                                    <ul class="list-unstyled">
+                                        @foreach (var item in componentChoosed)
+                                        {
+                                            <li style="font-size: 15px; line-height: 22px;">@item.Title</li>
+                                            <li><strong>@item.Price ₺</strong></li>
+                                            <hr style=" margin-top: 10px; margin-bottom: 10px;" />
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
                         <div class="price-box pr-box-featured" id="btn-width">
-                            @*<div class="pr-box price-heading" id="price-heading">
-                                    <div class="price-heading-inner">
-                                        <h3 class="price-title" style="position: relative; top: 7px;">Toplam Fiyat</h3>
-                                    </div>
-                                </div>*@
                             <div class="pr-box price-box-price">
-                                @*<div class="price"><span id="count-price">0</span> ₺</div>*@
                                 @if (total > 0)
                                 {
                                     <div class="price"><span id="count-price">@total</span> ₺</div>
@@ -276,13 +123,6 @@
                                 }
                             </div>
                         </div>
-                        @*<a onclick="insertCart();" style="background: none; border: 0; width: 100%; padding: 0;" class="btn-left" id="btn-width">
-                                <div class="price-box pr-box-featured" id="btnNext">
-                                    <div class="pr-box price-box-price btn-padding" style="padding: 7px 20px 15px 35px;">
-                                        <div class="price"><span>Sepete At</span></div>
-                                    </div>
-                                </div>
-                            </a>*@
                         @if (total > 0)
                         {
                             <a onclick="confirmCalculate();" style="background: none; border: 0; width: 100%; padding: 0;" class="btn-left" id="btn-width">
@@ -306,6 +146,48 @@
 
                     </div>
 
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12" style="max-width:85%;">
+                    <div class="portfolio-list-inner isotope-wrap tt-wrap">
+
+                        <div class="isotope col-3 gutter-3">
+
+                            <div class="isotope-top-content">
+
+                                <div class="isotope-filter">
+                                    <div class="isotope-filter-button">
+                                        <span class="ifb-icon"><span class="lnr lnr-funnel"></span></span>
+                                        <span class="ifb-icon-close"><i class="fas fa-times"></i></span>
+
+                                        <span class="ifb-text">Filter</span>
+
+                                    </div>
+
+                                    <span class="margin-bottom-2-p"><strong>Bu hizmetlerimize de göz atmak ister misiniz?</strong></span>
+
+                                    <ul class="isotope-filter-links" style="margin-top:10px;">
+
+                                        @foreach (var item in pricingList)
+                                        {
+                                            if (item.Id != Model.Id)
+                                            {
+                                                <li><button onclick="window.location.href='@Url.Action("fiyathesapla", "anasayfa", new { Id = item.Id })'" data-filter=".branding">+ @item.Title</button></li>
+                                            }
+
+                                        }
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
