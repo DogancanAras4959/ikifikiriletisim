@@ -620,7 +620,14 @@ namespace ikifikirweb.Controllers
                     ViewBag.PackageTitle = packagePrice.Title;
                     ViewBag.Total = totalPrice;
                     ViewBag.ResultList = resultList;
-                    return View();
+
+                    int resultCount = resultList.Count;
+                 
+                    if(resultCount == 0)
+                        return RedirectToAction("fiyatpaketleri", "anasayfa");
+                    else
+                        return View();
+
                 }
                 else
                 {
@@ -631,7 +638,7 @@ namespace ikifikirweb.Controllers
             }
             catch (Exception ex)
             {
-                return View();
+                return RedirectToAction("fiyatpaketleri", "anasayfa");
             }
 
         }
