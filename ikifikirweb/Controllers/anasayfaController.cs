@@ -644,7 +644,7 @@ namespace ikifikirweb.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> fiyatformgonder(AppoinmentContact contact)
+        public async Task<JsonResult> fiyatformgonder(AppoinmentContact contact)
         {
             string result = "";
             string items = "";
@@ -675,20 +675,14 @@ namespace ikifikirweb.Controllers
 
                 result = await _emailSender.SendEmailAsync(contactMessage);
 
-                //HttpContext.Session.Remove("result");
-                //HttpContext.Session.Clear();
                 Response.Cookies.Delete("ComponentList");
+                return Json(true);
 
-                return RedirectToAction("sonuc", "anasayfa", new { resultPage = result, type = 1 });
             }
             catch (Exception ex)
             {
                 Response.Cookies.Delete("ComponentList");
-
-                //HttpContext.Session.Remove("result");
-                //HttpContext.Session.Clear();
-
-                return RedirectToAction("sonuc", "anasayfa", new { resultPage = result, type = 0 });
+                return Json(false);
             }
 
         }

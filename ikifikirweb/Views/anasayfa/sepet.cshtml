@@ -48,7 +48,6 @@
         perspective: 1000px;
         -webkit-perspective: 1000px;
     }
-
 </style>
 
 <section id="prices-section">
@@ -92,7 +91,7 @@
                         </div>
                     </div>
                     <div class="price-box" id="member_form">
-                        <form method="post" action="@Url.Action("fiyatformgonder","anasayfa")">
+                        <form method="post" id="form_price" action="@Url.Action("fiyatformgonder","anasayfa")">
                             <div class="contact-form-inner padding-5-p">
                                 <div class="row">
                                     <div class="col-lg-6">
@@ -128,11 +127,25 @@
                                     </div> <!-- /.col -->
                                 </div> <!-- /.row -->
                                 <a onclick="teklifedon();" class="btn btn-primary margin-top-20">Teklife Dön</a>
+                                @*<button type="submit" onclick="formonayla();" class="btn btn-primary margin-top-20">Gönder</button>*@
                                 <button type="submit" class="btn btn-primary margin-top-20">Gönder</button>
                             </div>
                         </form>
-
                     </div>
+                    <div class="price-box" id="done_form">
+                        <div class="pr-box price-box-price">
+                            <img src="https://uploads.ikifikir.net/videos/done.gif" style="width:100px;">
+                        </div>
+                        <div class="pr-box price-features" style="margin-top:5px;">
+                            <h3 class="price-title" style="margin-bottom:5px;">Teklif formunuz başarıyla gönderildi!</h3>
+                            <p style="margin:0px 0px 7px 0px;">Sizinle en kısa sürede iletişime geçeceğiz</p>
+                        </div>
+                        <div class="pr-box price-features">
+                            <a href="@Url.Action("fiyatpaketleri","anasayfa")" class="btn btn-primary">Paketlere Dön</a>
+                        </div>
+                    </div>
+                    <div style="height:150px;"></div>
+
                 </div>
             </div>
         </div>
@@ -160,5 +173,32 @@
         services.style.transform = "rotateY(0deg)";
         memberForm.style.transform = "rotateY(180deg)";
     }
+
+    $("#form_price").submit(function (event) {
+        event.preventDefault();
+        var form = $(this);
+        var actionUrl = form.attr('action');
+
+        $.ajax({
+
+            type: "POST",
+            url: actionUrl,
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            data: form.serialize(),
+            success: function (data) {
+
+                var memberForm = document.getElementById("member_form");
+                var doneform = document.getElementById("done_form");
+                memberForm.style.transform = "rotateY(180deg)";
+                doneform.style.transform = "rotateY(0deg)";
+            },
+            error: function (data) {
+                alert("Hata");
+            }
+
+        });
+
+    })
 
 </script>

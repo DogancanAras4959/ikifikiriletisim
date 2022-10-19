@@ -11,6 +11,10 @@
         width: 90% !important;
     }
 
+    #done_form{
+        width: 90% !important;
+    }
+
     .pli-alter-3 .pl-item-info, .isotope.gutter-2 .pli-alter-3 .portfolio-list-item .pl-item-info, .isotope.gutter-3 .pli-alter-3 .portfolio-list-item .pl-item-info, .isotope.gutter-4 .pli-alter-3 .portfolio-list-item .pl-item-info, .isotope.gutter-5 .pli-alter-3 .portfolio-list-item .pl-item-info, .isotope.gutter-6 .pli-alter-3 .portfolio-list-item .pl-item-info {
         position: absolute;
         top: auto;
@@ -208,4 +212,16 @@
     position: fixed;
     top: 0;
     width: 650px;
+}
+
+#done_form {
+    transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    transition: 1s transform;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    position: fixed;
+    top: 0;
+    width: 650px;
+    background-color: #f1f6f5;
 }
