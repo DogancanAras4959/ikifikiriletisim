@@ -105,9 +105,9 @@ namespace ikifikir.ENGINES.Engines
 
         public List<PricingComponentListItemDto> getPricingComponentListByPricePackageId(int Id)
         {
-            IEnumerable<pricingComponents> roles = _unitOfWork.GetRepository<pricingComponents>().Where(x => x.PricingId == Id, x => x.OrderBy(y => y.Id), "pricing", null, null);
+            IEnumerable<pricingComponents> components = _unitOfWork.GetRepository<pricingComponents>().Where(x => x.PricingId == Id, x => x.OrderBy(y => y.Id), "pricing", null, null);
 
-            return roles.Select(x => new PricingComponentListItemDto
+            return components.Select(x => new PricingComponentListItemDto
             {
                 Id = x.Id,
                 IsActive = x.IsActive,

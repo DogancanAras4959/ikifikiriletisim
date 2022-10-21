@@ -2,6 +2,7 @@
 using ikifikir.COMMON.DataTransfer.PricingDataValues.PricingComponentData;
 using ikifikir.COMMON.DataTransfer.PricingDataValues.PricingComponentTypeData;
 using ikifikir.COMMON.DataTransfer.PricingDataValues.PricingData;
+using ikifikir.DAL.Models;
 using ikifikirweb.ViewModels.PricingDataModelWeb.PricingComponentTypeWebModel;
 using ikifikirweb.ViewModels.PricingDataModelWeb.PricingComponentWebModel;
 using ikifikirweb.ViewModels.PricingDataModelWeb.PricingWebModel;
@@ -16,6 +17,7 @@ namespace ikifikirweb.Profiles
     {
         public PricingProfile()
         {
+
             CreateMap<PricingDto, PricingViewModel>();
             CreateMap<PricingListItemDto, PricingListViewModel>();
 

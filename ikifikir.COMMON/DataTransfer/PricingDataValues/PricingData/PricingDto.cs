@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ikifikir.COMMON.DataTransfer.PricingDataValues.PricingComponentData;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,6 @@ namespace ikifikir.COMMON.DataTransfer.PricingDataValues.PricingData
         public decimal MonthPrice { get; set; }
         public string Image { get; set; }
         public decimal YearPrice { get; set; }
+
     }
 }

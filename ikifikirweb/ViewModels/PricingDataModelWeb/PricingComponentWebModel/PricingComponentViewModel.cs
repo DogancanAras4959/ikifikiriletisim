@@ -1,4 +1,5 @@
-﻿using ikifikir.DAL.Models;
+﻿using ikifikir.COMMON.DataTransfer.PricingDataValues.PricingData;
+using ikifikir.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

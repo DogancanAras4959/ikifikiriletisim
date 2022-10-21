@@ -16,6 +16,9 @@
         float: left;
         margin: 0;
     }
+    .header-shadow {
+        box-shadow: 0 1px 12px 0px #747373;
+    }
 </style>
 
 @{
@@ -37,19 +40,21 @@
 
 }
 
-<header id="header" class="header-show-hide-on-scroll @transparent.Trim() menu-align-right">
+<header id="header" class="header-show-hide-on-scroll @transparent.Trim() header-shadow menu-align-right">
     <div class="header-inner tt-wrap">
 
         <div id="logo">
             <!-- logo images for big screens -->
             <a href="@Url.Action("sayfa","anasayfa")" class="logo-dark">
-            <img src="https://uploads.ikifikir.net/site/logo-dark-ikifikir.png" alt="logo-dark-ikifikir.png" loading="lazy" title="logo-dark-ikifikir.png" /></a>
+                <img src="https://uploads.ikifikir.net/site/logo-dark-ikifikir.png" alt="logo-dark-ikifikir.png" loading="lazy" title="logo-dark-ikifikir.png" />
+            </a>
             <a href="@Url.Action("sayfa","anasayfa")" class="logo-light">
                 <img src="https://uploads.ikifikir.net/site/logo-light-ikifikir.png" alt="logo-light-ikifikir.png" loading="lazy" title="logo-light-ikifikir.png" />
             </a>
 
             <a href="@Url.Action("sayfa","anasayfa")" class="logo-dark-m">
-            <img src="https://uploads.ikifikir.net/site/logo-ikifikir-dark-m.png" alt="logo-dark-ikifikir.png" loading="lazy" title="logo-dark-ikifikir.png" /></a>
+                <img src="https://uploads.ikifikir.net/site/logo-ikifikir-dark-m.png" alt="logo-dark-ikifikir.png" loading="lazy" title="logo-dark-ikifikir.png" />
+            </a>
             <a href="@Url.Action("sayfa","anasayfa")" class="logo-light-m">
                 <img src="https://uploads.ikifikir.net/site/logo-light-ikifikir.png" alt="logo-light-ikifikir.png" loading="lazy" title="logo-light-ikifikir.png" />
             </a>
@@ -170,10 +175,14 @@
 
                     </li>
 
-                    @*<li class="tt-submenu-wrap tt-submenu-master">
-                        <a href="@Url.Action("fiyatpaketleri","anasayfa")">Paketlerimiz</a>
+                    <li class="tt-submenu-wrap tt-submenu-master">
+                        <a href="@Url.Action("fiyathesapla","anasayfa")">Teklifmatik</a>
+                    </li>
 
-                    </li>*@
+                    @*<li class="tt-submenu-wrap tt-submenu-master">
+                            <a href="@Url.Action("fiyatpaketleri","anasayfa")">Paketlerimiz</a>
+
+                        </li>*@
 
                     <li class="tt-submenu-wrap tt-submenu-master">
                         <a href="@Url.Action("iletisim","anasayfa")">İletişim</a>

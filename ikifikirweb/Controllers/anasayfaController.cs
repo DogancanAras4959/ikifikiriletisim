@@ -423,7 +423,7 @@ namespace ikifikirweb.Controllers
         }
 
         [HttpGet]
-        public IActionResult fiyathesapla(int Id)
+        public IActionResult fiyathesapla()
         {
             TempData["isTransparent"] = 0;
             TempData["isHaveFooter"] = 0;
@@ -445,18 +445,18 @@ namespace ikifikirweb.Controllers
 
             #endregion
 
-            var value = _mapper.Map<PricingDto, PricingViewModel>(_pricingService.getPricingById(Id));
-
-            List<PricingComponentListViewModel> components = _mapper.Map<List<PricingComponentListItemDto>, List<PricingComponentListViewModel>>(_pricingService.getPricingComponentListByPricePackageId(value.Id));
-
-            ViewBag.Bilesenler = components;
-
-            List<PricingComponentTypeListViewModel> types = _mapper.Map<List<PricingComponentTypeListItemDto>, List<PricingComponentTypeListViewModel>>(_pricingService.getPricingComponentTypeList());
-
-            ViewBag.Tipler = types;
-
             var pricingList = _mapper.Map<List<PricingListItemDto>, List<PricingListViewModel>>(_pricingService.getPricingList());
+            List<PricingComponentListViewModel> componentAll = new List<PricingComponentListViewModel>();
+
+            foreach (var itemComp in pricingList)
+            {
+                var value = _mapper.Map<PricingDto, PricingViewModel>(_pricingService.getPricingById(itemComp.Id));
+                var components = _mapper.Map<List<PricingComponentListItemDto>, List<PricingComponentListViewModel>>(_pricingService.getPricingComponentListByPricePackageId(value.Id));
+                componentAll.AddRange(components);
+            }
+
             ViewBag.Paketler = pricingList;
+            ViewBag.Hizmetler = componentAll;
 
             var cookie = Request.Cookies["ComponentList"];
 
@@ -476,7 +476,7 @@ namespace ikifikirweb.Controllers
                 }
             }
 
-            return View(value);
+            return View();
         }
 
         [HttpPost]
@@ -492,6 +492,7 @@ namespace ikifikirweb.Controllers
                 {
                     ComponentResult data = new ComponentResult
                     {
+                        Id = component.Id,
                         Title = component.ComponentTitle,
                         Price = component.Price
                     };
@@ -592,6 +593,7 @@ namespace ikifikirweb.Controllers
                 if (cookie != null)
                 {
                     TempData["isTransparent"] = 0;
+                    TempData["isHaveFooter"] = 1;
 
                     #region Meta
 

@@ -1,15 +1,13 @@
 ﻿@model ikifikirweb.ViewModels.PricingDataModelWeb.PricingWebModel.PricingViewModel
 @using ikifikirweb.ViewModels.PricingDataModelWeb.PricingComponentWebModel
-@using ikifikirweb.ViewModels.PricingDataModelWeb.PricingComponentTypeWebModel
 @using ikifikirweb.ViewModels.PricingDataModelWeb.PricingWebModel
 @using ikifikir.CORE.EmailConfig
 @{
     ViewData["Title"] = "fiyathesapla";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    List<PricingComponentTypeListViewModel> types = ViewBag.Tipler as List<PricingComponentTypeListViewModel>;
-    List<PricingComponentListViewModel> components = ViewBag.Bilesenler as List<PricingComponentListViewModel>;
     List<PricingListViewModel> pricingList = ViewBag.Paketler as List<PricingListViewModel>;
+    List<PricingComponentListViewModel> pricingCompList = ViewBag.Hizmetler as List<PricingComponentListViewModel>;
     List<ComponentResult> componentChoosed = ViewBag.ComponentChoosed as List<ComponentResult>;
 
     string[] nameList = { };
@@ -28,144 +26,98 @@
     int total = Convert.ToInt32(ViewBag.Total);
 
 }
+
 <link href="~/assets/css/mobile.css" rel="stylesheet" />
 <link href="~/assets/css/calculate.css" rel="stylesheet" />
+<link href="~/assets/css/carousel.css" rel="stylesheet" />
+
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+    #header.header-show-hide-on-scroll.fly-up {
+        top: 0px;
+    }
+    .wrap-section {
+        max-width: 1282px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+</style>
 
 <section id="prices-section">
     <div class="prices-section-inner tt-wrap">
         <div class="price-boxes-container">
-
-            <div class="row price-pb-m">
-                <div class="col-sm-12">
-                    <div class="tt-heading tt-heading-xlg padding-on" style="position: relative; top: 15px;">
-                        <div class="tt-heading-inner">
-                            <h1 class="tt-heading-title">@Model.Title</h1>
-                            <div class="tt-heading-subtitle">Lütfen fiyat hesaplama modulünden istediğiniz hizmetleri seçin</div>
-                        </div> <!-- /.tt-heading-inner -->
-                    </div>
-                </div>
-            </div>
             <div class="row">
-                <div class="col-sm-9" @*id="col-pb-mobile"*@>
-                    <div class="row">
-                        @foreach (var item in components)
-                        {
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3" style="padding-right: 5px;">
-                                <div class="price-box">
-                                    <div class="pr-box price-heading">
-                                        <div class="price-heading-inner">
-                                            <div class="prh-icon"><span class="lnr lnr-layers"></span></div>
-                                            <h3 class="price-title">@item.ComponentTitle</h3>
-                                        </div>
-                                    </div>
-                                    <div class="pr-box price-features">
-                                        <ul class="list-unstyled">
-                                            <li>@*@Decimal.Parse(item.Price.ToString("0.00##"))*@ @Convert.ToInt32(item.Price) ₺</li>
-                                        </ul>
-                                    </div>
-                                    <div class="pr-box">
-
-                                        @if (nameList != null && nameList.Length > 0)
-                                        {
-                                            foreach (var item2 in nameList)
-                                            {
-                                                if (item.ComponentTitle == item2)
-                                                {
-                                                    titleCurrent = item.ComponentTitle;
-                                                }
-                                            }
-                                        }
-
-                                        @if (item.ComponentTitle == titleCurrent)
-                                        {
-                                            <button style="padding: 5px 25px; font-size: 15px;" value="@item.Id" class="btn btn-price-box btn-primary active">Seçildi</button>
-                                            <input type="hidden" value="@item.Price" id="price_@item.Id" />
-                                            <input type="hidden" value="@item.ComponentTitle" id="title_@item.Id" />
-                                        }
-
-                                        else
-                                        {
-                                            <button style="padding: 5px 25px; font-size: 15px;" value="@item.Id" class="btn btn-price-box btn-primary">Seç</button>
-                                            <input type="hidden" value="@item.Price" id="price_@item.Id" />
-                                            <input type="hidden" value="@item.ComponentTitle" id="title_@item.Id" />
-                                        }
-                                    </div>
-                                </div>
+                <div class="col-sm-9" @*id="col-pb-mobile"*@ style="padding: 0px 45px 0px 35px;">
+                    <nav id="menu-container" class="arrow">
+                        <div class="menu-inner-box">
+                            <div class="menu">
+                                @foreach (var item in pricingList)
+                                {
+                                    <a class="menu-item" href="#section_@item.Id">@item.Title</a>
+                                }
                             </div>
-                        }
-                    </div>
-                    <div class="row" style="margin-top:35px;">
-                        <div class="col-sm-12" style="padding:0px;">
-                            <section id="portfolio-list-section">
-                                <div class="portfolio-list-inner isotope-wrap">
-                                    <p class="title-look"><strong>Bu hizmetlerimize de göz atmak ister misiniz?</strong></p>
-                                    <div class="isotope col-4 gutter-2" style="padding:0px;">
-                                        <div class="isotope-items-wrap pli-colored pli-alter-3" style="position: relative; padding-top:20px; height: 1014.52px;">
-                                            <div class="grid-sizer"></div>
+                        </div>
+                    </nav>
+                    <div class="row margin-top-100">
 
-                                            @foreach (var item in pricingList)
+                        @foreach (var item in pricingList)
+                        {
+
+                            <div class="price-box" id="section_@item.Id" style="padding: 15px; margin: 10px 0px 35px 0px; box-shadow: none; background-color: #f5f5f5;">
+
+                                @foreach (var item2 in pricingCompList.Where(x => x.PricingId == item.Id))
+                                {
+                                    @if (nameList != null && nameList.Length > 0)
+                                    {
+                                        foreach (var item3 in nameList)
+                                        {
+                                            if (item2.ComponentTitle == item3)
                                             {
-                                                if (item.Id != Model.Id)
-                                                {
-                                                    <div class="isotope-item print iso-height-1" style="position: absolute; left: 463.266px; top: 0px;">
-                                                        <div class="portfolio-list-item" style="border: 1px solid #979797;">
-                                                            <div class="pl-item-image-wrap">
-                                                                <a href="@Url.Action("fiyathesapla","anasayfa", new { Id = item.Id })" class="pl-item-image-inner">
-                                                                    <div class="pl-item-image bg-image lazy" style="background-image: url(https://uploads.ikifikir.net/images/@item.Image );"></div>
-                                                                    <div class="pl-item-icon"><span class="lnr lnr-link"></span></div>
-                                                                </a>
-                                                            </div>
-                                                            <div class="pl-item-info">
-                                                                <div class="pl-item-caption">
-                                                                    <h2 class="pl-item-title" style="font-size:15px;"><a href="@Url.Action("fiyathesapla","anasayfa", new { Id = item.Id })">@item.Title</a></h2>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                }
+                                                titleCurrent = item2.ComponentTitle;
                                             }
+                                        }
+                                    }
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            @*<div class="portfolio-list-inner isotope-wrap tt-wrap">
-                                    <div class="isotope col-3 gutter-3">
-                                        <div class="isotope-top-content">
-                                            <div class="isotope-filter">
-                                                <div class="isotope-filter-button">
-                                                    <span class="ifb-icon"><span class="lnr lnr-funnel"></span></span>
-                                                    <span class="ifb-icon-close"><i class="fas fa-times"></i></span>
-                                                    <span class="ifb-text">Filter</span>
-                                                </div>
-                                                <span class="margin-bottom-2-p"><strong>Bu hizmetlerimize de göz atmak ister misiniz?</strong></span>
-                                                <ul class="isotope-filter-links" style="margin-top:10px;">
-
-                                                    @foreach (var item in pricingList)
-                                                    {
-                                                        if (item.Id != Model.Id)
-                                                        {
-                                                            <li><button onclick="window.location.href='@Url.Action("fiyathesapla", "anasayfa", new { Id = item.Id })'" data-filter=".branding">+ @item.Title</button></li>
-                                                        }
-
-                                                    }
-
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="padding-right: 5px;">
+                                        <div class="price-box" style="text-align: left; padding: 15px 15px; box-shadow: 0 0 5px 2px rgb(0 0 0 / 14%);">
+                                            <div class="ps-attributes" style="float:left;">
+                                                <ul class="ps-attr list-inline">
+                                                    <li style="margin:0px; max-width:100%;">
+                                                        <div class="ps-attr-heading" style="font-size:14px;">@item2.ComponentTitle</div>
+                                                        <div class="ps-attr-cont">@Convert.ToInt32(item2.Price) ₺</div>
+                                                    </li>
                                                 </ul>
+                                            </div>
+                                            <div class="pr-box" style="float:right; padding:0px;">
+
+                                                @if (item2.ComponentTitle == titleCurrent)
+                                                {
+                                                    <button style="padding: 5px 15px; font-size: 20px; margin:0px;" value="@item2.Id" class="btn btn-price-box btn-primary active">-</button>
+                                                    <input type="hidden" value="@item2.Price" id="price_@item2.Id" />
+                                                    <input type="hidden" value="@item2.ComponentTitle" id="title_@item2.Id" />
+                                                }
+
+                                                else
+                                                {
+                                                    <button style="padding: 5px 15px; font-size: 20px; margin: 0px;" value="@item2.Id" class="btn btn-price-box btn-primary">+</button>
+                                                    <input type="hidden" value="@item2.Price" id="price_@item2.Id" />
+                                                    <input type="hidden" value="@item2.ComponentTitle" id="title_@item2.Id" />
+                                                }
                                             </div>
                                         </div>
                                     </div>
-                                </div>*@
-                        </div>
-                    </div>
-                    <div class="row" id="showB">
-                        <div class="col-sm-12">
-                            <div style="height:150px;"></div>
-                        </div>
+                                }
+                            </div>
+
+                        }
+
                     </div>
                 </div>
-                <div class="col-sm-3 fixed-total" style="padding-right: 5px;">
-                    <div class="pay-box">
+                <div class="col-sm-3 fixed-total">
 
                         @if (componentChoosed != null && componentChoosed.Count > 0)
                         {
@@ -177,7 +129,7 @@
                                 </div>
                             </div>
 
-                            <div class="price-box overflow-y-scroll hideCart" id="cartList">
+                            <div class="price-box hideCart" style="box-shadow: none; margin-top: 80px;">
                                 <div class="pr-box price-features" style="padding: 5px 10px 0px 10px;">
                                     <ul class="list-unstyled" id="uniqeListPrice">
                                         @foreach (var item in componentChoosed)
@@ -202,7 +154,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="price-box overflow-y-scroll hideCart" id="cartList">
+                            <div class="price-box hideCart" style="box-shadow: none; margin-top: 80px;">
                                 <div class="pr-box price-features" style="padding: 5px 10px 0px 10px;">
                                     <ul class="list-unstyled" id="uniqeListPrice">
                                         <li id="empty_list" style="font-size: 15px; line-height: 22px;">Boş Görünüyor!</li>
@@ -211,7 +163,7 @@
                             </div>
                         }
 
-                        <div class="price-box pr-box-featured" id="btn-width">
+                        <div class="price-box pr-box-featured" style="box-shadow: none;" id="btn-width">
                             <div class="pr-box price-box-price">
                                 @if (total > 0)
                                 {
@@ -226,7 +178,7 @@
 
                         @if (total > 0)
                         {
-                            <a href="@Url.Action("sepet","anasayfa")" style="background: none; border: 0; width: 100%; padding: 0;" class="btn-left" id="btn-width">
+                            <a href="@Url.Action("sepet","anasayfa")" style="background: none; border: 0; width: 100%; padding: 0; box-shadow:none;" class="btn-left" id="btn-width">
                                 <div class="price-box pr-box-featured" id="btnNext">
                                     <div class="pr-box price-box-price btn-padding" style="padding: 7px 20px 15px 35px;">
                                         <div class="price"><span>Sepete Git</span></div>
@@ -236,8 +188,8 @@
                         }
                         else
                         {
-                            <a href="@Url.Action("sepet","anasayfa")" style="background: none; border: 0; width: 100%; padding: 0;" class="btn-left" id="btn-width">
-                                <div class="price-box pr-box-featured" id="btnNext">
+                            <a href="@Url.Action("sepet","anasayfa")" style="background: none; border: 0; width: 100%; padding: 0; box-shadow:none;" class="btn-left" id="btn-width">
+                                <div class="price-box pr-box-featured" id="btnNext" style="box-shadow: none;">
                                     <div class="pr-box price-box-price btn-padding" style="padding: 7px 20px 15px 35px;">
                                         <div class="price"><span>Sepete Git</span></div>
                                     </div>
@@ -245,14 +197,26 @@
                             </a>
                         }
 
-                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
 
 <script src="~/assets/vendor/jquery/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#btn-nav-previous').click(function () {
+            $(".menu-inner-box").animate({ scrollLeft: "-=100px" });
+        });
+
+        $('#btn-nav-next').click(function () {
+            $(".menu-inner-box").animate({ scrollLeft: "+=100px" });
+        });
+    });
+</script>
 
 <script type="text/javascript">
 
@@ -282,27 +246,27 @@
             btnNext.style.backgroundColor = "#0040d8";
             btnNext.style.disabled = "false";
 
-            if (this.innerHTML == "Seç") {
+            if (this.innerHTML == "+") {
                 var id = $(this).val();
                 var priceThis = $("#price_" + id).val();
                 var titleThis = $("#title_" + id).val();
                 Id = $(this).val();
                 selected = true;
                 this.classList.add('active');
-                this.innerHTML = "Seçildi";
+                this.innerHTML = "-";
                 //totalPrice = Number.parseInt($("#price_" + id).val());
                 totalPrice = Number.parseInt(priceThis);
                 countPrice.innerHTML = increment(totalPrice);
                 insertToCalculate();
                 insertDynamicListData(titleThis, priceThis);
             }
-            else if (this.innerHTML == "Seçildi") {
+            else if (this.innerHTML == "-") {
                 var id = $(this).val();
                 IdRemove = $(this).val();
                 var priceThis = $("#price_" + id).val();
                 selected = false;
                 this.classList.remove('active');
-                this.innerHTML = "Seç";
+                this.innerHTML = "+";
                 totalPrice = Number.parseInt($("#price_" + id).val());
                 countPrice.innerHTML = deIncrement(totalPrice);
                 removeToCalculate();
