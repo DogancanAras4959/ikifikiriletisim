@@ -80,9 +80,20 @@
     #prices-section {
         padding: 0px !important;
     }
+
     .section-width {
         width: 100% !important;
         position: relative;
+        right: 20px;
+    }
+
+    #services_price {
+        transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        transition: 1s transform;
+        transform-style: preserve-3d;
+        backface-visibility: hidden;
+        padding: 30px 0 !important;
     }
 
     #member_form {
@@ -103,10 +114,12 @@
         opacity: 1;
         visibility: visible;
     }
+  
     .pl-item-title{
         font-size:20px !important;
         padding:20px;
     }
+ 
     .pli-alter-3 .pl-item-title {
         font-size: 20px !important; 
         text-align:center;
@@ -129,6 +142,7 @@
     .title-look{
         text-align:center;
     }
+   
     .showCart{
         display:block;
     }
@@ -145,6 +159,7 @@
     #btn_view{
         color:#fff;
     }
+  
     #cartList {
         height: 300px;
         margin-top: 0px !important;
@@ -161,6 +176,28 @@
         padding: 25px 0px 0px 0px !important;
         margin: 0px !important;
         background-color:#f2f2f2 !important;
+    }
+
+    .total-text {
+        position: absolute !important;
+        top: 10px;
+        left: 96px !important;
+        font-size: 20px !important;
+    }
+
+    .buttons-price {
+        position: absolute;
+        bottom: 10px !important;
+        left: 0;
+        right: 0 !important;
+    }
+
+    .p-box-cart {
+        padding-top: 8px !important;
+    } 
+
+    .title-box-message{
+        font-size:30px !important;
     }
 }
 
@@ -239,10 +276,6 @@
     padding: 3px 0;
     font-size: 20px;
     font-weight: 500;
-}
-
-.price-box .pr-box {
-    padding: 0px;
 }
 
 .price-box .price-box-price .price {
@@ -324,6 +357,7 @@
     transition: 1s transform;
     transform-style: preserve-3d;
     backface-visibility: hidden;
+    padding: 15px 0px;
 }
 
 #member_form {
@@ -379,4 +413,21 @@
 
 .seperate-price{
     display:none;
+}
+
+.total-text{
+    position:absolute;
+    bottom:15px;
+    left:20px;
+    font-size:30px;
+}
+
+.buttons-price{
+    position:absolute;
+    bottom:7px;
+    right:20px;
+}
+
+.p-box-cart{
+    padding-top:50px;
 }

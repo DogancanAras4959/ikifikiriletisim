@@ -134,7 +134,7 @@
                                                     <input type="hidden" value="@item2.ComponentTitle" id="title_@item2.Id" />
                                                 }
                                             </div>
-                                            <div class="pr-box" style="position:absolute; bottom:11px; right:11px">
+                                            <div class="pr-box" style="position:absolute; bottom:11px; right:11px; padding:0px;">
                                                 <img src="https://uploads.ikifikir.net/site/@item2.Image" style="width:110px; height:110px; object-fit:cover" />
                                             </div>
                                         </div>
@@ -161,7 +161,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="price-box cart-button-w" id="cartButton" style="padding:5px 0;">
-                                    <div class="pr-box price-features">
+                                    <div class="pr-box price-features" style="padding:0px;">
                                         <ul class="list-unstyled" style="margin:0;">
                                             <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Sepeti Görüntüle</a></li>
                                         </ul>
@@ -170,7 +170,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="price-box cart-button-p" id="cartButton" style="padding:5px 0;">
-                                    <div class="pr-box price-features">
+                                    <div class="pr-box price-features" style="padding:0px;">
                                         <ul class="list-unstyled" style="margin:0;">
                                             <li><a style="cursor:pointer; color:#fff;" href="@Url.Action("sepet","anasayfa")">Onayla</a></li>
                                         </ul>
@@ -184,7 +184,7 @@
                                 <div class="price-box-price hidePrice">
                                     @if (total > 0)
                                     {
-                                        <div class="price"><span style="color:#000;">Toplam:</span> <span id="count-price">@total</span> ₺</div>
+                                        <div class="price"><span style="color:#000;">Toplam:</span> <span id="count-price-pretotal">@total</span> ₺</div>
                                     }
                                     else
                                     {
@@ -213,7 +213,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="price-box cart-button-w" id="cartButton" style="padding:5px 0;">
-                                    <div class="pr-box price-features">
+                                    <div class="pr-box price-features" style="padding:0px;">
                                         <ul class="list-unstyled" style="margin:0;">
                                             <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Sepeti Görüntüle</a></li>
                                         </ul>
@@ -223,7 +223,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="price-box cart-button-p" id="cartButton" style="padding:5px 0;">
-                                    <div class="pr-box price-features">
+                                    <div class="pr-box price-features" style="padding:0px;">
                                         <ul class="list-unstyled" style="margin:0;">
                                             <li><a style="cursor: pointer; color: #fff;" href="@Url.Action("sepet","anasayfa")">Onayla</a></li>
                                         </ul>
@@ -248,7 +248,7 @@
                         <div class="price-box-price">
                             @if (total > 0)
                             {
-                                <div class="price"><span class="total-title" style="color:#000;">Toplam:</span> <span id="count-price">@total</span> ₺</div>
+                                <div class="price"><span class="total-title" style="color:#000;">Toplam:</span> <span id="count-price-pretotal">@total</span> ₺</div>
                             }
                             else
                             {
@@ -289,180 +289,11 @@
     </div>
 </section>
 
-<script src="~/assets/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="~/assets/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="~/assets/js/calculate.js"></script>
 
 <script type="text/javascript">
 
-    let buttons = document.querySelectorAll('button');
-    const countPrice = document.getElementById("count-price");
-    const btnNext = document.getElementById("btnNext");
-    let totalPrice = 0;
-    let sumTotal = 0;
-
-    var Id = 0;
-    var IdRemove = 0;
-
-    if (@total > 0) {
-        sumTotal = @total;
-        btnNext.style.cursor = "pointer";
-        btnNext.style.backgroundColor = "#0040d8";
-    }
-    else {
-        btnNext.style.cursor = "not-allowed";
-        btnNext.style.backgroundColor = "#84a8ff";
-        btnNext.style.disabled = "disabled";
-    }
-
-    buttons.forEach(button => {
-        button.addEventListener('click', function () {
-            btnNext.style.cursor = "pointer";
-            btnNext.style.backgroundColor = "#0040d8";
-            btnNext.style.disabled = "false";
-
-            if (this.innerHTML == "+") {
-                var id = $(this).val();
-                var priceThis = $("#price_" + id).val();
-                var titleThis = $("#title_" + id).val();
-                Id = $(this).val();
-                selected = true;
-                this.classList.add('active');
-                this.innerHTML = "-";
-                //totalPrice = Number.parseInt($("#price_" + id).val());
-                totalPrice = Number.parseInt(priceThis);
-                countPrice.innerHTML = increment(totalPrice);
-                insertToCalculate();
-                insertDynamicListData(titleThis, priceThis);
-            }
-            else if (this.innerHTML == "-") {
-                var id = $(this).val();
-                IdRemove = $(this).val();
-                var priceThis = $("#price_" + id).val();
-                selected = false;
-                this.classList.remove('active');
-                this.innerHTML = "+";
-                totalPrice = Number.parseInt($("#price_" + id).val());
-                countPrice.innerHTML = deIncrement(totalPrice);
-                removeToCalculate();
-                removeDynamicListData(priceThis);
-            }
-        });
-    });
-
-    function insertDynamicListData(titleThis, priceThis) {
-
-        var listEmpty = document.getElementById("empty_list");
-
-        if (listEmpty != null) {
-            listEmpty.remove();
-        }
-
-        var li = document.createElement('li');
-        li.innerHTML = dynamicelementdata(titleThis, priceThis);
-        document.getElementById("uniqeListPrice").appendChild(li);
-
-    }
-
-    function removeDynamicListData(priceThis) {
-        var priceConvert = Number.parseInt(priceThis);
-        var li = document.getElementById('list_' + priceConvert);
-        li.remove();
-    }
-
-    function dynamicelementdata(titleThis, priceThis) {
-        var priceConvert = Number.parseInt(priceThis);
-        return "<li style='font-size: 15px; line-height: 22px;' id='list_" + priceConvert + "'>" +
-            "<div>" + titleThis + " <br /> <strong>" + priceThis + " ₺</strong>" +
-               "<hr style='margin-top: 10px; margin-bottom: 10px;' /> </div></li>"
-    }
-
-    function increment(totalPriceValue) {
-        sumTotal += totalPriceValue;
-        return Number.parseInt(sumTotal);
-    }
-
-    function deIncrement(totalPriceDeValue) {
-        sumTotal -= totalPriceDeValue;
-        return Number.parseInt(sumTotal);
-    }
-
-</script>
-
-<script>
-
-    var insertToCalculate = function () {
-
-        try {
-
-            $.ajax({
-
-                type: "POST",
-                url: "/anasayfa/sepeteekle/",
-                data: { Id: Id },
-                success: function (response) {
-                    console.log("deneme");
-                },
-                error: function (response) {
-                    console.log("hata");
-                }
-
-            });
-        }
-
-        catch (err) {
-            alert(err);
-        }
-
-        finally {
-
-        }
-
-    }
-
-    var removeToCalculate = function () {
-
-        try {
-
-            $.ajax({
-
-                type: "POST",
-                url: "/anasayfa/sepetcikar/",
-                data: { IdRemove: IdRemove },
-                success: function (response) {
-                    console.log("deneme");
-                },
-                error: function (response) {
-                    console.log("hata");
-                }
-
-            });
-        }
-
-        catch (err) {
-            alert(err);
-        }
-
-        finally {
-
-        }
-
-    }
-
-    var viewCartList = function () {
-
-        var btn = document.getElementById("btn_view");
-        var cartList = document.getElementById("cartList");
-        var totalList = document.getElementsByClassName("total-title");
-
-        if (btn.innerHTML == "Sepeti Kapat") {
-            btn.innerHTML = "Sepeti Görüntüle";
-            cartList.classList.remove('showCart');
-            cartList.classList.add('hideCart');
-        }
-        else if (btn.innerHTML == "Sepeti Görüntüle") {
-            btn.innerHTML = "Sepeti Kapat";
-            cartList.classList.remove('hideCart');
-            cartList.classList.add('showCart');
-        }
-    };
+    mainCalculate(@total);
 
 </script>

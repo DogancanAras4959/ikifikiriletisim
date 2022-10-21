@@ -24,10 +24,6 @@
         font-weight: bold;
     }
 
-    .price-box .pr-box {
-        padding: 0px 0px 5px 0px;
-    }
-
     .price-box {
         position: relative;
         background-color: #fff;
@@ -50,6 +46,10 @@
         perspective: 1000px;
         -webkit-perspective: 1000px;
     }
+    tr td:last-child {
+        width: 1%;
+        white-space: nowrap;
+    }
 </style>
 
 <section id="prices-section">
@@ -59,7 +59,7 @@
                 <div class="col-sm-12">
                     <div class="tt-heading tt-heading-xlg text-center padding-on">
                         <div class="tt-heading-inner">
-                            <h1 class="tt-heading-title">Fiyat Onaylandı</h1>
+                            <h1 class="tt-heading-title title-box-message">Sepeti Onaylayın</h1>
                             <div class="tt-heading-subtitle">Sizinle iletişime geçebilmemiz için sepeti onaylayın ve formu doldurun</div>
                         </div> <!-- /.tt-heading-inner -->
                     </div>
@@ -68,33 +68,37 @@
             <div class="row section-width">
                 <div class="col-sm-12 baseprice">
                     <div class="price-box" id="services_price">
-                            <div class="pr-box price-features" style="padding:20px;">
-                                <table class="table table-condensed table-hover table-bordered" id="table_price" style="vertical-align:central; margin-bottom:0px;">
-                                    <thead>
-                                        <tr>
-                                            <th>Hizmet</th>
-                                            <th>Fiyat</th>
-                                            <th>İşlem</th>
+                        <div class="pr-box price-features" style="padding:20px;">
+                            <table class="table table-condensed table-hover table-bordered" id="table_price" style="vertical-align:central; margin-bottom:0px;">
+                                <thead>
+                                    <tr>
+                                        <th>Hizmet</th>
+                                        <th>Fiyat</th>
+                                        <th>İşlem</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in resultList)
+                                    {
+                                        <tr id="tableRow_@item.Id">
+                                            <td style="text-align:left; font-size:16px;">@item.Title</td>
+                                            <td><strong style="font-size:20px; text-align:left;">@Convert.ToInt32(item.Price) ₺</strong> <input type="hidden" value="@Convert.ToInt32(item.Price)" id="price_@item.Id" /></td>
+                                            <td><a onclick="removeFromTable(@item.Id);" style="cursor:pointer; position:relative; top:2px;"><span class="fa fa-window-close" style="font-size:25px;"></span></a></td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
+                                    }
+                                </tbody>
 
-                                        @foreach (var item in resultList)
-                                        {
-                                            <tr id="tableRow_@item.Id">
-                                                <td style="text-align:left; font-size:16px;">@item.Title</td>
-                                                <td><strong style="font-size:20px; text-align:left;">@Convert.ToInt32(item.Price) ₺</strong> <input type="hidden" value="@Convert.ToInt32(item.Price)" id="price_@item.Id" /></td>
-                                                <td><a onclick="removeFromTable(@item.Id);" style="cursor:pointer; position:relative; top:2px;"><span class="fa fa-window-close" style="font-size:25px;"></span></a></td>
-                                            </tr>
-                                        }
-                                    </tbody>
-
-                                </table>
+                            </table>
+                        </div>
+                        <div class="pr-box price-box-price p-box-cart">
+                            <div class="price total-text" style="position: absolute; font-size: 25px;"><span style="color:#141414;">Toplam:</span> <span id="count-price">@total</span> ₺</div>
+                            <div class="buttons-price">
+                                <a href="@Url.Action("fiyathesapla","anasayfa")" class="btn btn-primary">Teklifmatik'e Dön</a>
+                                <a onclick="sepetiOnayla();" class="btn btn-primary">Onayla</a>
                             </div>
-                            <div class="pr-box price-box-price" style="margin-top: 10px;">
-                                <div class="price" style="float: left; font-size: 30px; position: relative; left: 22px; bottom: 12px; "><span style="color:#141414; font-size:25px;">Toplam:</span> <span id="count-price">@total</span> ₺</div>
-                                <a onclick="sepetiOnayla();" style="margin: 0; float: right; position: relative; right: 19px; top: -9px;" class="btn btn-primary">Sepeti Onayla</a>
-                            </div>   
+                        
+                        </div>
                     </div>
                     <div class="price-box" id="member_form">
                         <form method="post" id="form_price" action="@Url.Action("fiyatformgonder","anasayfa")">
@@ -155,83 +159,10 @@
     </div>
 </section>
 
-<script src="~/assets/vendor/jquery/jquery.min.js"></script>
-
+<script type="text/javascript" src="~/assets/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="~/assets/js/calculate.js"></script>
 <script>
 
     var currentTotal = @total;
-
-    var sepetiOnayla = function () {
-        var memberForm = document.getElementById("member_form");
-        var services = document.getElementById("services_price");
-
-        services.style.transform = "rotateY(180deg)";
-        memberForm.style.transform = "rotateY(0deg)";
-
-    }
-
-    var teklifedon = function () {
-
-        var memberForm = document.getElementById("member_form");
-        var services = document.getElementById("services_price");
-
-        services.style.transform = "rotateY(0deg)";
-        memberForm.style.transform = "rotateY(180deg)";
-    }
-
-    $("#form_price").submit(function (event) {
-        event.preventDefault();
-        var form = $(this);
-        var actionUrl = form.attr('action');
-
-        $.ajax({
-
-            type: "POST",
-            url: actionUrl,
-            dataType: 'json',
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            data: form.serialize(),
-            success: function (data) {
-
-                var memberForm = document.getElementById("member_form");
-                var doneform = document.getElementById("done_form");
-                memberForm.style.transform = "rotateY(180deg)";
-                doneform.style.transform = "rotateY(0deg)";
-            },
-            error: function (data) {
-                alert("Hata");
-            }
-
-        });
-
-    })
-
-    var removeFromTable = function (id) {
-
-        var count = document.getElementById("count-price");
-        var price = document.getElementById("price_" + id).value;
-
-        console.log("Eski Fiyat: " + currentTotal);
-
-        var getRow = document.getElementById("tableRow_" + id);
-        getRow.remove();
-
-        count.innerHTML = decrementTotal(price);
-        console.log("Yazan Fiyat: " + count.innerHTML);
-
-        $.ajax({
-            type: "POST",
-            url: "/anasayfa/sepetcikar/",
-            data: { IdRemove: id },
-            success: function (data) {
-            }
-        });
-
-        function decrementTotal(price) {
-            currentTotal = currentTotal - price;
-            console.log("Yeni Fiyat: " + currentTotal);
-            return currentTotal;
-        }
-    }
 
 </script>
