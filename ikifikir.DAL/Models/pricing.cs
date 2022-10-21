@@ -17,6 +17,8 @@ namespace ikifikir.DAL.Models
         }
 
         public string Title { get; set; }
+        public string priceLongTitle { get; set; }
+
         public bool Status { get; set; }
         public decimal MonthPrice { get; set; }
         public string Image { get; set; }

@@ -21,7 +21,7 @@
                         <label>Bileşen Adı</label>
                         <input type="text" class="form-control" placeholder="Bileşen adı giriniz..." maxlength="325" asp-for="ComponentTitle" name="ComponentTitle" id="defaultconfig">
                     </div>
-                    <br />
+                    <br />             
                     <div class="form-group">
                         <label>Fiyat</label>
                         <input type="text" class="form-control" placeholder="Fiyat giriniz..." maxlength="25" asp-for="Price" name="Price" id="defaultconfig">
@@ -31,7 +31,7 @@
                         @Html.CheckBoxFor(x => x.ChooseType, new { @class = "form-check-input", id = "ChooseType" })
                         <label class="form-check-label" for="customSwitch1"> Çoklu Seçim Yap</label>
                     </div>
-                    <br />               
+                    <br />
                     <div class="form-group mt-3">
                         <button class="btn btn-primary" type="submit">Bileşen Oluştur</button>
                     </div>

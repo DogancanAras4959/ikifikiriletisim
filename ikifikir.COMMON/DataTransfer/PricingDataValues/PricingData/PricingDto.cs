@@ -13,6 +13,8 @@ namespace ikifikir.COMMON.DataTransfer.PricingDataValues.PricingData
         public bool Status { get; set; }
         public decimal MonthPrice { get; set; }
         public string Image { get; set; }
+        public string priceLongTitle { get; set; }
+
         public decimal YearPrice { get; set; }
 
     }

@@ -12,6 +12,8 @@ namespace ikifikirweb.ViewModels.PricingDataModelWeb.PricingWebModel
         public bool Status { get; set; }
         public string Image { get; set; }
         public decimal MonthPrice { get; set; }
+        public string priceLongTitle { get; set; }
+
         public decimal YearPrice { get; set; }
     }
 }

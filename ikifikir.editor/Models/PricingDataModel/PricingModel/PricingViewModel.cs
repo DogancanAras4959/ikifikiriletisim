@@ -17,6 +17,7 @@ namespace ikifikir.editor.Models.PricingDataModel.PricingModel
         public bool Status { get; set; }
         public decimal MonthPrice { get; set; }
         public string Image { get; set; }
+        public string priceLongTitle { get; set; }
         public decimal YearPrice { get; set; }
      
         List<pricingComponents> pricingComponentList { get; set; }

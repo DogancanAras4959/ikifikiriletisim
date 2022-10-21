@@ -21,9 +21,8 @@ namespace ikifikir.DAL.Models
         [ForeignKey("pricing")]
         public int PricingId { get; set; }
         public bool ChooseType { get; set; }
-
+        public string Image { get; set; }
         public decimal Price { get; set; }
-
         public pricing pricing { get; set; }
 
         public ICollection<pricingComponentTypes> pricingComponentTypeList { get; set; }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ikifikir.DAL;
 
 namespace ikifikir.DAL.Migrations
 {
     [DbContext(typeof(ikifikirdbcontext))]
-    partial class ikifikirdbcontextModelSnapshot : ModelSnapshot
+    [Migration("20221021010341_vCalculate")]
+    partial class vCalculate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,9 +175,6 @@ namespace ikifikir.DAL.Migrations
                     b.Property<decimal>("YearPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("priceLongTitle")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("pricing");
@@ -243,6 +242,9 @@ namespace ikifikir.DAL.Migrations
 
                     b.Property<DateTime>("UpdatedTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("priceTitle")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

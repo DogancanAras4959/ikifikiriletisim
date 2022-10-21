@@ -58,6 +58,7 @@ namespace ikifikir.ENGINES.Engines
                 Status = getPost.Status,
                 Image = getPost.Image,
                 Title = getPost.Title,
+                priceLongTitle = getPost.priceLongTitle,
                 YearPrice = getPost.YearPrice,
                 Id = getPost.Id
             };
@@ -81,6 +82,7 @@ namespace ikifikir.ENGINES.Engines
                 Price = getPost.Price,
                 PricingId = getPost.PricingId,
                 Id = getPost.Id,
+                Image = getPost.Image,
                 ChooseType = getPost.ChooseType,
                 
             };
@@ -97,6 +99,7 @@ namespace ikifikir.ENGINES.Engines
                 CreatedTime = x.CreatedTime,
                 UpdatedTime = x.UpdatedTime,
                 Price = x.Price,
+                Image = x.Image,
                 PricingId = x.PricingId,
                 ComponentTitle = x.ComponentTitle,
 
@@ -114,6 +117,7 @@ namespace ikifikir.ENGINES.Engines
                 CreatedTime = x.CreatedTime,
                 UpdatedTime = x.UpdatedTime,
                 Price = x.Price,
+                Image = x.Image,
                 PricingId = x.PricingId,
                 pricing = x.pricing,
                 ComponentTitle = x.ComponentTitle,
@@ -188,6 +192,7 @@ namespace ikifikir.ENGINES.Engines
                 Image = x.Image,
                 UpdatedTime = x.UpdatedTime,
                 Status = x.Status,
+                priceLongTitle = x.priceLongTitle,
                 MonthPrice = x.MonthPrice,
                 Title = x.Title,
                 YearPrice = x.YearPrice
@@ -208,10 +213,11 @@ namespace ikifikir.ENGINES.Engines
             {
                 IsActive = getPost.IsActive,
                 CreatedTime = getPost.CreatedTime,
+                Image = getPost.Image,
                 UpdatedTime = getPost.UpdatedTime,
                 ComponentTitle = getPost.ComponentTitle,
                 Price = getPost.Price,
-                PricingId = getPost.PricingId,
+                PricingId = getPost.PricingId,    
                 Id = getPost.Id,
                 ChooseType = getPost.ChooseType,
 
@@ -229,7 +235,8 @@ namespace ikifikir.ENGINES.Engines
                 Status = model.Status,
                 MonthPrice = model.MonthPrice,
                 Title = model.Title,
-                YearPrice = model.YearPrice
+                YearPrice = model.YearPrice,
+                priceLongTitle = model.priceLongTitle,
             }); 
 
             return getPost != null && getPost.Id != 0;
@@ -241,6 +248,7 @@ namespace ikifikir.ENGINES.Engines
             {
                 IsActive = true,
                 CreatedTime = DateTime.Now,
+                Image = model.Image,
                 UpdatedTime = DateTime.Now,
                 ComponentTitle = model.ComponentTitle,
                 Price = model.Price,
@@ -281,6 +289,7 @@ namespace ikifikir.ENGINES.Engines
                 YearPrice = model.YearPrice,
                 Status = model.Status,
                 MonthPrice = model.MonthPrice,
+                priceLongTitle = model.priceLongTitle,
                 Title = model.Title,
                 Id = model.Id,
             });
