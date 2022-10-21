@@ -1,4 +1,68 @@
 ﻿@media (max-width: 992px) {
+
+    .mobile-cart{
+        display:none;
+    }
+
+    .arrow-left-calc {
+        position: absolute;
+        top: 23px;
+        left: -25px;
+        display: block !important;
+    }
+
+    .arrow-right-calc {
+        position: absolute;
+        top: 23px;
+        right: -25px;
+        display: block !important;
+    }
+
+    nav#menu-container {
+        position: fixed;
+        width: 100%;
+        top: 60px !important;
+        overflow: hidden;
+        left: 0;
+        height: 70px !important;
+        background-color: #fff;
+        box-shadow: 0px 2px 9px 0px #7c7c7c;
+        z-index: 3;
+        white-space: nowrap;
+    }
+
+    .total-title{
+        display:none;
+    }
+
+    .title-price-box{
+        text-align:center !important;
+    }
+
+    .margin-top-calculate {
+        margin-top: 65px !important;
+    }
+
+    .menu-item {
+        height: 100%;
+        padding: 10px 0px;
+        border-bottom: 1px solid #000;
+        display: inline;
+        font-size: 15px;
+        margin: 0px 9px !important;
+        color: #000;
+        line-height: 57px;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .menu-inner-box {
+        width: 81% !important;
+        left: 35px !important;
+        box-sizing: border-box;
+        position: relative;
+    }
+
     #prices-section {
         padding: 0px !important;
     }
@@ -44,8 +108,19 @@
         display:none !important;
     }
 
-    #cartButton{
-        display:block !important;
+    #cartButton {
+        display: block !important;
+        background-color: #0040d8;
+    }
+
+    #btn_view{
+        color:#fff;
+    }
+    #cartList {
+        height: 300px;
+        margin-top: 0px !important;
+        bottom: 317px;
+        z-index: 1;
     }
 }
 
@@ -69,6 +144,10 @@
 .parent {
     display: inline-block;
     padding: 3.5em;
+}
+
+.margin-top-calculate {
+    margin-top: 100px;
 }
 
 .btn {
@@ -215,7 +294,7 @@
     backface-visibility: hidden;
     position: fixed;
     top: 0;
-    width: 650px;
+    width: 800px;
 }
 
 #done_form {
@@ -226,7 +305,7 @@
     backface-visibility: hidden;
     position: fixed;
     top: 0;
-    width: 650px;
+    width: 800px;
     background-color: #f1f6f5;
 }
 
@@ -234,4 +313,22 @@
     position: fixed;
     right: 59px;
     top: 79px;
+}
+
+.title-price-box {
+    font-size: 25px;
+    padding: 5px 0px 0px 0px;
+    font-weight: 700;
+    max-width:100%;
+    text-align:left;
+    margin-left:12px;
+    margin-bottom:10px;
+}
+
+.arrow-left-calc {
+  display:none;
+}
+
+.arrow-right-calc {
+   display:none;
 }
