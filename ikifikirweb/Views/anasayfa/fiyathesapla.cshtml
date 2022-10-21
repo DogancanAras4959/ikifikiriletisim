@@ -35,15 +35,27 @@
     html {
         scroll-behavior: smooth;
     }
+
     #header.header-show-hide-on-scroll.fly-up {
         top: 0px;
     }
+
     .wrap-section {
         max-width: 1282px;
         margin-left: auto;
         margin-right: auto;
         padding-left: 15px;
         padding-right: 15px;
+    }
+
+    .tt-heading-title {
+        max-width: 800px;
+        margin-left: 10px;
+        margin-top: 5px;
+        font-size: 30px !important;
+        text-align: left;
+        font-weight: 700 !important;
+        padding-bottom: 5px;
     }
 </style>
 
@@ -67,7 +79,13 @@
                         @foreach (var item in pricingList)
                         {
 
-                            <div class="price-box" id="section_@item.Id" style="padding: 15px; margin: 10px 0px 35px 0px; box-shadow: none; background-color: #f5f5f5;">
+                            <div class="price-box" id="section_@item.Id" style="padding: 20px 30px 30px 20px; margin: 10px 0px 35px 0px; box-shadow: none; background-color: #f5f5f5; flex-direction: column;">
+
+                                <div class="tt-heading tt-heading-lg">
+                                    <div class="tt-heading-inner">
+                                        <h2 class="tt-heading-title">@item.Title</h2>
+                                    </div>
+                                </div>
 
                                 @foreach (var item2 in pricingCompList.Where(x => x.PricingId == item.Id))
                                 {
@@ -119,83 +137,79 @@
                 </div>
                 <div class="col-sm-3 fixed-total">
 
-                        @if (componentChoosed != null && componentChoosed.Count > 0)
-                        {
-                            <div class="price-box" id="cartButton" style="padding:5px 0;">
-                                <div class="pr-box price-features">
-                                    <ul class="list-unstyled" style="margin:0;">
-                                        <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Listeyi Görmek İçin Tıklayınız</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="price-box hideCart" style="box-shadow: none; margin-top: 80px;">
-                                <div class="pr-box price-features" style="padding: 5px 10px 0px 10px;">
-                                    <ul class="list-unstyled" id="uniqeListPrice">
-                                        @foreach (var item in componentChoosed)
-                                        {
-                                            <li style="font-size: 15px; line-height: 22px;" id="list_@Convert.ToInt32(item.Price)">
-                                                <div>
-                                                    @item.Title <br /> <strong>@item.Price ₺</strong>
-                                                    <hr style="margin-top: 10px; margin-bottom: 10px;" />
-                                                </div>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="price-box" id="cartButton" style="padding:5px 0;">
-                                <div class="pr-box price-features">
-                                    <ul class="list-unstyled" style="margin:0;">
-                                        <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Listeyi Görmek İçin Tıklayınız</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="price-box hideCart" style="box-shadow: none; margin-top: 80px;">
-                                <div class="pr-box price-features" style="padding: 5px 10px 0px 10px;">
-                                    <ul class="list-unstyled" id="uniqeListPrice">
-                                        <li id="empty_list" style="font-size: 15px; line-height: 22px;">Boş Görünüyor!</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        }
-
-                        <div class="price-box pr-box-featured" style="box-shadow: none;" id="btn-width">
-                            <div class="pr-box price-box-price">
-                                @if (total > 0)
-                                {
-                                    <div class="price"><span id="count-price">@total</span> ₺</div>
-                                }
-                                else
-                                {
-                                    <div class="price"><span id="count-price">0</span> ₺</div>
-                                }
+                    @if (componentChoosed != null && componentChoosed.Count > 0)
+                    {
+                        <div class="price-box" id="cartButton" style="padding:5px 0;">
+                            <div class="pr-box price-features">
+                                <ul class="list-unstyled" style="margin:0;">
+                                    <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Listeyi Görmek İçin Tıklayınız</a></li>
+                                </ul>
                             </div>
                         </div>
 
-                        @if (total > 0)
-                        {
-                            <a href="@Url.Action("sepet","anasayfa")" style="background: none; border: 0; width: 100%; padding: 0; box-shadow:none;" class="btn-left" id="btn-width">
-                                <div class="price-box pr-box-featured" id="btnNext">
-                                    <div class="pr-box price-box-price btn-padding" style="padding: 7px 20px 15px 35px;">
-                                        <div class="price"><span>Sepete Git</span></div>
-                                    </div>
-                                </div>
-                            </a>
-                        }
-                        else
-                        {
-                            <a href="@Url.Action("sepet","anasayfa")" style="background: none; border: 0; width: 100%; padding: 0; box-shadow:none;" class="btn-left" id="btn-width">
-                                <div class="price-box pr-box-featured" id="btnNext" style="box-shadow: none;">
-                                    <div class="pr-box price-box-price btn-padding" style="padding: 7px 20px 15px 35px;">
-                                        <div class="price"><span>Sepete Git</span></div>
-                                    </div>
-                                </div>
-                            </a>
-                        }
+                        <div class="price-box overflow-y-scroll hideCart" style="max-height:300px; box-shadow: none; margin-top: 100px;">
+                            <div class="pr-box price-features" style="padding: 5px 10px 0px 10px;">
+                                <ul class="list-unstyled" id="uniqeListPrice">
+                                    @foreach (var item in componentChoosed)
+                                    {
+                                        <li style="font-size: 15px; line-height: 22px;" id="list_@Convert.ToInt32(item.Price)">
+                                            <div>
+                                                @item.Title <br /> <strong>@item.Price ₺</strong>
+                                                <hr style="margin-top: 10px; margin-bottom: 10px;" />
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="price-box" id="cartButton" style="padding:5px 0;">
+                            <div class="pr-box price-features">
+                                <ul class="list-unstyled" style="margin:0;">
+                                    <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Listeyi Görmek İçin Tıklayınız</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="price-box overflow-y-scroll hideCart" style="max-height: 300px; box-shadow: none; margin-top: 100px;">
+                            <div class="pr-box price-features" style="padding: 5px 10px 0px 10px;">
+                                <ul class="list-unstyled" id="uniqeListPrice">
+                                    <li id="empty_list" style="font-size: 15px; line-height: 22px;">Boş Görünüyor!</li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="price-box" style="box-shadow: none;" id="btn-width">
+                        <div class="price-box-price">
+                            @if (total > 0)
+                            {
+                                <div class="price"><span style="color:#000;">Toplam:</span> <span id="count-price">@total</span> ₺</div>
+                            }
+                            else
+                            {
+                                <div class="price"><span style="color:#000;">Toplam:</span> <span id="count-price">0</span> ₺</div>
+                            }
+                        </div>
+                    </div>
+                    @if (total > 0)
+                    {
+                        <a href="@Url.Action("sepet","anasayfa")" style="background: none; border: 0; width: 100%; padding: 0; box-shadow:none;" class="btn-left" id="btn-width">
+                            <div class="price-box pr-box-featured" style="box-shadow: none;" id="btnNext">
+                                <span>Sepete Git</span>
+                            </div>
+                        </a>
+
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("sepet","anasayfa")" style="background: none; border: 0; width: 100%; padding: 0; box-shadow:none;" class="btn-left" id="btn-width">
+                            <div class="price-box pr-box-featured" style="box-shadow: none;" id="btnNext">
+                                <span>Sepete Git</span>
+                            </div>
+                        </a>
+                    }
 
                 </div>
             </div>
