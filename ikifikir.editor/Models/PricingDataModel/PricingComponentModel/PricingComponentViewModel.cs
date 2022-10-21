@@ -18,7 +18,7 @@ namespace ikifikir.editor.Models.PricingDataModel.PricingComponentModel
         public decimal Price { get; set; }
         public bool ChooseType { get; set; }
         public string Image { get; set; }
-
+        public string Description { get; set; }
         public pricing pricing { get; set; }
         public List<pricingComponentTypes> pricingComponentTypesList { get; set; }
     }

@@ -79,6 +79,7 @@ namespace ikifikir.ENGINES.Engines
                 CreatedTime = getPost.CreatedTime,
                 UpdatedTime = getPost.UpdatedTime,
                 ComponentTitle = getPost.ComponentTitle,
+                Description = getPost.Description,
                 Price = getPost.Price,
                 PricingId = getPost.PricingId,
                 Id = getPost.Id,
@@ -100,6 +101,7 @@ namespace ikifikir.ENGINES.Engines
                 UpdatedTime = x.UpdatedTime,
                 Price = x.Price,
                 Image = x.Image,
+                Description = x.Description,
                 PricingId = x.PricingId,
                 ComponentTitle = x.ComponentTitle,
 
@@ -115,6 +117,7 @@ namespace ikifikir.ENGINES.Engines
                 Id = x.Id,
                 IsActive = x.IsActive,
                 CreatedTime = x.CreatedTime,
+                Description = x.Description,
                 UpdatedTime = x.UpdatedTime,
                 Price = x.Price,
                 Image = x.Image,
@@ -137,7 +140,7 @@ namespace ikifikir.ENGINES.Engines
             return new PricingComponentTypeDto
             {
                 IsActive = getPost.IsActive,
-                CreatedTime = getPost.CreatedTime,
+                CreatedTime = getPost.CreatedTime,     
                 UpdatedTime = getPost.UpdatedTime,
                 Price = getPost.Price,
                 Type = getPost.Type,
@@ -190,7 +193,7 @@ namespace ikifikir.ENGINES.Engines
                 IsActive = x.IsActive,
                 CreatedTime = x.CreatedTime,
                 Image = x.Image,
-                UpdatedTime = x.UpdatedTime,
+                UpdatedTime = x.UpdatedTime,        
                 Status = x.Status,
                 priceLongTitle = x.priceLongTitle,
                 MonthPrice = x.MonthPrice,
@@ -217,6 +220,7 @@ namespace ikifikir.ENGINES.Engines
                 UpdatedTime = getPost.UpdatedTime,
                 ComponentTitle = getPost.ComponentTitle,
                 Price = getPost.Price,
+                Description = getPost.Description,
                 PricingId = getPost.PricingId,    
                 Id = getPost.Id,
                 ChooseType = getPost.ChooseType,
@@ -250,6 +254,7 @@ namespace ikifikir.ENGINES.Engines
                 CreatedTime = DateTime.Now,
                 Image = model.Image,
                 UpdatedTime = DateTime.Now,
+                Description = model.Description,
                 ComponentTitle = model.ComponentTitle,
                 Price = model.Price,
                 PricingId = model.PricingId,
@@ -283,7 +288,7 @@ namespace ikifikir.ENGINES.Engines
             pricing getPost = await _unitOfWork.GetRepository<pricing>().UpdateAsync(new pricing
             {
                 IsActive = postGet.IsActive,
-                CreatedTime = postGet.CreatedTime,
+                CreatedTime = postGet.CreatedTime,           
                 UpdatedTime = DateTime.Now,
                 Image = model.Image,
                 YearPrice = model.YearPrice,
@@ -304,6 +309,7 @@ namespace ikifikir.ENGINES.Engines
             pricingComponents getPost = await _unitOfWork.GetRepository<pricingComponents>().UpdateAsync(new pricingComponents
             {
                 IsActive = postGet.IsActive,
+                Description = postGet.Description,
                 CreatedTime = postGet.CreatedTime,
                 UpdatedTime = DateTime.Now,
                 Price = model.Price,

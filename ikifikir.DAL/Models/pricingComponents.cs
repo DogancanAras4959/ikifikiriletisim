@@ -22,6 +22,7 @@ namespace ikifikir.DAL.Models
         public int PricingId { get; set; }
         public bool ChooseType { get; set; }
         public string Image { get; set; }
+        public string Description { get; set; }
         public decimal Price { get; set; }
         public pricing pricing { get; set; }
 
