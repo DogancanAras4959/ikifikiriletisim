@@ -81,72 +81,75 @@
                         @foreach (var item in pricingList)
                         {
 
-                        <div class="price-box price-box-mobile" 
-                             style="padding: 20px 0px 0px 0px; margin: 10px 0px; box-shadow: none; flex-direction: column;">
+                            <div class="price-box price-box-mobile"
+                                 style="padding: 20px 0px 0px 0px; margin: 10px 0px; box-shadow: none; flex-direction: column;">
 
-                            <!-- Hizmet Adı -->
+                                <!-- Hizmet Adı -->
 
-                            <div class="tt-heading tt-heading-lg">
-                                <div class="tt-heading-inner">
-                                    <h2 class="title-price-box title-mobile-size" id="section_@item.Id">@item.priceLongTitle</h2>
-                                </div>
-                            </div>
-
-                            <!-- Hizmet Adı -->
-
-                            @foreach (var item2 in pricingCompList.Where(x => x.PricingId == item.Id))
-                            {
-                                @if (nameList != null && nameList.Length > 0)
-                                {
-                                    foreach (var item3 in nameList)
-                                    {
-                                        if (item2.ComponentTitle == item3)
-                                        {
-                                            titleCurrent = item2.ComponentTitle;
-                                        }
-                                    }
-                                }
-
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="padding-right: 5px;">
-                                    <div class="price-box" style="height: 135px; text-align: left; padding: 15px 15px; box-shadow: 0 0 5px 2px rgb(0 0 0 / 14%);">
-                                        <div class="ps-attributes" style="position: absolute; top: 15px; left: 15px; max-width: calc(100% - 120px);">
-                                            <ul class="ps-attr list-inline">
-                                                <li style="margin:0px; max-width:100%;">
-                                                    <div class="ps-attr-heading" style="font-size:13px;">@item2.ComponentTitle</div>
-                                                    <p style="font-size:14px;" class="ps-attr-cont">@item2.Description</p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="ps-attr-cont margin-top-10" style="position: absolute; bottom: 5px; left: 15px; }">@Convert.ToInt32(item2.Price) ₺</div>
-                                        <div class="pr-box" style="float: right; padding: 0px; position: absolute; right: 15px; top: 15px;">
-
-                                            @if (item2.ComponentTitle == titleCurrent)
-                                            {
-                                                <button style="padding: 5px 15px; font-size: 20px; margin:0px;" value="@item2.Id" class="btn btn-price-box btn-primary active">-</button>
-                                                <input type="hidden" value="@item2.Price" id="price_@item2.Id" />
-                                                <input type="hidden" value="@item2.ComponentTitle" id="title_@item2.Id" />
-                                            }
-
-                                            else
-                                            {
-                                                <button style="padding: 5px 15px; font-size: 20px; margin: 0px;" value="@item2.Id" class="btn btn-price-box btn-primary">+</button>
-                                                <input type="hidden" value="@item2.Price" id="price_@item2.Id" />
-                                                <input type="hidden" value="@item2.ComponentTitle" id="title_@item2.Id" />
-                                            }
-                                        </div>
+                                <div class="tt-heading tt-heading-lg">
+                                    <div class="tt-heading-inner">
+                                        <h2 class="title-price-box title-mobile-size" id="section_@item.Id">@item.priceLongTitle</h2>
                                     </div>
                                 </div>
-                            }
 
-                        </div>
+                                <!-- Hizmet Adı -->
+
+                                @foreach (var item2 in pricingCompList.Where(x => x.PricingId == item.Id))
+                                {
+                                    @if (nameList != null && nameList.Length > 0)
+                                    {
+                                        foreach (var item3 in nameList)
+                                        {
+                                            if (item2.ComponentTitle == item3)
+                                            {
+                                                titleCurrent = item2.ComponentTitle;
+                                            }
+                                        }
+                                    }
+
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" style="padding-right: 5px;">
+                                        <div class="price-box" style="height: 135px; text-align: left; padding: 15px 15px; box-shadow: 0 0 5px 2px rgb(0 0 0 / 14%);">
+                                            <div class="ps-attributes" style="position: absolute; top: 15px; left: 15px; max-width: calc(100% - 200px);">
+                                                <ul class="ps-attr list-inline">
+                                                    <li style="margin:0px; max-width:100%;">
+                                                        <div class="ps-attr-heading" style="font-size:13px;">@item2.ComponentTitle</div>
+                                                        <p style="font-size:14px;" class="ps-attr-cont">@item2.Description</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="ps-attr-cont margin-top-10" style="position: absolute; bottom: 5px; left: 15px; }">@Convert.ToInt32(item2.Price) ₺</div>
+                                            <div class="pr-box" style="padding: 0px; position: absolute; right: 11px; bottom: 11px;">
+
+                                                @if (item2.ComponentTitle == titleCurrent)
+                                                {
+                                                    <button style="padding: 5px 15px; font-size: 20px; margin:0px;" value="@item2.Id" class="btn btn-price-box btn-primary active">-</button>
+                                                    <input type="hidden" value="@item2.Price" id="price_@item2.Id" />
+                                                    <input type="hidden" value="@item2.ComponentTitle" id="title_@item2.Id" />
+                                                }
+
+                                                else
+                                                {
+                                                    <button style="padding: 5px 15px; font-size: 20px; margin: 0px;" value="@item2.Id" class="btn btn-price-box btn-primary">+</button>
+                                                    <input type="hidden" value="@item2.Price" id="price_@item2.Id" />
+                                                    <input type="hidden" value="@item2.ComponentTitle" id="title_@item2.Id" />
+                                                }
+                                            </div>
+                                            <div class="pr-box" style="position:absolute; bottom:11px; right:11px">
+                                                <img src="https://uploads.ikifikir.net/site/@item2.Image" style="width:110px; height:110px; object-fit:cover" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
 
                         }
 
                     </div>
+                    <span class="seperate-price"></span>
                 </div>
 
                 <!-- Hizmetler -->
-
                 <!-- Sepet -->
 
                 <div class="col-sm-3 fixed-total">
@@ -155,14 +158,27 @@
 
                     @if (componentChoosed != null && componentChoosed.Count > 0)
                     {
-                        <div class="price-box" id="cartButton" style="padding:5px 0;">
-                            <div class="pr-box price-features">
-                                <ul class="list-unstyled" style="margin:0;">
-                                    <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Sepeti Görüntüle</a></li>
-                                </ul>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="price-box cart-button-w" id="cartButton" style="padding:5px 0;">
+                                    <div class="pr-box price-features">
+                                        <ul class="list-unstyled" style="margin:0;">
+                                            <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Sepeti Görüntüle</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="price-box cart-button-p" id="cartButton" style="padding:5px 0;">
+                                    <div class="pr-box price-features">
+                                        <ul class="list-unstyled" style="margin:0;">
+                                            <li><a style="cursor:pointer; color:#fff;" href="@Url.Action("sepet","anasayfa")">Onayla</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
+                       
                         <div class="price-box overflow-y-scroll hideCart" id="cartList" style="max-height:300px; box-shadow: none; margin-top: 100px;">
                             <div class="pr-box price-features" style="padding: 5px 10px 0px 10px;">
                                 <div class="price-box-price hidePrice">
@@ -194,18 +210,32 @@
 
                     else
                     {
-                        <div class="price-box" id="cartButton" style="padding:5px 0;">
-                            <div class="pr-box price-features">
-                                <ul class="list-unstyled" style="margin:0;">
-                                    <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Sepeti Görüntüle</a></li>
-                                </ul>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="price-box cart-button-w" id="cartButton" style="padding:5px 0;">
+                                    <div class="pr-box price-features">
+                                        <ul class="list-unstyled" style="margin:0;">
+                                            <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Sepeti Görüntüle</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="price-box cart-button-p" id="cartButton" style="padding:5px 0;">
+                                    <div class="pr-box price-features">
+                                        <ul class="list-unstyled" style="margin:0;">
+                                            <li><a style="cursor: pointer; color: #fff;" href="@Url.Action("sepet","anasayfa")">Onayla</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="price-box overflow-y-scroll hideCart" id="cartList" style="max-height: 300px; box-shadow: none; margin-top: 100px;">
                             <div class="pr-box price-features" style="padding: 5px 10px 0px 10px;">
                                 <ul class="list-unstyled" id="uniqeListPrice">
-                                    <li id="empty_list" style="font-size: 15px; line-height: 22px;">Boş Görünüyor!</li>
+                                    <li id="empty_list" style="font-size: 15px; line-height: 22px;">Hizmet seçmeye başlayın!</li>
                                 </ul>
                             </div>
                         </div>

@@ -4,6 +4,12 @@
         display:none;
     }
 
+    .seperate-price {
+        display: block !important;
+        height: 90px !important;
+        width: 100%;
+    }
+
     .hidePrice{
         display:block !important;
     }
@@ -48,7 +54,7 @@
     }
 
     .margin-top-calculate {
-        margin-top: 35px !important;
+        margin-top: 60px !important;
     }
 
     .menu-item {
@@ -105,6 +111,21 @@
         font-size: 20px !important; 
         text-align:center;
     }
+
+    .cart-button-w {
+        width: 210px;
+        position: absolute !important;
+        left: -6px;
+        bottom: -65px;
+    }
+
+    .cart-button-p {
+        position: absolute !important;
+        right: -8px;
+        bottom: -64px;
+        width: 120px;
+    }
+
     .title-look{
         text-align:center;
     }
@@ -127,7 +148,7 @@
     #cartList {
         height: 300px;
         margin-top: 0px !important;
-        bottom: 317px;
+        bottom: 257px;
         z-index: 1;
     }
 
@@ -353,5 +374,9 @@
 }
 
 .hidePrice{
+    display:none;
+}
+
+.seperate-price{
     display:none;
 }
