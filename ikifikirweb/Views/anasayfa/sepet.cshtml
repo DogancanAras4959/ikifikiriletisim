@@ -14,7 +14,7 @@
 
 <style>
     .tt-heading.padding-on {
-        padding: 2% 0% 3% 0%;
+        padding: 2% 0% 2% 0%;
     }
 
     .price-box .price-box-price .price {
@@ -61,6 +61,7 @@
                         <div class="tt-heading-inner">
                             <h1 class="tt-heading-title title-box-message">Sepeti Onaylayın</h1>
                             <div class="tt-heading-subtitle">Sizinle iletişime geçebilmemiz için sepeti onaylayın ve formu doldurun</div>
+                            <div class="tt-heading-subtitle" style="font-size:16px;"><em>(Hizmet seçimine devam etmek içine "Teklifmatik'e Dön" linkiyle geri dönün)</em></div>
                         </div> <!-- /.tt-heading-inner -->
                     </div>
                 </div>
@@ -84,7 +85,7 @@
                                         <tr id="tableRow_@item.Id">
                                             <td style="text-align:left; font-size:16px;">@item.Title</td>
                                             <td><strong style="font-size:20px; text-align:left;">@Convert.ToInt32(item.Price) ₺</strong> <input type="hidden" value="@Convert.ToInt32(item.Price)" id="price_@item.Id" /></td>
-                                            <td><a onclick="removeFromTable(@item.Id);" style="cursor:pointer; position:relative; top:2px;"><span class="fa fa-window-close" style="font-size:25px;"></span></a></td>
+                                            <td><a onclick="removeFromTable(@item.Id);" style="cursor:pointer; position:relative; top:2px;"><span class="fa fa-trash-alt" style="font-size:25px;"></span></a></td>
                                         </tr>
                                     }
                                 </tbody>
@@ -161,8 +162,20 @@
 
 <script type="text/javascript" src="~/assets/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="~/assets/js/calculate.js"></script>
-<script>
+<script type="text/javascript">
 
     var currentTotal = @total;
+
+    $(function () {
+        var rx = /INPUT|SELECT|TEXTAREA/i;
+
+        $(document).bind("keydown keypress", function (e) {
+            if (e.which == 8) { // 8 == backspace
+                if (!rx.test(e.target.tagName) || e.target.disabled || e.target.readOnly) {
+                    e.preventDefault();
+                }
+            }
+        });
+    });
 
 </script>

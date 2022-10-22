@@ -2,17 +2,18 @@
 
     let buttons = document.querySelectorAll('button');
     let countPrice = document.getElementById("count-price");
-    let countPricePre = document.getElementById("count-price-pretotal");
     let btnNext = document.getElementById("btnNext");
     let totalPrice = 0;
     let sumTotal = 0;
     let Id = 0;
     let IdRemove = 0;
+    var trash = '<i class="fa fa-trash-alt"></i>';
 
     if (total > 0) {
+        sumTotal = total;
         btnNext.style.cursor = "pointer";
         btnNext.style.backgroundColor = "#0040d8";
-        countPricePre.innerHTML = total;
+        countPrice.innerHTML = total;
     }
 
     else {
@@ -36,13 +37,13 @@
                 Id = $(this).val();
                 selected = true;
                 this.classList.add('active');
-                this.innerHTML = "-";
+                this.innerHTML = trash;
                 totalPrice = Number.parseInt(priceThis);
 
                 if (total > 0) {
                     total = increment(totalPrice);
                     //Bu satırda toplamı yazıyor 
-                    countPricePre.innerHTML = total;
+                    countPrice.innerHTML = total;
                 }
 
                 else {
@@ -50,10 +51,10 @@
                 }
 
                 insertToCalculate();
-                insertDynamicListData(titleThis, priceThis);
+                insertDynamicListData(titleThis, priceThis, id);
 
             }
-            else if (this.innerHTML == "-") {
+            else if (this.innerHTML == trash) {
 
                 var id = $(this).val();
                 IdRemove = $(this).val();
@@ -66,7 +67,7 @@
                 if (total > 0) {
                     total = deIncrement(totalPrice);
                      //Bu satırda toplamı yazıyor
-                    countPricePre.innerHTML = total;
+                    countPrice.innerHTML = total;
                 }
                 else {
                     countPrice.innerHTML = deIncrement(totalPrice);
@@ -133,7 +134,7 @@
 
     }
 
-    function insertDynamicListData(titleThis, priceThis) {
+    function insertDynamicListData(titleThis, priceThis, id) {
 
         var listEmpty = document.getElementById("empty_list");
 
@@ -142,21 +143,22 @@
         }
 
         var li = document.createElement('li');
-        li.innerHTML = dynamicelementdata(titleThis, priceThis);
+        li.innerHTML = dynamicelementdata(titleThis, priceThis, id);
         document.getElementById("uniqeListPrice").appendChild(li);
 
     }
 
     function removeDynamicListData(priceThis) {
         var priceConvert = Number.parseInt(priceThis);
-        var li = document.getElementById('list_' + priceConvert);
+        var li = document.getElementById('listBox_' + priceConvert);
         li.remove();
     }
 
-    function dynamicelementdata(titleThis, priceThis) {
+    function dynamicelementdata(titleThis, priceThis, id) {
         var priceConvert = Number.parseInt(priceThis);
-        return "<li style='font-size: 15px; line-height: 22px;' id='list_" + priceConvert + "'>" +
-            "<div>" + titleThis + " <br /> <strong>" + priceThis + " ₺</strong>" +
+        return "<li style='font-size: 15px; line-height: 22px; text-align:left; position:relative;' id='listBox_" + priceConvert + "'>" +
+            "<div style='max-width: calc(100% - 52px);'>" + titleThis + " <br /> <strong>" + priceThis + " ₺</strong>" +
+            "<a href='/anasayfa/sepettencikar?Id=" + id +"' style='padding: 7px 13px; margin: 0px; position: absolute; right: 3px; top: 3px; color: #ec1059;'><i class='fa fa-trash-alt' style='font-size:18px;'></i><a>" +
             "<hr style='margin-top: 10px; margin-bottom: 10px;' /> </div></li>"
     }
 
@@ -178,13 +180,13 @@ var viewCartList = function () {
     var cartList = document.getElementById("cartList");
     var totalList = document.getElementsByClassName("total-title");
 
-    if (btn.innerHTML == "Sepeti Kapat") {
-        btn.innerHTML = "Sepeti Görüntüle";
+    if (btn.innerHTML == "Kapat") {
+        btn.innerHTML = "Sepet";
         cartList.classList.remove('showCart');
         cartList.classList.add('hideCart');
     }
-    else if (btn.innerHTML == "Sepeti Görüntüle") {
-        btn.innerHTML = "Sepeti Kapat";
+    else if (btn.innerHTML == "Sepet") {
+        btn.innerHTML = "Kapat";
         cartList.classList.remove('hideCart');
         cartList.classList.add('showCart');
     }

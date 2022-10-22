@@ -53,8 +53,13 @@
         text-align:center !important;
     }
 
+    .menu {
+        height: 65px !important;
+        margin-top: 0px !important;
+    }
+
     .margin-top-calculate {
-        margin-top: 60px !important;
+        margin-top: 55px !important;
     }
 
     .menu-item {
@@ -126,9 +131,9 @@
     }
 
     .cart-button-w {
-        width: 210px;
+        width: 100px;
         position: absolute !important;
-        left: -6px;
+        right: 119px;
         bottom: -65px;
     }
 
@@ -159,12 +164,14 @@
     #btn_view{
         color:#fff;
     }
-  
+
     #cartList {
         height: 300px;
         margin-top: 0px !important;
-        bottom: 257px;
-        z-index: 1;
+        bottom: 279px;
+        z-index: 0;
+        width: 379px;
+        left: -42px;
     }
 
     .title-mobile-size{
@@ -208,14 +215,14 @@
 
 .fixed-total {
     position: fixed;
-    top: 0px;
-    right: 0px;
+    top: 150px;
+    right: 0;
     z-index: 4;
     display: inline-block;
     padding: 0px 40px;
     box-shadow: -2px 0px 9px 0px #b3b3b3;
-    height: 100%;
     background-color: #fff;
+    height: 100%;
 }
 
 .parent {
@@ -224,7 +231,7 @@
 }
 
 .margin-top-calculate {
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 .btn {

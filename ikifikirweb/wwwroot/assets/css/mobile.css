@@ -1,5 +1,9 @@
 ﻿@media (max-width: 768px) {
 
+    .mobile-price-font{
+        font-size:21px !important;
+    }
+
     .mobile-badge {
         position: relative !important;
         left: 34px !important;
@@ -60,9 +64,12 @@
         box-shadow: none !important;
     }
 
-    #btn-width{
-        width:48% !important;
-        float:left;
+    #btn-width {
+        width: 122px;
+        position: absolute;
+        left: 9px;
+        bottom: -3px;
+        background: none;
     }
 
     .btn-padding {

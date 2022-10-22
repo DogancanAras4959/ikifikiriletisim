@@ -582,6 +582,55 @@ namespace ikifikirweb.Controllers
             }
         }
 
+        public IActionResult sepettencikar(int Id)
+        {
+            try
+            {
+                List<ComponentResult> result = new List<ComponentResult>();
+
+                var cookieIsHave = Request.Cookies["ComponentList"];
+
+                #region Cookie
+
+                if (cookieIsHave != null)
+                {
+                    List<ComponentResult> cookieResult = JsonSerializer.Deserialize<List<ComponentResult>>(cookieIsHave);
+                    result.AddRange(cookieResult);
+
+                    var componentRemove = _pricingService.getPricingComponentById(Id);
+
+                    if (componentRemove != null)
+                    {
+                        for (int i = 0; i < result.Count; i++)
+                        {
+                            if (result[i].Title == componentRemove.ComponentTitle)
+                            {
+                                result.RemoveAt(i);
+                            }
+                        }
+                    }
+
+                    string componentList = JsonSerializer.Serialize(result);
+                    Response.Cookies.Append("ComponentList", componentList);
+                }
+                else
+                {
+                    CookieOptions cookie = new CookieOptions();
+                    cookie.Expires = DateTime.Now.AddYears(1);
+                    string componentList = JsonSerializer.Serialize(result);
+                    Response.Cookies.Append("ComponentList", componentList, cookie);
+                }
+
+                #endregion
+
+                return RedirectToAction("fiyathesapla","anasayfa");
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("fiyathesapla", "anasayfa");
+            }
+        }
+
         [HttpGet]
         public IActionResult sepet()
         {

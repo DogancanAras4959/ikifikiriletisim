@@ -64,7 +64,7 @@
                         <div class="menu-inner-box">
                             <i class="fa fa-arrow-alt-circle-left arrow-left-calc"></i>
                             <i class="fa fa-arrow-alt-circle-right arrow-right-calc"></i>
-                            <div class="menu overflow-y-scroll" style="height:65px;" id="subMenu-top">
+                            <div class="menu overflow-y-scroll" style="height: 65px; margin-top: 5px;" id="subMenu-top">
                                 @foreach (var item in pricingList)
                                 {
                                     <a class="menu-item" href="#section_@item.Id">@item.Title</a>
@@ -81,14 +81,14 @@
                         @foreach (var item in pricingList)
                         {
 
-                            <div class="price-box price-box-mobile"
+                            <div class="price-box price-box-mobile" id="section_@item.Id"
                                  style="padding: 20px 0px 0px 0px; margin: 10px 0px; box-shadow: none; flex-direction: column;">
 
                                 <!-- Hizmet Adı -->
 
                                 <div class="tt-heading tt-heading-lg">
                                     <div class="tt-heading-inner">
-                                        <h2 class="title-price-box title-mobile-size" id="section_@item.Id">@item.priceLongTitle</h2>
+                                        <h2 class="title-price-box title-mobile-size">@item.priceLongTitle</h2>
                                     </div>
                                 </div>
 
@@ -118,18 +118,18 @@
                                                 </ul>
                                             </div>
                                             <div class="ps-attr-cont margin-top-10" style="position: absolute; bottom: 5px; left: 15px; }">@Convert.ToInt32(item2.Price) ₺</div>
-                                            <div class="pr-box" style="padding: 0px; position: absolute; right: 11px; bottom: 11px;">
+                                            <div class="pr-box" style="padding: 0px; position: absolute; right: 11px; bottom: 11px; border:2px solid #fff; z-index:5;">
 
                                                 @if (item2.ComponentTitle == titleCurrent)
                                                 {
-                                                    <button style="padding: 5px 15px; font-size: 20px; margin:0px;" value="@item2.Id" class="btn btn-price-box btn-primary active">-</button>
+                                                    <button style="padding: 5px 12px; font-size: 20px; margin:0px;" value="@item2.Id" class="btn btn-price-box btn-primary active"><i class="fa fa-trash-alt"></i></button>
                                                     <input type="hidden" value="@item2.Price" id="price_@item2.Id" />
                                                     <input type="hidden" value="@item2.ComponentTitle" id="title_@item2.Id" />
                                                 }
 
                                                 else
                                                 {
-                                                    <button style="padding: 5px 15px; font-size: 20px; margin: 0px;" value="@item2.Id" class="btn btn-price-box btn-primary">+</button>
+                                                    <button style="padding: 5px 12px; font-size: 20px; margin: 0px;" value="@item2.Id" class="btn btn-price-box btn-primary">+</button>
                                                     <input type="hidden" value="@item2.Price" id="price_@item2.Id" />
                                                     <input type="hidden" value="@item2.ComponentTitle" id="title_@item2.Id" />
                                                 }
@@ -163,7 +163,7 @@
                                 <div class="price-box cart-button-w" id="cartButton" style="padding:5px 0;">
                                     <div class="pr-box price-features" style="padding:0px;">
                                         <ul class="list-unstyled" style="margin:0;">
-                                            <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Sepeti Görüntüle</a></li>
+                                            <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Sepet</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -179,28 +179,23 @@
                             </div>
                         </div>
                        
-                        <div class="price-box overflow-y-scroll hideCart" id="cartList" style="max-height:300px; box-shadow: none; margin-top: 100px;">
-                            <div class="pr-box price-features" style="padding: 5px 10px 0px 10px;">
-                                <div class="price-box-price hidePrice">
-                                    @if (total > 0)
-                                    {
-                                        <div class="price"><span style="color:#000;">Toplam:</span> <span id="count-price-pretotal">@total</span> ₺</div>
-                                    }
-                                    else
-                                    {
-                                        <div class="price"><span style="color:#000;">Toplam:</span> <span id="count-price">0</span> ₺</div>
-                                    }
-                                    <hr />
-                                </div>
+                        <div class="price-box overflow-y-scroll hideCart" id="cartList" style="box-shadow: none; margin-top: 25px;">
+                            <div class="pr-box price-features" style="padding: 5px 20px 5px 20px;">
                                 <ul class="list-unstyled" id="uniqeListPrice">
                                     @foreach (var item in componentChoosed)
                                     {
-                                        <li style="font-size: 15px; line-height: 22px;" id="list_@Convert.ToInt32(item.Price)">
-                                            <div>
-                                                @item.Title <br /> <strong>@item.Price ₺</strong>
-                                                <hr style="margin-top: 10px; margin-bottom: 10px;" />
-                                            </div>
-                                        </li>
+                                    <li style="font-size: 15px; line-height: 22px; text-align:left; position:relative;" id="listBox_@Convert.ToInt32(item.Price)">
+                                        <div style="max-width: calc(100% - 52px);">
+                                            @item.Title <br /> <strong>@item.Price ₺</strong>
+
+                                        </div>
+                                        <a href="@Url.Action("sepettencikar","anasayfa", new { Id = item.Id })" style="padding: 7px 13px; font-size: 15px; margin: 0px; position: absolute; right: 3px; top: 3px; color: #ec1059;"><i class="fa fa-trash-alt" style="font-size:18px;"></i></a>
+                                        @*<button style="padding: 0px 10px; font-size: 20px; margin: 0px; position: absolute; right: 15px; top: 10px; " value="@item.Id" class="btn btn-price-box btn-primary active">-</button>
+        <input type="hidden" value="@item.Price" id="priceBox_@item.Id" />
+        <input type="hidden" value="@item.Title" id="titleBox_@item.Id" />*@
+                                        <hr style="margin-top: 10px; margin-bottom: 10px;" />
+                                    </li>
+                                 
                                     }
                                 </ul>
                             </div>
@@ -215,7 +210,7 @@
                                 <div class="price-box cart-button-w" id="cartButton" style="padding:5px 0;">
                                     <div class="pr-box price-features" style="padding:0px;">
                                         <ul class="list-unstyled" style="margin:0;">
-                                            <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Sepeti Görüntüle</a></li>
+                                            <li><a style="cursor:pointer;" id="btn_view" onclick="viewCartList();">Sepet</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -232,7 +227,7 @@
                             </div>
                         </div>
 
-                        <div class="price-box overflow-y-scroll hideCart" id="cartList" style="max-height: 300px; box-shadow: none; margin-top: 100px;">
+                        <div class="price-box overflow-y-scroll hideCart" id="cartList" style="box-shadow: none; margin-top: 25px;">
                             <div class="pr-box price-features" style="padding: 5px 10px 0px 10px;">
                                 <ul class="list-unstyled" id="uniqeListPrice">
                                     <li id="empty_list" style="font-size: 15px; line-height: 22px;">Hizmet seçmeye başlayın!</li>
@@ -244,15 +239,15 @@
                     <!-- Sepet Seçilenler -->
                     <!--Toplam Fiyat-->
 
-                    <div class="price-box mobile-cart" style="box-shadow: none;" id="btn-width">
+                    <div class="price-box" style="box-shadow: none;" id="btn-width">
                         <div class="price-box-price">
                             @if (total > 0)
                             {
-                                <div class="price"><span class="total-title" style="color:#000;">Toplam:</span> <span id="count-price-pretotal">@total</span> ₺</div>
+                                <div class="price"><span class="total-title mobile-cart" style="color:#000;">Toplam:</span> <span class="mobile-price-font" id="count-price">@total</span> <span class="mobile-price-font">₺</span></div>
                             }
                             else
                             {
-                                <div class="price"><span class="total-title" style="color:#000;">Toplam:</span> <span id="count-price">0</span> ₺</div>
+                                <div class="price"><span class="total-title mobile-cart" style="color:#000;">Toplam:</span> <span class="mobile-price-font" id="count-price">0</span> <span class="mobile-price-font">₺</span></div>
                             }
                         </div>
                     </div>
@@ -294,6 +289,7 @@
 
 <script type="text/javascript">
 
-    mainCalculate(@total);
+    var current = @total;
+    mainCalculate(current);
 
 </script>
