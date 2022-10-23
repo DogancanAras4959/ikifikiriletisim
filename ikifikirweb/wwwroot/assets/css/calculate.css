@@ -6,7 +6,7 @@
 
     .seperate-price {
         display: block !important;
-        height: 90px !important;
+        height: 80px !important;
         width: 100%;
     }
 
@@ -16,6 +16,10 @@
 
     .col-price {
         padding: 0px 10px 0px 0px !important;
+    }
+
+    .mobile-display{
+        display:block !important;
     }
 
     .arrow-left-calc {
@@ -87,9 +91,9 @@
     }
 
     .section-width {
-        width: 100% !important;
+        width: 374px !important;
         position: relative;
-        right: 20px;
+        right: 13px;
     }
 
     #services_price {
@@ -166,12 +170,13 @@
     }
 
     #cartList {
-        height: 300px;
-        margin-top: 0px !important;
-        bottom: 279px;
+        max-height: 100% !important;
+        top: 100px;
+        height:70%;
+        position: fixed;
         z-index: 0;
-        width: 379px;
-        left: -42px;
+        width: 100%;
+        left: 0;
     }
 
     .title-mobile-size{
@@ -313,6 +318,10 @@
     -o-transition: all 0.2s ease-in-out;
     -ms-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
+}
+
+.mobile-display{
+    display:none;
 }
 
 * {

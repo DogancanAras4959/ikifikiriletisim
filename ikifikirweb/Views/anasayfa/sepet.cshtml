@@ -14,7 +14,7 @@
 
 <style>
     .tt-heading.padding-on {
-        padding: 2% 0% 2% 0%;
+        padding: 5% 0% 2% 0%;
     }
 
     .price-box .price-box-price .price {
@@ -74,8 +74,8 @@
                                 <thead>
                                     <tr>
                                         <th>Hizmet</th>
-                                        <th>Fiyat</th>
-                                        <th>İşlem</th>
+                                        <th class="mobile-cart">Fiyat</th>
+                                        <th><span class="mobile-cart">İşlem</span></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,8 +83,8 @@
                                     @foreach (var item in resultList)
                                     {
                                         <tr id="tableRow_@item.Id">
-                                            <td style="text-align:left; font-size:16px;">@item.Title</td>
-                                            <td><strong style="font-size:20px; text-align:left;">@Convert.ToInt32(item.Price) ₺</strong> <input type="hidden" value="@Convert.ToInt32(item.Price)" id="price_@item.Id" /></td>
+                                            <td style="text-align:left; font-size:16px;">@item.Title <p style="font-size: 20px; font-weight:600; text-align: left; margin-bottom:10px;" class="mobile-display">@Convert.ToInt32(item.Price) ₺</p></td>
+                                            <td class="mobile-cart"><strong style="font-size:20px; text-align:left;">@Convert.ToInt32(item.Price) ₺</strong> <input type="hidden" value="@Convert.ToInt32(item.Price)" id="price_@item.Id" /></td>
                                             <td><a onclick="removeFromTable(@item.Id);" style="cursor:pointer; position:relative; top:2px;"><span class="fa fa-trash-alt" style="font-size:25px;"></span></a></td>
                                         </tr>
                                     }
